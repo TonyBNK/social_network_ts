@@ -1,0 +1,10 @@
+.allposts{
+    border: solid 1px cyan;
+    color: white;
+}
+
+.title{
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
