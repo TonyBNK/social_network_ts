@@ -8,7 +8,7 @@ import {NewPost} from "./NewPost/NewPost";
 export const AllPosts = () => {
     return (
         <div className={c.allposts}>
-            <span className={c.title}>My Posts</span>
+            <h3 className={c.title}>My Posts</h3>
             <NewPost/>
             <div>
                 <Post ava={cat_with_tongue} message={"Кто насрал в мой лоток?"} likesCount={14}/>
