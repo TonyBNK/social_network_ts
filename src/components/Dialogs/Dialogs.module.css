@@ -1,16 +1,9 @@
 .dialogs{
     display: grid;
     grid-template-columns: 2fr 10fr;
+    grid-template-areas: 'dialog message';
     padding: 20px;
     background-color: cornflowerblue;
     color: white;
 }
 
-.dialog a{
-    color: white;
-    text-decoration: none;
-}
-
-.dialog a.active{
-    color: gold;
-}

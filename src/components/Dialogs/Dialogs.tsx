@@ -1,26 +1,18 @@
 import React from "react";
 import c from './Dialogs.module.css';
-import {Dialog} from "./Dialog/Dialog";
-import {Message} from "./Message/Message";
+import {Dialog, DialogType} from "./Dialog/Dialog";
+import {Message, MessageType} from "./Message/Message";
 
-export const Dialogs = () => {
 
-    let dialogs = [
-        {id: 1, name: "Cat"},
-        {id: 2, name: "Doge"},
-        {id: 3, name: "Parrot"},
-        {id: 4, name: "Hamster"},
-        {id: 5, name: "Turtle"},
-    ];
 
-    let messages = [
-        {id: 1, message: 'So much wow!'},
-        {id: 2, message: 'Bark'},
-        {id: 3, message: "What's up?"},
-    ];
+export type DialogsPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+}
+export const Dialogs:React.FC<DialogsPageType> = (props) => {
 
-    let dialogsElements = dialogs.map(d => <Dialog id={d.id} name={d.name}/>);
-    let messagesElements = messages.map(m => <Message message={m.message}/>);
+    let dialogsElements = props.dialogs.map(d => <Dialog id={d.id} name={d.name} ava={d.ava}/>);
+    let messagesElements = props.messages.map(m => <Message message={m.message}/>);
 
     return (
         <div className={c.dialogs}>

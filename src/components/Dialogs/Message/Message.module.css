@@ -1,0 +1,4 @@
+.message {
+    grid-area: message;
+    border: deeppink solid;
+}

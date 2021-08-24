@@ -9,7 +9,7 @@ export type PostType = {
 }
 export const Post: React.FC<PostType> = (props) => {
     return (<div className={c.item}>
-            <img className={c.usersImg} src={props.ava} alt="аватарка"/> {props.message}
+            <img className={c.usersImg} src={props.ava} alt="ava"/> {props.message}
             <div>
                 <button>Like</button> {props.likesCount}
             </div>

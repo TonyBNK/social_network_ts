@@ -1,13 +1,13 @@
 import React from "react";
 import {Post, PostType} from "./Post/Post";
-import c from "./AllPosts.module.css";
+import c from "./Posts.module.css";
 import {NewPost} from "./NewPost/NewPost";
 
 
 type AllPostsType = {
     posts: Array<PostType>
 }
-export const AllPosts:React.FC<AllPostsType> = (props) => {
+export const Posts:React.FC<AllPostsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Post id={p.id} ava={p.ava} message={p.message} likesCount={p.likesCount}/>);
 

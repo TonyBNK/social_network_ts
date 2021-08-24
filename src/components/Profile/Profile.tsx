@@ -1,23 +1,20 @@
 import React from "react";
-import {MyInfo} from "./MyInfo/MyInfo";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {TitleImage} from "./TitleImage/TitleImage";
 import c from './Profile.module.css'
 import azgard from './../../images/azgard.jpg';
 import cat_wit_glasses from './../../images/cat_with_glasses.jpg';
-import cat_with_tongue from "../../images/cat_with_tongue.jpg";
-import angry_cat from "../../images/angry_cat.webp";
+import {PostType} from "./ProfileInfo/Posts/Post/Post";
 
-export const Profile = () => {
-
-    let posts = [
-        {id: 1, ava: cat_with_tongue, message: "Кто насрал в мой лоток?", likesCount: 14},
-        {id: 2, ava: angry_cat, message: "Кожанный мешок опять забыл покормить }:(", likesCount: 23},
-    ];
+export type ProfilePageType = {
+    posts: Array<PostType>
+}
+export const Profile: React.FC<ProfilePageType> = (props) => {
 
     return (
         <div className={c.profile}>
             <TitleImage image={azgard}/>
-            <MyInfo ava={cat_wit_glasses} posts={posts}/>
+            <ProfileInfo ava={cat_wit_glasses} posts={props.posts}/>
         </div>
     );
 };

@@ -1,17 +1,18 @@
 import React from "react";
-import c from "../Dialogs.module.css";
+import c from './Dialog.module.css';
 import {NavLink} from "react-router-dom";
 
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
+    ava: string
 };
 
 export const Dialog: React.FC<DialogType> = (props) => {
     let path = `/dialogs/${props.id}`;
     return (
         <div className={c.dialog}>
-            <NavLink to={path} activeClassName={c.active}>{props.name}</NavLink>
+            <img src={props.ava} alt=""/><NavLink to={path} activeClassName={c.active}>{props.name}</NavLink>
         </div>
     );
 };
