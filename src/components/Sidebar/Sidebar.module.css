@@ -1,7 +1,10 @@
-.navbar{
+.sidebar{
     grid-area: n;
     background-color: midnightblue;
     padding: 10px;
+    display: grid;
+    grid-template-columns: 170px;
+    grid-template-rows: 30px 30px 30px 30px 30px 100px 1fr;
 }
 
 .item a{
@@ -11,4 +14,9 @@
 
 .item a.active{
     color: cyan;
+}
+
+.itemFriends{
+    margin-top: 30px;
+    color: white;
 }

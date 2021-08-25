@@ -1,9 +1,22 @@
-.dialogs{
+.dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
-    grid-template-areas: 'dialog message';
     padding: 20px;
+    grid-template-areas: 'dI m';
     background-color: cornflowerblue;
-    color: white;
+}
+
+.dialogsItems {
+    grid-area: dI;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 20px;
+}
+
+.messages {
+    grid-area: m;
+    margin: 0 50px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 

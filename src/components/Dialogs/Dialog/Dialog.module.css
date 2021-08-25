@@ -1,23 +1,24 @@
 .dialog{
-    grid-area: dialog;
+    align-self: auto;
+    justify-self: left;
     display: grid;
-    grid-template-rows: 20px 20px 20px 20px 20px;
-    border: black solid;
+    grid-template-columns: 70px 1fr;
+}
+
+.dialog a{
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
     align-self: center;
     justify-self: left;
 }
 
-.dialog img{
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-}
-
-.dialog a{
-    color: white;
-    text-decoration: none;
-}
-
-.dialog a.active{
+.dialog a.active {
     color: gold;
+}
+
+.dialog img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 }

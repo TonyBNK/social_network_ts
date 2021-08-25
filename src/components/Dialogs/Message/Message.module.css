@@ -1,4 +1,13 @@
 .message {
-    grid-area: message;
-    border: deeppink solid;
+    padding: 20px;
+    align-self: center;
+    justify-self: end;
+}
+
+.message:nth-child(2n){
+    justify-self: left;
+}
+
+.message:nth-child(3n){
+    justify-self: left;
 }

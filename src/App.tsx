@@ -25,7 +25,7 @@ function App(props: AppPropsType) {
     return (
         <div className="app-wrapper">
             <Header logotype={logo}/>
-            <Sidebar/>
+            <Sidebar friends={props.data.friendsPage.friends}/>
 
             <Route path='/profile' render={() => <Profile posts={props.data.profilePage.posts}/>}/>
             <Route path='/dialogs' render={() => <Dialogs dialogs={props.data.dialogsPage.dialogs}
@@ -33,7 +33,6 @@ function App(props: AppPropsType) {
             <Route path='/news' render={() => <News/>}/>
             <Route path='/music' render={() => <Music/>}/>
             <Route path='/settings' render={() => <Settings/>}/>
-            <Route path='/friends' render={() => <Friends friends={props.data.friendsPage.friends}/>}/>
         </div>
     );
 }
