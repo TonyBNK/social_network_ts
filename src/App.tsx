@@ -9,11 +9,10 @@ import {Dialogs, DialogsPageType} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {Friends, FriendsPageType} from "./components/Friends/Friends";
+import {FriendsPageType} from "./components/Friends/Friends";
 
-
-type AppPropsType = {
-    data: {
+export type AppPropsType = {
+    state: {
         profilePage: ProfilePageType
         dialogsPage: DialogsPageType
         friendsPage: FriendsPageType
@@ -25,11 +24,12 @@ function App(props: AppPropsType) {
     return (
         <div className="app-wrapper">
             <Header logotype={logo}/>
-            <Sidebar friends={props.data.friendsPage.friends}/>
+            <Sidebar friends={props.state.friendsPage.friends}/>
 
-            <Route path='/profile' render={() => <Profile posts={props.data.profilePage.posts}/>}/>
-            <Route path='/dialogs' render={() => <Dialogs dialogs={props.data.dialogsPage.dialogs}
-                                                          messages={props.data.dialogsPage.messages}/>}/>
+            <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts}
+                                                          addPost={props.state.profilePage.addPost}/>}/>
+            <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
+                                                          messages={props.state.dialogsPage.messages}/>}/>
             <Route path='/news' render={() => <News/>}/>
             <Route path='/music' render={() => <Music/>}/>
             <Route path='/settings' render={() => <Settings/>}/>

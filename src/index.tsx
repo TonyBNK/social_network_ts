@@ -1,19 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {data} from "./redux/state";
-import {BrowserRouter} from "react-router-dom";
+import {renderEntireTree} from "./render";
 
-
-
-ReactDOM.render(
-  <BrowserRouter>
-    <App data={data}/>
-  </BrowserRouter>,
-  document.getElementById('root')
-);
+renderEntireTree(data);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

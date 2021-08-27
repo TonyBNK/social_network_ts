@@ -2,7 +2,7 @@ import React from "react";
 import c from './Friend.module.css';
 
 export type FriendType = {
-    id: number
+    id: string
     name: string
     ava: string
 }
