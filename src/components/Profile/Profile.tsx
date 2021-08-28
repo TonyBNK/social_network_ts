@@ -8,7 +8,7 @@ import {Posts} from "./Posts/Posts";
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    addPost: (postMessage: string) => void
+    addPost: (postMessage: string) => Array<PostType>
 }
 export const Profile: React.FC<ProfilePageType> = (props) => {
 
