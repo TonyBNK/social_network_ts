@@ -1,25 +1,17 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {Post, PostType} from "./Post/Post";
 import c from "./Posts.module.css";
 
 
 type PostsType = {
     posts: Array<PostType>
-    addPost: (postMessage: string) => Array<PostType>
+    newPostText: string
+    updateNewPostText: (text: string) => void
+    addNewPostText: (text: string) => void
 }
 export const Posts: React.FC<PostsType> = (props) => {
 
-    let[, setPostsElements] = useState<Array<PostType>>(props.posts);
-
     let newPostText = React.createRef<HTMLTextAreaElement>();
-
-    const addPost = () => {
-        if (newPostText.current !== null) {
-            let editedPosts = props.addPost(newPostText.current.value);
-            setPostsElements(editedPosts);
-            newPostText.current.value = '';
-        }
-    }
 
     let postsElements = props.posts.map(p =>
         <Post id={p.id}
@@ -29,15 +21,25 @@ export const Posts: React.FC<PostsType> = (props) => {
         />
     );
 
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value);
+    };
+
+    const onClickHandler = () => {
+        if (newPostText.current) props.addNewPostText(newPostText.current.value);
+    }
+
     return (
         <div className={c.allPosts}>
             <h3 className={c.title}>My Posts</h3>
             <div className={c.newPost}>
                 <div>
-                    <textarea ref={newPostText}></textarea>
+                    <textarea ref={newPostText}
+                              value={props.newPostText}
+                              onChange={onChangeHandler}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Send</button>
+                    <button onClick={onClickHandler}>Send</button>
                 </div>
             </div>
             <div>

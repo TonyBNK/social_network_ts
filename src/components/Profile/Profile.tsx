@@ -8,7 +8,9 @@ import {Posts} from "./Posts/Posts";
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    addPost: (postMessage: string) => Array<PostType>
+    newPostText: string
+    updateNewPostText: (text: string) => void
+    addNewPostText: (text: string) => void
 }
 export const Profile: React.FC<ProfilePageType> = (props) => {
 
@@ -17,7 +19,9 @@ export const Profile: React.FC<ProfilePageType> = (props) => {
             <ProfileInfo titleImage={azgard}
                          ava={cat_wit_glasses}/>
             <Posts posts={props.posts}
-                   addPost={props.addPost}/>
+                   newPostText={props.newPostText}
+                   updateNewPostText={props.updateNewPostText}
+                   addNewPostText={props.addNewPostText}/>
         </div>
     );
 };
