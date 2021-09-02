@@ -3,27 +3,27 @@ import c from './Dialogs.module.css';
 import {Dialog, DialogType} from "./Dialog/Dialog";
 import {Message, MessageType} from "./Message/Message";
 
-
-export type DialogsPageType = {
+type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
-    updateNewMessageText: (text: string) => void
-    addNewMessageText: (text: string) => void
+    newMessage: string
+};
+type DialogsPageType = {
+    dialogsPageState: DialogsPageStateType
+    setNewMessage: (text: string) => void
+    addNewMessage: (text: string) => void
 }
 export const Dialogs: React.FC<DialogsPageType> = (props) => {
 
-    let dialogsElements = props.dialogs.map(d => <Dialog id={d.id} name={d.name} ava={d.ava}/>);
-    let messagesElements = props.messages.map(m => <Message message={m.message}/>);
-
-    let newMessageText = React.createRef<HTMLTextAreaElement>();
+    let dialogsElements = props.dialogsPageState.dialogs.map(d => <Dialog id={d.id} name={d.name} ava={d.ava}/>);
+    let messagesElements = props.dialogsPageState.messages.map(m => <Message id={m.id} message={m.message}/>);
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageText(e.currentTarget.value);
+        props.setNewMessage(e.currentTarget.value);
     }
 
     const onClickHandler = () => {
-        if (newMessageText.current) props.addNewMessageText(newMessageText.current.value);
+        props.addNewMessage(props.dialogsPageState.newMessage);
     }
 
     return (
@@ -34,8 +34,7 @@ export const Dialogs: React.FC<DialogsPageType> = (props) => {
             <div className={c.messages}>
                 {messagesElements}
                 <div className={c.newMessage}>
-                    <textarea ref={newMessageText}
-                              value={props.newMessageText}
+                    <textarea value={props.dialogsPageState.newMessage}
                               onChange={onChangeHandler}/>
                     <button onClick={onClickHandler}>Send</button>
                 </div>

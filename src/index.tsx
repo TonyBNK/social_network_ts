@@ -1,32 +1,24 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {state, subscribe} from "./redux/state";
+import {store} from "./redux/state";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import {ProfilePageType} from "./components/Profile/Profile";
-import {DialogsPageType} from "./components/Dialogs/Dialogs";
-import {FriendsPageType} from "./components/Friends/Friends";
 
-type StateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    friendsPage: FriendsPageType
-};
 
-const rerenderEntireTree = (state: StateType) => {
+const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state}/>
+            <App store={store}/>
         </BrowserRouter>,
         document.getElementById('root')
     );
 }
 
-rerenderEntireTree(state);
+rerenderEntireTree();
 
-subscribe(rerenderEntireTree);
+store.subscribe(rerenderEntireTree);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
