@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import c from './Dialogs.module.css';
 import {Dialog, DialogType} from "./Dialog/Dialog";
 import {Message, MessageType} from "./Message/Message";
-import {ActionType} from "../Profile/Posts/Posts";
+import {addNewMessageActionCreator, setNewMessageActionCreator} from "../../redux/state";
 
 
 type SetNewMessageActionType = {
@@ -31,12 +31,12 @@ export const Dialogs: React.FC<DialogsPageType> = (props) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         //props.setNewMessage(e.currentTarget.value);
-        props.dispatch({type: "SET-NEW-MESSAGE", messageText: e.currentTarget.value});
+        props.dispatch(setNewMessageActionCreator(e.currentTarget.value));
     }
 
     const onClickHandler = () => {
         //props.addNewMessage(props.dialogsPageState.newMessage);
-        props.dispatch({type: 'ADD-NEW-MESSAGE'});
+        props.dispatch(addNewMessageActionCreator());
     }
 
     return (

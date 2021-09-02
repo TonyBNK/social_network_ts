@@ -1,8 +1,9 @@
 import React, {ChangeEvent} from "react";
 import {Post, PostType} from "./Post/Post";
 import c from "./Posts.module.css";
+import {addNewPostActionCreator, setNewPostActionCreator} from "../../../redux/state";
 
-export type ActionType = { type: string, text?: string };
+
 export type PostsStateType = {
     posts: PostType[]
     newPost: string
@@ -35,12 +36,12 @@ export const Posts: React.FC<PostsType> = (props) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         //props.setNewPost(e.currentTarget.value);
-        props.dispatch({type: "SET-NEW-POST", postText: e.currentTarget.value});
+        props.dispatch(setNewPostActionCreator(e.currentTarget.value));
     };
 
     const onClickHandler = () => {
         //props.addNewPost(props.postsState.newPost);
-        props.dispatch({type: 'ADD-NEW-POST'});
+        props.dispatch(addNewPostActionCreator());
     }
 
     return (
