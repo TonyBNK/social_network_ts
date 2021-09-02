@@ -28,3 +28,18 @@
     height: 100px;
 }
 
+.newMessage button{
+    height: 30px;
+    align-self: self-end;
+    background: aquamarine;
+    border-radius: 5px;
+    border: blue 2px solid;
+}
+
+.newMessage textarea{
+    height: 60px;
+    border-radius: 5px;
+    border: blue 2px solid;
+    align-self: self-end;
+}
+

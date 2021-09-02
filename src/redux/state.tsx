@@ -6,7 +6,8 @@ import turtle from '../images/turtle.jpg';
 import cat_with_tongue from "../images/cat_with_tongue.jpg";
 import angry_cat from "../images/angry_cat.webp";
 import {v1} from "uuid";
-import cat_with_glasses from '../images/cat_with_glasses.jpg';
+import profileReducer, {ProfileActionsType} from "./profileReducer";
+import dialogsReducer, {DialogsActionsType} from "./dialogsReducer";
 
 
 type PostType = {
@@ -30,11 +31,11 @@ type FriendType = {
     name: string
 };
 
-type ProfilePageStateType = {
+export type ProfilePageStateType = {
     posts: Array<PostType>
     newPost: string
 };
-type DialogsPageStateType = {
+export type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessage: string
@@ -49,11 +50,7 @@ type StateType = {
     friendsPage: FriendsPageType
 };
 
-export type ActionsType =
-    ReturnType<typeof setNewPostActionCreator>
-    | ReturnType<typeof addNewPostActionCreator>
-    | ReturnType<typeof setNewMessageActionCreator>
-    | ReturnType<typeof addNewMessageActionCreator>;
+export type ActionsType = ProfileActionsType | DialogsActionsType;
 
 export type StoreType = {
     _state: StateType
@@ -62,17 +59,6 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-
-export const setNewPostActionCreator = (text: string) => ({
-    type: "SET-NEW-POST",
-    postText: text
-} as const);
-export const addNewPostActionCreator = () => ({type: "ADD-NEW-POST"} as const);
-export const setNewMessageActionCreator = (text: string) => ({
-    type: "SET-NEW-MESSAGE",
-    messageText: text
-} as const);
-export const addNewMessageActionCreator = () => ({type: "ADD-NEW-MESSAGE"} as const);
 
 export const store: StoreType = {
     _state: {
@@ -119,25 +105,10 @@ export const store: StoreType = {
         this._subscriber = observer;
     },
     dispatch(action: ActionsType) {
-        if (action.type === "SET-NEW-POST") {
-            this._state.profilePage.newPost = action.postText;
-            this._subscriber();
-        } else if (action.type === "ADD-NEW-POST") {
-            this._state.profilePage.posts.unshift({
-                id: v1(),
-                ava: cat_with_glasses,
-                post: this._state.profilePage.newPost,
-                likesCount: 0
-            });
-            this._state.profilePage.newPost = '';
-            this._subscriber();
-        } else if (action.type === "SET-NEW-MESSAGE") {
-            this._state.dialogsPage.newMessage = action.messageText;
-            this._subscriber();
-        } else if (action.type === "ADD-NEW-MESSAGE") {
-            this._state.dialogsPage.messages.push({id: v1(), message: this._state.dialogsPage.newMessage});
-            this._state.dialogsPage.newMessage = '';
-            this._subscriber();
-        }
+
+        profileReducer(this._state.profilePage, action);
+        dialogsReducer(this._state.dialogsPage, action);
+
+        this._subscriber();
     }
 }

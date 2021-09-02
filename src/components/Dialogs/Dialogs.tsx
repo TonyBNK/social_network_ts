@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import c from './Dialogs.module.css';
 import {Dialog, DialogType} from "./Dialog/Dialog";
 import {Message, MessageType} from "./Message/Message";
-import {addNewMessageActionCreator, setNewMessageActionCreator} from "../../redux/state";
+import {addNewMessageActionCreator, setNewMessageActionCreator} from "../../redux/dialogsReducer";
 
 
 type SetNewMessageActionType = {
