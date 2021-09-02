@@ -26,11 +26,9 @@ function App(props: AppPropsType) {
             <Sidebar friends={props.store.getState().friendsPage.friends}/>
 
             <Route path='/profile' render={() => <Profile profilePageState={state.profilePage}
-                                                          setNewPost={props.store.setNewPost.bind(props.store)}
-                                                          addNewPost={props.store.addNewPost.bind(props.store)}/>}/>
+                                                          dispatch={props.store.dispatch.bind(props.store)}/>}/>
             <Route path='/dialogs' render={() => <Dialogs dialogsPageState={state.dialogsPage}
-                                                          setNewMessage={props.store.setNewMessage.bind(props.store)}
-                                                          addNewMessage={props.store.addNewMessage.bind(props.store)}/>}/>
+                                                          dispatch={props.store.dispatch.bind(props.store)}/>}/>
             <Route path='/news' render={() => <News/>}/>
             <Route path='/music' render={() => <Music/>}/>
             <Route path='/settings' render={() => <Settings/>}/>

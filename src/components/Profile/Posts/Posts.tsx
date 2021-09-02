@@ -2,32 +2,45 @@ import React, {ChangeEvent} from "react";
 import {Post, PostType} from "./Post/Post";
 import c from "./Posts.module.css";
 
-
+export type ActionType = { type: string, text?: string };
 export type PostsStateType = {
     posts: PostType[]
     newPost: string
 }
+
+type SetNewPostActionType = {
+    type: 'SET-NEW-POST',
+    postText: string
+}
+type AddNewPostActionType = {
+    type: 'ADD-NEW-POST'
+}
+export type PostsActionsType = SetNewPostActionType | AddNewPostActionType;
+
 type PostsType = {
     postsState: PostsStateType
-    setNewPost: (text: string) => void
-    addNewPost: (text: string) => void
+    dispatch: (action: PostsActionsType) => void
 }
+
+
 export const Posts: React.FC<PostsType> = (props) => {
 
     let postsElements = props.postsState.posts.map(p =>
         <Post id={p.id}
               ava={p.ava}
-              message={p.message}
+              post={p.post}
               likesCount={p.likesCount}
         />
     );
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.setNewPost(e.currentTarget.value);
+        //props.setNewPost(e.currentTarget.value);
+        props.dispatch({type: "SET-NEW-POST", postText: e.currentTarget.value});
     };
 
     const onClickHandler = () => {
-        props.addNewPost(props.postsState.newPost);
+        //props.addNewPost(props.postsState.newPost);
+        props.dispatch({type: 'ADD-NEW-POST'});
     }
 
     return (
