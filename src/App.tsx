@@ -9,7 +9,7 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {StoreType} from "./redux/state";
+import {StoreType} from "./redux/store";
 
 
 
@@ -23,7 +23,7 @@ function App(props: AppPropsType) {
     return (
         <div className="app-wrapper">
             <Header logotype={logo}/>
-            <Sidebar friends={props.store.getState().friendsPage.friends}/>
+            <Sidebar friendsPageState={state.friendsPage}/>
 
             <Route path='/profile' render={() => <Profile profilePageState={state.profilePage}
                                                           dispatch={props.store.dispatch.bind(props.store)}/>}/>

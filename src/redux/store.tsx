@@ -40,7 +40,7 @@ export type DialogsPageStateType = {
     messages: Array<MessageType>
     newMessage: string
 };
-type FriendsPageType = {
+export type FriendsPageType = {
     friends: Array<FriendType>
 };
 
