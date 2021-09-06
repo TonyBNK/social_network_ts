@@ -1,20 +1,53 @@
 import React from "react";
 import c from "./Sidebar.module.css";
 import {NavLink} from "react-router-dom";
-import {Friends, FriendsPageType} from "../Friends/Friends";
+import {FriendsContainer} from "../Friends/FriendsContainer";
 
-type FriendsPageStateType = {
-    friendsPageState: FriendsPageType
-}
-export const Sidebar:React.FC<FriendsPageStateType> = (props) => {
+export const Sidebar:React.FC<StoreType> = (
+    {
+        store
+    }
+) => {
     return (
         <div className={c.sidebar}>
-            <div className={c.item}><NavLink to='/profile' activeClassName={c.active}>Profile</NavLink></div>
-            <div className={c.item}><NavLink to='/dialogs' activeClassName={c.active}>Messages</NavLink></div>
-            <div className={c.item}><NavLink to='/news' activeClassName={c.active}>News</NavLink></div>
-            <div className={c.item}><NavLink to='/music' activeClassName={c.active}>Music</NavLink></div>
-            <div className={c.item}><NavLink to='/settings' activeClassName={c.active}>Settings</NavLink></div>
-            <div className={c.itemFriends}><Friends friends={props.friendsPageState.friends}/></div>
+            <div className={c.item}>
+                <NavLink
+                    to='/profile'
+                    activeClassName={c.active}>
+                    Profile
+                </NavLink>
+            </div>
+            <div className={c.item}>
+                <NavLink
+                    to='/dialogs'
+                    activeClassName={c.active}>
+                    Messages
+                </NavLink>
+            </div>
+            <div className={c.item}>
+                <NavLink
+                    to='/news'
+                    activeClassName={c.active}>
+                    News
+                </NavLink>
+            </div>
+            <div className={c.item}>
+                <NavLink
+                    to='/music'
+                    activeClassName={c.active}>
+                    Music
+                </NavLink>
+            </div>
+            <div className={c.item}>
+                <NavLink
+                    to='/settings'
+                    activeClassName={c.active}>
+                    Settings
+                </NavLink>
+            </div>
+            <div className={c.itemFriends}>
+                <FriendsContainer store={store}/>
+            </div>
         </div>
     );
 };

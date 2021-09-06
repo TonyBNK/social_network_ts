@@ -3,6 +3,7 @@ import {v1} from "uuid";
 import cat_with_glasses from "../images/cat_with_glasses.jpg";
 import cat_with_tongue from "../images/cat_with_tongue.jpg";
 import angry_cat from "../images/angry_cat.webp";
+import React from "react";
 
 
 const initialState: ProfilePageStateType = {
@@ -20,7 +21,7 @@ const initialState: ProfilePageStateType = {
             likesCount: 23
         },
     ],
-    newPost: ''
+    newPostText: ''
 }
 
 export type ProfileActionsType =
@@ -31,16 +32,16 @@ const profileReducer = (state = initialState, action: ActionsType) => {
 
     switch (action.type) {
         case "SET-NEW-POST":
-            state.newPost = action.postText;
+            state.newPostText = action.postText;
             return state;
         case "ADD-NEW-POST":
             state.posts.unshift({
                 id: v1(),
                 ava: cat_with_glasses,
-                post: state.newPost,
+                post: state.newPostText,
                 likesCount: 0
             });
-            state.newPost = '';
+            state.newPostText = '';
             return state;
         default:
             return state;

@@ -7,12 +7,24 @@ export type DialogType = {
     name: string
     ava: string
 };
-
-export const Dialog: React.FC<DialogType> = (props) => {
-    let path = `/dialogs/${props.id}`;
+export const Dialog: React.FC<DialogType> = (
+    {
+        id,
+        ava,
+        name
+    }
+) => {
+    const path = `/dialogs/${id}`;
     return (
         <div className={c.dialog}>
-            <img src={props.ava} alt="ava"/><NavLink to={path} activeClassName={c.active}>{props.name}</NavLink>
+            <img
+                src={ava}
+                alt="ava"/>
+            <NavLink
+                to={path}
+                activeClassName={c.active}>
+                {name}
+            </NavLink>
         </div>
     );
 };

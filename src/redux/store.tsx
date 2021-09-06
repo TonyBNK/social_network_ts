@@ -33,18 +33,18 @@ type FriendType = {
 
 export type ProfilePageStateType = {
     posts: Array<PostType>
-    newPost: string
+    newPostText: string
 };
 export type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessage: string
+    newMessageText: string
 };
 export type FriendsPageType = {
     friends: Array<FriendType>
 };
 
-type StateType = {
+export type StateType = {
     profilePage: ProfilePageStateType
     dialogsPage: DialogsPageStateType
     friendsPage: FriendsPageType
@@ -52,7 +52,7 @@ type StateType = {
 
 export type ActionsType = ProfileActionsType | DialogsActionsType;
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     _subscriber: () => void
     getState: () => StateType
@@ -67,7 +67,7 @@ export const store: StoreType = {
                 {id: v1(), ava: cat_with_tongue, post: "Кто насрал в мой лоток?", likesCount: 14},
                 {id: v1(), ava: angry_cat, post: "Кожанный мешок опять забыл покормить }:(", likesCount: 23},
             ],
-            newPost: ''
+            newPostText: ''
         },
         dialogsPage: {
             dialogs: [
@@ -82,7 +82,7 @@ export const store: StoreType = {
                 {id: v1(), message: 'Bark'},
                 {id: v1(), message: "What's up?"},
             ],
-            newMessage: ''
+            newMessageText: ''
         },
         friendsPage: {
             friends: [

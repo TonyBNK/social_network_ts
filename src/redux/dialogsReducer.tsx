@@ -20,7 +20,7 @@ const initialState: DialogsPageStateType = {
         {id: v1(), message: 'Bark'},
         {id: v1(), message: "What's up?"},
     ],
-    newMessage: ''
+    newMessageText: ''
 };
 
 export type DialogsActionsType =
@@ -31,11 +31,11 @@ const dialogsReducer = (state = initialState, action: ActionsType) => {
 
     switch (action.type) {
         case "SET-NEW-MESSAGE":
-            state.newMessage = action.messageText;
+            state.newMessageText = action.messageText;
             return state;
         case "ADD-NEW-MESSAGE":
-            state.messages.push({id: v1(), message: state.newMessage});
-            state.newMessage = '';
+            state.messages.push({id: v1(), message: state.newMessageText});
+            state.newMessageText = '';
             return state;
         default:
             return state;

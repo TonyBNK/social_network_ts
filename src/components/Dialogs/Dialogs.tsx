@@ -1,55 +1,45 @@
 import React, {ChangeEvent} from "react";
 import c from './Dialogs.module.css';
-import {Dialog, DialogType} from "./Dialog/Dialog";
-import {Message, MessageType} from "./Message/Message";
-import {addNewMessageActionCreator, setNewMessageActionCreator} from "../../redux/dialogsReducer";
+import {DialogType} from "./Dialog/Dialog";
+import {MessageType} from "./Message/Message";
 
-
-type SetNewMessageActionType = {
-    type: 'SET-NEW-MESSAGE',
-    messageText: string
-}
-type AddNewMessageActionType = {
-    type: 'ADD-NEW-MESSAGE',
-}
-export type MessagesActionsType = SetNewMessageActionType | AddNewMessageActionType;
-
-type DialogsPageStateType = {
+type DialogsPropsType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessage: string
-};
-type DialogsPageType = {
-    dialogsPageState: DialogsPageStateType
-    dispatch: (action: MessagesActionsType) => void
+    newMessageText: string
+    setNewMessage: (text: string) => void
+    addNewMessage: () => void
 }
-
-export const Dialogs: React.FC<DialogsPageType> = (props) => {
-
-    let dialogsElements = props.dialogsPageState.dialogs.map(d => <Dialog id={d.id} name={d.name} ava={d.ava}/>);
-    let messagesElements = props.dialogsPageState.messages.map(m => <Message id={m.id} message={m.message}/>);
-
+export const Dialogs: React.FC<DialogsPropsType> = (
+    {
+        dialogs,
+        messages,
+        newMessageText,
+        setNewMessage,
+        addNewMessage
+    }
+) => {
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        //props.setNewMessage(e.currentTarget.value);
-        props.dispatch(setNewMessageActionCreator(e.currentTarget.value));
+        setNewMessage(e.currentTarget.value);
     }
 
-    const onClickHandler = () => {
-        //props.addNewMessage(props.dialogsPageState.newMessage);
-        props.dispatch(addNewMessageActionCreator());
-    }
+    const onClickHandler = () => addNewMessage();
 
     return (
         <div className={c.dialogs}>
             <div className={c.dialogsItems}>
-                {dialogsElements}
+                {dialogs}
             </div>
             <div className={c.messages}>
-                {messagesElements}
+                {messages}
                 <div className={c.newMessage}>
-                    <textarea value={props.dialogsPageState.newMessage}
-                              onChange={onChangeHandler}/>
-                    <button onClick={onClickHandler}>Send</button>
+                    <textarea
+                        value={newMessageText}
+                        onChange={onChangeHandler}
+                    />
+                    <button onClick={onClickHandler}>
+                        Send
+                    </button>
                 </div>
             </div>
         </div>

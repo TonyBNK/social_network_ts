@@ -1,63 +1,47 @@
 import React, {ChangeEvent} from "react";
-import {Post, PostType} from "./Post/Post";
+import {PostType} from "./Post/Post";
 import c from "./Posts.module.css";
-import {addNewPostActionCreator, setNewPostActionCreator} from "../../../redux/profileReducer";
 
-
-export type PostsStateType = {
-    posts: PostType[]
-    newPost: string
+type PostsPropsType = {
+    posts: Array<PostType>
+    newPostText: string
+    setNewPost: (text: string) => void
+    addNewPost: () => void
 }
-
-type SetNewPostActionType = {
-    type: 'SET-NEW-POST',
-    postText: string
-}
-type AddNewPostActionType = {
-    type: 'ADD-NEW-POST'
-}
-export type PostsActionsType = SetNewPostActionType | AddNewPostActionType;
-
-type PostsType = {
-    postsState: PostsStateType
-    dispatch: (action: PostsActionsType) => void
-}
-
-
-export const Posts: React.FC<PostsType> = (props) => {
-
-    let postsElements = props.postsState.posts.map(p =>
-        <Post id={p.id}
-              ava={p.ava}
-              post={p.post}
-              likesCount={p.likesCount}
-        />
-    );
-
+export const Posts: React.FC<PostsPropsType> = (
+    {
+        posts,
+        newPostText,
+        setNewPost,
+        addNewPost
+    }
+) => {
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        //props.setNewPost(e.currentTarget.value);
-        props.dispatch(setNewPostActionCreator(e.currentTarget.value));
+        setNewPost(e.currentTarget.value);
     };
 
-    const onClickHandler = () => {
-        //props.addNewPost(props.postsState.newPost);
-        props.dispatch(addNewPostActionCreator());
-    }
+    const onClickHandler = () => addNewPost();
 
     return (
         <div className={c.allPosts}>
-            <h3 className={c.title}>My Posts</h3>
+            <h3 className={c.title}>
+                My Posts
+            </h3>
             <div className={c.newPost}>
                 <div>
-                    <textarea value={props.postsState.newPost}
-                              onChange={onChangeHandler}/>
+                    <textarea
+                        value={newPostText}
+                        onChange={onChangeHandler}
+                    />
                 </div>
                 <div>
-                    <button onClick={onClickHandler}>Send</button>
+                    <button onClick={onClickHandler}>
+                        Send
+                    </button>
                 </div>
             </div>
             <div>
-                {postsElements}
+                <>{posts}</>
             </div>
         </div>
     );
