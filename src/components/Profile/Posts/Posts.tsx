@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import {PostType} from "./Post/Post";
+import {Post, PostType} from "./Post/Post";
 import c from "./Posts.module.css";
 
 type PostsPropsType = {
@@ -16,6 +16,15 @@ export const Posts: React.FC<PostsPropsType> = (
         addNewPost
     }
 ) => {
+    const postsList = posts.map(p =>
+        <Post
+            id={p.id}
+            ava={p.ava}
+            post={p.post}
+            likesCount={p.likesCount}
+        />
+    )
+
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setNewPost(e.currentTarget.value);
     };
@@ -41,7 +50,7 @@ export const Posts: React.FC<PostsPropsType> = (
                 </div>
             </div>
             <div>
-                <>{posts}</>
+                {postsList}
             </div>
         </div>
     );

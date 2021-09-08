@@ -10,4 +10,6 @@ const reducers = combineReducers({
     friendsPage: friendsReducer
 });
 
+export type StoreType = typeof store;
 export const store = createStore(reducers);
+

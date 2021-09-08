@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import c from './Dialogs.module.css';
-import {DialogType} from "./Dialog/Dialog";
-import {MessageType} from "./Message/Message";
+import {Dialog, DialogType} from "./Dialog/Dialog";
+import {Message, MessageType} from "./Message/Message";
 
 type DialogsPropsType = {
     dialogs: Array<DialogType>
@@ -19,6 +19,20 @@ export const Dialogs: React.FC<DialogsPropsType> = (
         addNewMessage
     }
 ) => {
+    const dialogsList = dialogs.map(d =>
+        <Dialog
+            id={d.id}
+            name={d.name}
+            ava={d.ava}
+        />
+    );
+    const messagesList = messages.map(m =>
+        <Message
+            id={m.id}
+            message={m.message}
+        />
+    );
+
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setNewMessage(e.currentTarget.value);
     }
@@ -28,10 +42,10 @@ export const Dialogs: React.FC<DialogsPropsType> = (
     return (
         <div className={c.dialogs}>
             <div className={c.dialogsItems}>
-                {dialogs}
+                {dialogsList}
             </div>
             <div className={c.messages}>
-                {messages}
+                {messagesList}
                 <div className={c.newMessage}>
                     <textarea
                         value={newMessageText}

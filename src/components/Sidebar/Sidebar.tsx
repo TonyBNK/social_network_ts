@@ -3,10 +3,8 @@ import c from "./Sidebar.module.css";
 import {NavLink} from "react-router-dom";
 import {FriendsContainer} from "../Friends/FriendsContainer";
 
-export const Sidebar:React.FC<StoreType> = (
-    {
-        store
-    }
+export const Sidebar:React.FC = (
+
 ) => {
     return (
         <div className={c.sidebar}>
@@ -46,7 +44,7 @@ export const Sidebar:React.FC<StoreType> = (
                 </NavLink>
             </div>
             <div className={c.itemFriends}>
-                <FriendsContainer store={store}/>
+                <FriendsContainer/>
             </div>
         </div>
     );

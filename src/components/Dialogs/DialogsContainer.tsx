@@ -1,6 +1,4 @@
 import React from "react";
-import {Dialog} from "./Dialog/Dialog";
-import {Message} from "./Message/Message";
 import {
     addNewMessageActionCreator,
     setNewMessageActionCreator
@@ -8,28 +6,13 @@ import {
 import {Dialogs} from "./Dialogs";
 import {Consumer} from "../../StoreContext";
 
-export const DialogsContainer: React.FC<StoreType> = () => {
+
+export const DialogsContainer = () => {
     return (
         <Consumer>
             {
                 store => {
                     const state = store.getState();
-
-                    const newMessageText = state.dialogsPage.newMessageText;
-
-                    const dialogs = state.dialogsPage.dialogs.map(d =>
-                        <Dialog
-                            id={d.id}
-                            name={d.name}
-                            ava={d.ava}
-                        />
-                    );
-                    const messages = state.dialogsPage.messages.map(m =>
-                        <Message
-                            id={m.id}
-                            message={m.message}
-                        />
-                    );
 
                     const onUpdateTextHandler = (text: string) => {
                         store.dispatch(setNewMessageActionCreator(text));
@@ -38,9 +21,9 @@ export const DialogsContainer: React.FC<StoreType> = () => {
                     const onAddTextHandler = () => store.dispatch(addNewMessageActionCreator());
 
                     return <Dialogs
-                        dialogs={dialogs}
-                        messages={messages}
-                        newMessageText={newMessageText}
+                        dialogs={state.dialogsPage.dialogs}
+                        messages={state.dialogsPage.messages}
+                        newMessageText={state.dialogsPage.newMessageText}
                         setNewMessage={onUpdateTextHandler}
                         addNewMessage={onAddTextHandler}
                     />

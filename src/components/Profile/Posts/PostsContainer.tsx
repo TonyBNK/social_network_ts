@@ -1,5 +1,4 @@
 import React from "react";
-import {Post} from "./Post/Post";
 import {
     addNewPostActionCreator,
     setNewPostActionCreator
@@ -14,17 +13,6 @@ export const PostsContainer = () => {
                 store => {
                     const state = store.getState();
 
-                    const newPostText = state.profilePage.newPostText;
-
-                    const posts = state.profilePage.posts.map(p =>
-                            <Post
-                                id={p.id}
-                                ava={p.ava}
-                                post={p.post}
-                                likesCount={p.likesCount}
-                            />
-                    )
-
                     const onUpdateTextHandler = (text: string) => {
                         store.dispatch(setNewPostActionCreator(text));
                     };
@@ -32,8 +20,8 @@ export const PostsContainer = () => {
                     const onAddTextHandler = () => store.dispatch(addNewPostActionCreator());
 
                     return <Posts
-                        posts={posts}
-                        newPostText={newPostText}
+                        posts={state.profilePage.posts}
+                        newPostText={state.profilePage.newPostText}
                         setNewPost={onUpdateTextHandler}
                         addNewPost={onAddTextHandler}
                     />
