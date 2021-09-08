@@ -18,7 +18,6 @@ const initialState:FriendsPageType  = {
     ]
 }
 const friendsReducer = (state = initialState, action: ActionsType) => {
-
     return state;
 }
 

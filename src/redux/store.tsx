@@ -52,7 +52,7 @@ export type StateType = {
 
 export type ActionsType = ProfileActionsType | DialogsActionsType;
 
-type StoreType = {
+export type StoreType = {
     _state: StateType
     _subscriber: () => void
     getState: () => StateType
