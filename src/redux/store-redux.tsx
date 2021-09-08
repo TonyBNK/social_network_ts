@@ -1,14 +1,34 @@
 import {combineReducers, createStore } from "redux";
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
-import friendsReducer from "./friendsReducer";
+import profileReducer, {
+    ProfileActionsType,
+    ProfilePageStateType
+} from "./profileReducer";
+import dialogsReducer, {
+    DialogsActionsType,
+    DialogsPageStateType
+} from "./dialogsReducer";
+import friendsReducer, {FriendsPageType} from "./friendsReducer";
+import usersReducer, {
+    UsersPageActionsType,
+    UsersPageType
+} from "./usersReducer";
 
 
 const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    friendsPage: friendsReducer
+    friendsPage: friendsReducer,
+    usersPage: usersReducer
 });
 
 export const store = createStore(reducers);
+
+export type StateType = {
+    profilePage: ProfilePageStateType
+    dialogsPage: DialogsPageStateType
+    friendsPage: FriendsPageType
+    usersPage: UsersPageType
+};
+
+export type ActionsType = ProfileActionsType | DialogsActionsType | UsersPageActionsType;
 

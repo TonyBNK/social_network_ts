@@ -5,7 +5,7 @@ import {
 } from "../../../redux/profileReducer";
 import {Posts} from "./Posts";
 import {connect} from "react-redux";
-import {StateType} from "../../../redux/store";
+import {StateType} from "../../../redux/store-redux";
 
 
 const mapStateToProps = (state: StateType) =>({

@@ -1,0 +1,89 @@
+.users{
+    padding-left: 30px;
+    display: grid;
+    grid-template-rows: 1fr 8fr 1fr 50px;
+    grid-template-areas: 'title' 'user' 'show';
+}
+
+.users h3{
+    grid-area: title;
+    font-size: 24px;
+}
+
+.users span{
+    grid-area: user;
+}
+
+.users .show{
+    margin-top: 10px;
+    grid-area: show;
+    width: 200px;
+    height: 80px;
+    justify-self: center;
+    top: 0;
+    background: midnightblue;
+    color: white;
+    border-radius: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user {
+    font-size: 14px;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    grid-template-columns: 1fr 8fr;
+    grid-template-areas: 'img body' 'button body';
+    column-gap: 10px;
+    margin-bottom: 20px;
+    grid-area: user;
+}
+
+.user img {
+    grid-area: img;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    justify-self: center;
+    align-self: center;
+}
+
+.user button{
+    grid-area: button;
+    justify-self: center;
+    align-self: center;
+    background: midnightblue;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.user div{
+    grid-area: body;
+    border: black solid;
+    border-radius: 15px;
+    min-width: 200px;
+    max-width: 500px;
+    display: grid;
+    grid-template-rows: 2fr 3fr;
+    grid-template-columns: 10fr 2fr;
+    grid-template-areas: 'name address' 'text address';
+}
+
+.user .name{
+    grid-area: name;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+.user .address{
+    grid-area: address;
+    font-size: 18px;
+    justify-self: right;
+}
+.user .text{
+    grid-area: text;
+    align-self: self-end;
+    padding: 10px;
+    font-size: 16px;
+}

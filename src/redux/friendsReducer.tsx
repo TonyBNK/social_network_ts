@@ -4,9 +4,16 @@ import doge from "../images/doge.jpg";
 import parrot from "../images/parrot.jpg";
 import hamster from "../images/hamster.jpg";
 import turtle from "../images/turtle.jpg";
-import {ActionsType, FriendsPageType} from "./store";
 
 
+type FriendType = {
+    id: string
+    ava: string
+    name: string
+};
+export type FriendsPageType = {
+    friends: Array<FriendType>
+};
 
 const initialState:FriendsPageType  = {
     friends: [
@@ -17,7 +24,7 @@ const initialState:FriendsPageType  = {
         {id: v1(), name: "Turtle", ava: turtle},
     ]
 }
-const friendsReducer = (state = initialState, action: ActionsType) => {
+const friendsReducer = (state = initialState, action: any) => {
     return state;
 }
 

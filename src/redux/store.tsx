@@ -31,28 +31,28 @@ type FriendType = {
     name: string
 };
 
-export type ProfilePageStateType = {
+type ProfilePageStateType = {
     posts: Array<PostType>
     newPostText: string
 };
-export type DialogsPageStateType = {
+type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string
 };
-export type FriendsPageType = {
+type FriendsPageType = {
     friends: Array<FriendType>
 };
 
-export type StateType = {
+type StateType = {
     profilePage: ProfilePageStateType
     dialogsPage: DialogsPageStateType
     friendsPage: FriendsPageType
 };
 
-export type ActionsType = ProfileActionsType | DialogsActionsType;
+type ActionsType = ProfileActionsType | DialogsActionsType;
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     _subscriber: () => void
     getState: () => StateType
@@ -104,7 +104,7 @@ export const store: StoreType = {
     subscribe(observer: () => void) {
         this._subscriber = observer;
     },
-    dispatch(action: ActionsType) {
+    dispatch(action: any) {
 
         profileReducer(this._state.profilePage, action);
         dialogsReducer(this._state.dialogsPage, action);

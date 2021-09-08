@@ -1,4 +1,3 @@
-import {ActionsType, DialogsPageStateType} from "./store";
 import {v1} from "uuid";
 import vsratiy_cat from "../images/vsratiy_cat.jpg";
 import doge from "../images/doge.jpg";
@@ -6,6 +5,25 @@ import parrot from "../images/parrot.jpg";
 import hamster from "../images/hamster.jpg";
 import turtle from "../images/turtle.jpg";
 
+
+type DialogType = {
+    id: string
+    ava: string
+    name: string
+};
+type MessageType = {
+    id: string
+    message: string
+};
+export type DialogsPageStateType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageText: string
+};
+
+export type DialogsActionsType =
+    ReturnType<typeof setNewMessageActionCreator>
+    | ReturnType<typeof addNewMessageActionCreator>;
 
 const initialState: DialogsPageStateType = {
     dialogs: [
@@ -23,11 +41,7 @@ const initialState: DialogsPageStateType = {
     newMessageText: ''
 };
 
-export type DialogsActionsType =
-    ReturnType<typeof setNewMessageActionCreator>
-    | ReturnType<typeof addNewMessageActionCreator>;
-
-const dialogsReducer = (state = initialState, action: ActionsType) => {
+const dialogsReducer = (state = initialState, action: DialogsActionsType) => {
 
     switch (action.type) {
         case "SET-NEW-MESSAGE":

@@ -1,10 +1,24 @@
-import {ActionsType, ProfilePageStateType} from "./store";
 import {v1} from "uuid";
 import cat_with_glasses from "../images/cat_with_glasses.jpg";
 import cat_with_tongue from "../images/cat_with_tongue.jpg";
 import angry_cat from "../images/angry_cat.webp";
 import React from "react";
 
+
+type PostType = {
+    id: string
+    ava: string
+    post: string
+    likesCount: number
+};
+export type ProfilePageStateType = {
+    posts: Array<PostType>
+    newPostText: string
+};
+
+export type ProfileActionsType =
+    ReturnType<typeof setNewPostActionCreator>
+    | ReturnType<typeof addNewPostActionCreator>;
 
 const initialState: ProfilePageStateType = {
     posts: [
@@ -24,11 +38,7 @@ const initialState: ProfilePageStateType = {
     newPostText: ''
 }
 
-export type ProfileActionsType =
-    ReturnType<typeof setNewPostActionCreator>
-    | ReturnType<typeof addNewPostActionCreator>;
-
-const profileReducer = (state = initialState, action: ActionsType) => {
+const profileReducer = (state = initialState, action: ProfileActionsType) => {
 
     switch (action.type) {
         case "SET-NEW-POST":
