@@ -14,14 +14,14 @@ import usersReducer, {
 } from "./usersReducer";
 
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     friendsPage: friendsReducer,
     usersPage: usersReducer
 });
 
-export const store = createStore(reducers);
+export const store = createStore(rootReducer);
 
 export type StateType = {
     profilePage: ProfilePageStateType

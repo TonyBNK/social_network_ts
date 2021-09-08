@@ -11,15 +11,22 @@ type DialogType = {
     ava: string
     name: string
 };
+
 type MessageType = {
     id: string
     message: string
 };
+
 export type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string
 };
+
+export type DialogsDispatchPropsType = {
+    setNewMessage: (text: string) => void,
+    addNewMessage: () => void
+}
 
 export type DialogsActionsType =
     ReturnType<typeof setNewMessageActionCreator>
@@ -41,7 +48,7 @@ const initialState: DialogsPageStateType = {
     newMessageText: ''
 };
 
-const dialogsReducer = (state = initialState, action: DialogsActionsType) => {
+const dialogsReducer = (state: DialogsPageStateType = initialState, action: DialogsActionsType): DialogsPageStateType => {
 
     switch (action.type) {
         case "SET-NEW-MESSAGE":

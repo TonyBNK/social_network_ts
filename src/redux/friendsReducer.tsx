@@ -11,6 +11,7 @@ type FriendType = {
     ava: string
     name: string
 };
+
 export type FriendsPageType = {
     friends: Array<FriendType>
 };

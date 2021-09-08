@@ -11,10 +11,16 @@ type PostType = {
     post: string
     likesCount: number
 };
+
 export type ProfilePageStateType = {
     posts: Array<PostType>
     newPostText: string
 };
+
+export type ProfileDispatchPropsType = {
+    setNewPost: (text: string) => void,
+    addNewPost: () => void
+}
 
 export type ProfileActionsType =
     ReturnType<typeof setNewPostActionCreator>
@@ -38,7 +44,7 @@ const initialState: ProfilePageStateType = {
     newPostText: ''
 }
 
-const profileReducer = (state = initialState, action: ProfileActionsType) => {
+const profileReducer = (state: ProfilePageStateType = initialState, action: ProfileActionsType): ProfilePageStateType => {
 
     switch (action.type) {
         case "SET-NEW-POST":

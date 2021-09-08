@@ -1,10 +1,3 @@
-import {v1} from "uuid";
-import vsratiy_cat from "../images/vsratiy_cat.jpg";
-import doge from "../images/doge.jpg";
-import parrot from "../images/parrot.jpg";
-import hamster from "../images/hamster.jpg";
-import turtle from "../images/turtle.jpg";
-
 export type UserType = {
     id: string,
     name: string,
@@ -16,8 +9,14 @@ export type UserType = {
     },
     text: string
 }
+
 export type UsersPageType = {
     users: Array<UserType>
+}
+
+export type UsersDispatchPropsType = {
+    followUnfollow: (id: string) => void,
+    setUsers: (users: Array<UserType>) => void
 }
 
 export type UsersPageActionsType =
@@ -38,7 +37,7 @@ export const setUsersAC = (users: Array<UserType>) => ({
     users
 } as const);
 
-const usersReducer = (state = initialState, action: UsersPageActionsType) => {
+const usersReducer = (state: UsersPageType = initialState, action: UsersPageActionsType): UsersPageType => {
     switch (action.type) {
         case 'FOLLOW-UNFOLLOW':
             return {
