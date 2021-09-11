@@ -1,13 +1,16 @@
 export type UserType = {
-    id: string,
+    id: number,
     name: string,
-    ava: string,
+    photos: {
+        small: string,
+        large: string
+    },
     followed: boolean,
     address: {
         country: string,
         city: string
     },
-    text: string
+    status: string
 }
 
 export type UsersPageType = {
@@ -15,7 +18,7 @@ export type UsersPageType = {
 }
 
 export type UsersDispatchPropsType = {
-    followUnfollow: (id: string) => void,
+    followUnfollow: (id: number) => void,
     setUsers: (users: Array<UserType>) => void
 }
 
@@ -27,7 +30,7 @@ const initialState: UsersPageType = {
     users: []
 }
 
-export const followUnfollowAC = (id: string) => ({
+export const followUnfollowAC = (id: number) => ({
     type: 'FOLLOW-UNFOLLOW',
     userId: id
 } as const);

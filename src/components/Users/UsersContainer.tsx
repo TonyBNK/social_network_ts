@@ -14,7 +14,7 @@ const mapStateToProps = (state: StateType): UsersPageType => ({
 });
 
 const mapDispatchToProps = (dispatch: (action: UsersPageActionsType) => void): UsersDispatchPropsType => ({
-    followUnfollow: (id: string) => {
+    followUnfollow: (id: number) => {
         dispatch(followUnfollowAC(id));
     },
     setUsers: (users: Array<UserType>) => {
