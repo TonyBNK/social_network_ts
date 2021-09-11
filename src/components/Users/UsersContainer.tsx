@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Users} from "./Users";
+import {UsersC} from "./UsersC";
 import {
     followUnfollowAC, setUsersAC, UsersDispatchPropsType,
     UsersPageActionsType, UsersPageType,
@@ -22,4 +22,4 @@ const mapDispatchToProps = (dispatch: (action: UsersPageActionsType) => void): U
     }
 });
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC);
