@@ -29,11 +29,11 @@ export type UsersDispatchPropsType = {
 }
 
 export type UsersPageActionsType =
-    ReturnType<typeof followUnfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof changeCurrentPageAC>
-    | ReturnType<typeof setUsersTotalCountAC>
-    | ReturnType<typeof setFetchingAC>;
+    ReturnType<typeof followUnfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof changeCurrentPage>
+    | ReturnType<typeof setUsersTotalCount>
+    | ReturnType<typeof setFetching>;
 
 const initialState: UsersStatePropsType = {
     users: [],
@@ -43,27 +43,27 @@ const initialState: UsersStatePropsType = {
     isFetching: false
 }
 
-export const followUnfollowAC = (id: number) => ({
+export const followUnfollow = (id: number) => ({
     type: 'FOLLOW-UNFOLLOW',
     userId: id
 } as const);
 
-export const setUsersAC = (users: Array<UserType>) => ({
+export const setUsers = (users: Array<UserType>) => ({
     type: 'SET-USERS',
     users
 } as const);
 
-export const changeCurrentPageAC = (currentPage: number) => ({
+export const changeCurrentPage = (currentPage: number) => ({
     type: 'CHANGE-CURRENT-PAGE',
     currentPage
 } as const);
 
-export const setUsersTotalCountAC = (usersTotalCount: number) => ({
+export const setUsersTotalCount = (usersTotalCount: number) => ({
     type: 'SET-USERS-TOTAL-COUNT',
     usersTotalCount
 } as const);
 
-export const setFetchingAC = (fetching: boolean) => ({
+export const setFetching = (fetching: boolean) => ({
     type: 'SET-FETCHING',
     fetching
 } as const);
