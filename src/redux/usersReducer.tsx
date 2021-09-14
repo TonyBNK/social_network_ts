@@ -12,7 +12,6 @@ export type UserType = {
     },
     status: string
 }
-
 export type UsersStatePropsType = {
     users: Array<UserType>
     currentPage: number
