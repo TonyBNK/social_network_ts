@@ -17,26 +17,30 @@ export type UsersStatePropsType = {
     currentPage: number
     usersTotalCount: number
     pageSize: number
+    isFetching: boolean
 }
 
 export type UsersDispatchPropsType = {
-    followUnfollow: (id: number) => void,
-    setUsers: (users: Array<UserType>) => void,
-    changeCurrentPage: (currentPage: number) => void,
+    followUnfollow: (id: number) => void
+    setUsers: (users: Array<UserType>) => void
+    changeCurrentPage: (currentPage: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
+    setFetching: (fetching: boolean) => void
 }
 
 export type UsersPageActionsType =
     ReturnType<typeof followUnfollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof changeCurrentPageAC>
-    | ReturnType<typeof setUsersTotalCountAC>;
+    | ReturnType<typeof setUsersTotalCountAC>
+    | ReturnType<typeof setFetchingAC>;
 
 const initialState: UsersStatePropsType = {
     users: [],
     currentPage: 1,
     usersTotalCount: 0,
-    pageSize: 5
+    pageSize: 5,
+    isFetching: false
 }
 
 export const followUnfollowAC = (id: number) => ({
@@ -57,6 +61,11 @@ export const changeCurrentPageAC = (currentPage: number) => ({
 export const setUsersTotalCountAC = (usersTotalCount: number) => ({
     type: 'SET-USERS-TOTAL-COUNT',
     usersTotalCount
+} as const);
+
+export const setFetchingAC = (fetching: boolean) => ({
+    type: 'SET-FETCHING',
+    fetching
 } as const);
 
 const usersReducer = (state: UsersStatePropsType = initialState, action: UsersPageActionsType):
@@ -83,6 +92,11 @@ const usersReducer = (state: UsersStatePropsType = initialState, action: UsersPa
             return {
                 ...state,
                 usersTotalCount: action.usersTotalCount
+            };
+        case "SET-FETCHING":
+            return {
+                ...state,
+                isFetching: action.fetching
             }
         default:
             return state
