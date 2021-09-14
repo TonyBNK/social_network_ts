@@ -10,7 +10,7 @@ import dialogsReducer, {
 import friendsReducer, {FriendsPageType} from "./friendsReducer";
 import usersReducer, {
     UsersPageActionsType,
-    UsersPageType
+    UsersStatePropsType
 } from "./usersReducer";
 
 
@@ -27,7 +27,7 @@ export type StateType = {
     profilePage: ProfilePageStateType
     dialogsPage: DialogsPageStateType
     friendsPage: FriendsPageType
-    usersPage: UsersPageType
+    usersPage: UsersStatePropsType
 };
 
 export type ActionsType = ProfileActionsType | DialogsActionsType | UsersPageActionsType;
