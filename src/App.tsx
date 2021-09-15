@@ -18,7 +18,7 @@ const App = () => {
             <Header logotype={logo}/>
             <Sidebar/>
             <Route
-                path='/profile'
+                path='/profile/:userId?'
                 render={() => <ProfileContainer/>}
             />
             <Route

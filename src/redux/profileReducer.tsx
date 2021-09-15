@@ -3,6 +3,8 @@ import cat_with_glasses from "../images/cat_with_glasses.jpg";
 import cat_with_tongue from "../images/cat_with_tongue.jpg";
 import angry_cat from "../images/angry_cat.webp";
 import React from "react";
+import {RouteComponentProps} from "react-router-dom";
+
 
 
 type PostType = {
@@ -10,7 +12,7 @@ type PostType = {
     ava: string
     post: string
     likesCount: number
-};
+}
 type UserProfileType = {
     aboutMe: string
     contacts: {
@@ -31,6 +33,9 @@ type UserProfileType = {
         small: string,
         large: string
     }
+}
+type PathParamsType = {
+    userId: string
 }
 
 export type PostsStateType = {
@@ -61,6 +66,8 @@ type PostsActionsType =
     | ReturnType<typeof addNewPost>;
 type ProfileInfoActionsType = ReturnType<typeof setUserProfile>;
 export type ProfileActionsType = PostsActionsType | ProfileInfoActionsType;
+
+export type ProfileInfoWithPathParamsType = RouteComponentProps<PathParamsType> & ProfileInfoType;
 
 
 export const setNewPost = (text: string) => ({
