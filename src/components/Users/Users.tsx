@@ -1,6 +1,7 @@
 import React from "react";
 import c from './Users.module.css';
 import catUser from '../../images/catUser.png';
+import {NavLink} from "react-router-dom";
 
 
 type UserType = {
@@ -43,8 +44,10 @@ export const Users: React.FC<UsersPropsType> = (
 
             return <div>
                 <div className={c.user} key={u.id}>
-                    <img src={u.photos.small ? u.photos.small : catUser}
-                         alt="ava"/>
+                    <NavLink to={'/profile/' + u.id}>
+                        <img src={u.photos.small ? u.photos.small : catUser}
+                             alt="ava"/>
+                    </NavLink>
                     <button onClick={onFollowUnfollowClickHandler}>
                         {u.followed ? 'Unfollow' : 'Follow'}
                     </button>

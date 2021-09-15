@@ -9,7 +9,7 @@ import {
     UsersDispatchPropsType,
     UsersStatePropsType
 } from "../../redux/usersReducer";
-import {StateType} from "../../redux/store-redux";
+import {RootStateType} from "../../redux/store";
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
@@ -57,7 +57,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-const mapStateToProps = (state: StateType): UsersStatePropsType => ({
+const mapStateToProps = (state: RootStateType): UsersStatePropsType => ({
     users: state.usersPage.users,
     currentPage: state.usersPage.currentPage,
     pageSize: state.usersPage.pageSize,

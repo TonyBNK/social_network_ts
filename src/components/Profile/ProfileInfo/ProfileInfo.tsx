@@ -1,19 +1,54 @@
 import React from "react";
 import c from './ProfileInfo.module.css';
+import {Preloader} from "../../Preloader/Preloader";
 
-type MyInfoType = {
+
+type ProfileType = {
+    aboutMe: string
+    contacts: {
+        facebook: string,
+        website: string,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: string,
+        github: string,
+        mainLink: string
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large: string
+    }
+}
+export type ProfileInfoType = {
     titleImage: string
-    ava: string
+    profile: ProfileType | null
 };
-export const ProfileInfo: React.FC<MyInfoType> = (props) => {
+export const ProfileInfo: React.FC<ProfileInfoType> = (
+    {
+        profile,
+        titleImage
+    }
+) => {
+    if (!profile) {
+        return <Preloader/>
+    }
+
     return (
-        <div className={c.myInfo}>
+        <div className={c.info}>
             <div className={c.titleImage}>
-                <img src={props.titleImage} alt="азгард"/>
+                <img src={titleImage} alt="azgard"/>
             </div>
-            <img className={c.myAva}
-                 src={props.ava}
-                 alt="кот с очками"/> <span className={c.nickname}>Mr. Cat</span>
+            <div className={c.avatar}>
+                <img src={profile.photos.large} alt="ava"/>
+            </div>
+            <div className={c.description}>
+                <span className={c.fullName}>{profile.fullName}</span>
+            </div>
         </div>
     );
 };

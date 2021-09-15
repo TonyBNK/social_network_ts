@@ -15,7 +15,8 @@ export const Post: React.FC<PostType> = (
         likesCount
     }
 ) => {
-    return (<div className={c.item}>
+    return (
+        <div key={id} className={c.item}>
             <img
                 className={c.usersImg}
                 src={ava}

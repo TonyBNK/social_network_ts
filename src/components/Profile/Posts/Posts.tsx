@@ -16,6 +16,7 @@ export const Posts: React.FC<PostsPropsType> = (
         addNewPost
     }
 ) => {
+
     const postsList = posts.map(p =>
         <Post
             id={p.id}

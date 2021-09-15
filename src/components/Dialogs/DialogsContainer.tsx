@@ -8,10 +8,10 @@ import {
 } from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/store-redux";
+import {RootStateType} from "../../redux/store";
 
 
-const mapStateToProps = (state: StateType): DialogsPageStateType => ({
+const mapStateToProps = (state: RootStateType): DialogsPageStateType => ({
     dialogs: state.dialogsPage.dialogs,
     messages: state.dialogsPage.messages,
     newMessageText: state.dialogsPage.newMessageText

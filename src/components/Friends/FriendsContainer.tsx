@@ -1,11 +1,11 @@
 import React from "react";
 import {Friends} from "./Friends";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/store-redux";
+import {RootStateType} from "../../redux/store";
 import {FriendsPageType} from "../../redux/friendsReducer";
 
 
-const mapStateToProps = (state: StateType): FriendsPageType => ({
+const mapStateToProps = (state: RootStateType): FriendsPageType => ({
    friends: state.friendsPage.friends
 });
 

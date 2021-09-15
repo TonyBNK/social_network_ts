@@ -11,22 +11,69 @@ type PostType = {
     post: string
     likesCount: number
 };
-
-export type ProfilePageStateType = {
-    posts: Array<PostType>
-    newPostText: string
-};
-
-export type ProfileDispatchPropsType = {
-    setNewPost: (text: string) => void,
-    addNewPost: () => void
+type UserProfileType = {
+    aboutMe: string
+    contacts: {
+        facebook: string,
+        website: string,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: string,
+        github: string,
+        mainLink: string
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large: string
+    }
 }
 
-export type ProfileActionsType =
-    ReturnType<typeof setNewPostActionCreator>
-    | ReturnType<typeof addNewPostActionCreator>;
+export type PostsStateType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+export type ProfileInfoStateType = {
+    profile: UserProfileType | null
+}
+export type ProfileStateType = PostsStateType & ProfileInfoStateType;
 
-const initialState: ProfilePageStateType = {
+export type PostsDispatchType = {
+    setNewPost: (text: string) => void
+    addNewPost: () => void
+}
+export type ProfileInfoDispatchType = {
+    setUserProfile: (profile: UserProfileType) => void
+}
+export type ProfileDispatchType = PostsDispatchType & ProfileInfoDispatchType;
+
+export type PostsType = PostsStateType & PostsDispatchType;
+export type ProfileInfoType = ProfileInfoStateType & ProfileInfoDispatchType;
+
+export type ProfilePageType = PostsType & ProfileInfoType;
+
+type PostsActionsType =
+    ReturnType<typeof setNewPost>
+    | ReturnType<typeof addNewPost>;
+type ProfileInfoActionsType = ReturnType<typeof setUserProfile>;
+export type ProfileActionsType = PostsActionsType | ProfileInfoActionsType;
+
+
+export const setNewPost = (text: string) => ({
+    type: "SET-NEW-POST",
+    postText: text
+} as const);
+export const addNewPost = () => ({type: "ADD-NEW-POST"} as const);
+export const setUserProfile = (profile: UserProfileType) => ({
+    type: 'SET-USER-PROFILE',
+    profile
+} as const);
+
+const initialState: ProfileStateType = {
     posts: [
         {
             id: v1(),
@@ -37,20 +84,21 @@ const initialState: ProfilePageStateType = {
         {
             id: v1(),
             ava: angry_cat,
-            post: "Кожанный мешок опять забыл покормить }:(",
+            post: "Кожанный мешок опять забыл покормить :(",
             likesCount: 23
         },
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
-const profileReducer = (state: ProfilePageStateType = initialState, action: ProfileActionsType): ProfilePageStateType => {
-
+const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType):
+    ProfileStateType => {
     switch (action.type) {
         case "SET-NEW-POST":
             return {
                 ...state,
-                newPostText: action.postText
+                newPostText: action.postText,
             };
         case "ADD-NEW-POST":
             return {
@@ -66,15 +114,14 @@ const profileReducer = (state: ProfilePageStateType = initialState, action: Prof
                 ],
                 newPostText: ''
             };
+        case "SET-USER-PROFILE":
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state;
     }
 }
-
-export const setNewPostActionCreator = (text: string) => ({
-    type: "SET-NEW-POST",
-    postText: text
-} as const);
-export const addNewPostActionCreator = () => ({type: "ADD-NEW-POST"} as const);
 
 export default profileReducer;
