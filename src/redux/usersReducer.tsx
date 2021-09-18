@@ -41,7 +41,7 @@ const initialState: UsersStatePropsType = {
     users: [],
     currentPage: 1,
     usersTotalCount: 0,
-    pageSize: 5,
+    pageSize: 10,
     isFetching: false
 }
 
