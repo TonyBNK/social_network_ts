@@ -18,6 +18,7 @@ export type UsersStatePropsType = {
     usersTotalCount: number
     pageSize: number
     isFetching: boolean
+    followingProgress: Array<number>
 }
 
 export type UsersDispatchPropsType = {
@@ -27,6 +28,7 @@ export type UsersDispatchPropsType = {
     changeCurrentPage: (currentPage: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
     setFetching: (fetching: boolean) => void
+    setFollowingProgress: (isFetching: boolean, buttonId: number) => void
 }
 
 export type UsersPageActionsType =
@@ -35,14 +37,16 @@ export type UsersPageActionsType =
     | ReturnType<typeof setUsers>
     | ReturnType<typeof changeCurrentPage>
     | ReturnType<typeof setUsersTotalCount>
-    | ReturnType<typeof setFetching>;
+    | ReturnType<typeof setFetching>
+    | ReturnType<typeof setFollowingProgress>;
 
 const initialState: UsersStatePropsType = {
     users: [],
     currentPage: 1,
     usersTotalCount: 0,
     pageSize: 10,
-    isFetching: false
+    isFetching: false,
+    followingProgress: []
 }
 
 export const follow = (id: number) => ({
@@ -73,6 +77,12 @@ export const setUsersTotalCount = (usersTotalCount: number) => ({
 export const setFetching = (fetching: boolean) => ({
     type: 'SET-FETCHING',
     fetching
+} as const);
+
+export const setFollowingProgress = (isFetching: boolean, buttonId: number) => ({
+   type: 'SET-FOLLOWING-PROGRESS',
+   isFetching,
+   buttonId
 } as const);
 
 const usersReducer = (state: UsersStatePropsType = initialState, action: UsersPageActionsType):
@@ -111,6 +121,13 @@ const usersReducer = (state: UsersStatePropsType = initialState, action: UsersPa
             return {
                 ...state,
                 isFetching: action.fetching
+            };
+        case "SET-FOLLOWING-PROGRESS":
+            return {
+                ...state,
+                followingProgress: action.isFetching
+                ? [...state.followingProgress, action.buttonId]
+                    : state.followingProgress.filter(id => id !== action.buttonId)
             }
         default:
             return state

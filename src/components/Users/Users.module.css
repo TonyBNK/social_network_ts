@@ -22,6 +22,10 @@
     font-size: 16px;
 }
 
+.user button:disabled{
+    opacity: 0.5;
+}
+
 .selectedPage{
     font-weight: bold;
 }
