@@ -2,7 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     changeCurrentPage,
-    followUnfollow,
+    follow,
+    unfollow,
     setFetching,
     setUsers,
     setUsersTotalCount,
@@ -22,7 +23,9 @@ class UsersContainer extends React.Component<UsersPropsType> {
         if (this.props.users.length === 0) {
             this.props.setFetching(true)
             axios
-                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+                    withCredentials: true
+                })
                 .then(response => {
                     this.props.setFetching(false);
                     this.props.setUsers(response.data.items);
@@ -35,7 +38,9 @@ class UsersContainer extends React.Component<UsersPropsType> {
         this.props.setFetching(true);
         this.props.changeCurrentPage(page);
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+                withCredentials: true
+            })
             .then(response => {
                 this.props.setFetching(false);
                 this.props.setUsers(response.data.items)
@@ -50,7 +55,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 currentPage={this.props.currentPage}
                 usersTotalCount={this.props.usersTotalCount}
                 pageSize={this.props.pageSize}
-                followUnfollow={this.props.followUnfollow}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
                 changeCurrentPage={this.changeCurrentPage}
             />
         </div>
@@ -66,7 +72,8 @@ const mapStateToProps = (state: RootStateType): UsersStatePropsType => ({
 });
 
 export default connect(mapStateToProps, {
-    followUnfollow,
+    follow,
+    unfollow,
     setUsers,
     changeCurrentPage,
     setUsersTotalCount,

@@ -21,7 +21,8 @@ export type UsersStatePropsType = {
 }
 
 export type UsersDispatchPropsType = {
-    followUnfollow: (id: number) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
     setUsers: (users: Array<UserType>) => void
     changeCurrentPage: (currentPage: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
@@ -29,7 +30,8 @@ export type UsersDispatchPropsType = {
 }
 
 export type UsersPageActionsType =
-    ReturnType<typeof followUnfollow>
+    ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof changeCurrentPage>
     | ReturnType<typeof setUsersTotalCount>
@@ -43,8 +45,13 @@ const initialState: UsersStatePropsType = {
     isFetching: false
 }
 
-export const followUnfollow = (id: number) => ({
-    type: 'FOLLOW-UNFOLLOW',
+export const follow = (id: number) => ({
+    type: 'FOLLOW',
+    userId: id
+} as const);
+
+export const unfollow = (id: number) => ({
+    type: 'UNFOLLOW',
     userId: id
 } as const);
 
@@ -71,11 +78,18 @@ export const setFetching = (fetching: boolean) => ({
 const usersReducer = (state: UsersStatePropsType = initialState, action: UsersPageActionsType):
     UsersStatePropsType => {
     switch (action.type) {
-        case 'FOLLOW-UNFOLLOW':
+        case 'FOLLOW':
             return {
                 ...state,
                 users: state.users.map(u =>
-                    u.id === action.userId ? {...u, followed: !u.followed} : u
+                    u.id === action.userId ? {...u, followed: true} : u
+                )
+            };
+        case "UNFOLLOW":
+            return {
+                ...state,
+                users: state.users.map(u =>
+                    u.id === action.userId ? {...u, followed: false} : u
                 )
             };
         case "SET-USERS":
