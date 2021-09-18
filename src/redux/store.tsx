@@ -9,13 +9,15 @@ import friendsReducer from "./friendsReducer";
 import usersReducer, {
     UsersPageActionsType
 } from "./usersReducer";
+import {authReducer} from "./authReducer";
 
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     friendsPage: friendsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 });
 
 export const store = createStore(rootReducer);
