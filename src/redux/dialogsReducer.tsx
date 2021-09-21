@@ -21,6 +21,7 @@ export type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string
+    isAuth: boolean
 };
 
 export type DialogsDispatchPropsType = {
@@ -29,8 +30,8 @@ export type DialogsDispatchPropsType = {
 }
 
 export type DialogsActionsType =
-    ReturnType<typeof setNewMessageActionCreator>
-    | ReturnType<typeof addNewMessageActionCreator>;
+    ReturnType<typeof setNewMessage>
+    | ReturnType<typeof addNewMessage>;
 
 const initialState: DialogsPageStateType = {
     dialogs: [
@@ -45,7 +46,8 @@ const initialState: DialogsPageStateType = {
         {id: v1(), message: 'Bark'},
         {id: v1(), message: "What's up?"},
     ],
-    newMessageText: ''
+    newMessageText: '',
+    isAuth: false
 };
 
 const dialogsReducer = (state: DialogsPageStateType = initialState, action: DialogsActionsType): DialogsPageStateType => {
@@ -67,10 +69,10 @@ const dialogsReducer = (state: DialogsPageStateType = initialState, action: Dial
     }
 }
 
-export const setNewMessageActionCreator = (text: string) => ({
+export const setNewMessage = (text: string) => ({
     type: "SET-NEW-MESSAGE",
     messageText: text
 } as const);
-export const addNewMessageActionCreator = () => ({type: "ADD-NEW-MESSAGE"} as const);
+export const addNewMessage = () => ({type: "ADD-NEW-MESSAGE"} as const);
 
 export default dialogsReducer;

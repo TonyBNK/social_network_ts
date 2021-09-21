@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import c from './Dialogs.module.css';
 import {Dialog, DialogType} from "./Dialog/Dialog";
 import {Message, MessageType} from "./Message/Message";
+import {Redirect} from "react-router-dom";
 
 type DialogsPropsType = {
     dialogs: Array<DialogType>
@@ -9,6 +10,7 @@ type DialogsPropsType = {
     newMessageText: string
     setNewMessage: (text: string) => void
     addNewMessage: () => void
+    isAuth: boolean
 }
 export const Dialogs: React.FC<DialogsPropsType> = (
     {
@@ -16,7 +18,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (
         messages,
         newMessageText,
         setNewMessage,
-        addNewMessage
+        addNewMessage,
+        isAuth
     }
 ) => {
     const dialogsList = dialogs.map(d =>
@@ -38,6 +41,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (
     }
 
     const onClickHandler = () => addNewMessage();
+
+    if (!isAuth) return <Redirect to={'login'}/>
 
     return (
         <div className={c.dialogs}>
