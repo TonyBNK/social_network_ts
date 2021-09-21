@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import c from "./Header.module.css";
 import logo from '../../images/logo.png';
-import {AuthUserMTSPType} from "../../types/authUserTypes";
+import {AuthUserMTSPType} from "../../redux/authReducer";
 
 
 type HeaderPropsType = AuthUserMTSPType;

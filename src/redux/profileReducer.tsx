@@ -2,9 +2,8 @@ import {v1} from "uuid";
 import cat_with_glasses from "../images/cat_with_glasses.jpg";
 import cat_with_tongue from "../images/cat_with_tongue.jpg";
 import angry_cat from "../images/angry_cat.webp";
-import React from "react";
 import {RouteComponentProps} from "react-router-dom";
-
+import {profileAPI} from "../api/api";
 
 
 type PostType = {
@@ -52,33 +51,41 @@ export type PostsDispatchType = {
     addNewPost: () => void
 }
 export type ProfileInfoDispatchType = {
-    setUserProfile: (profile: UserProfileType) => void
+    setUserProfile: (userId: string | undefined) => void
 }
 export type ProfileDispatchType = PostsDispatchType & ProfileInfoDispatchType;
 
 export type PostsType = PostsStateType & PostsDispatchType;
 export type ProfileInfoType = ProfileInfoStateType & ProfileInfoDispatchType;
 
-export type ProfilePageType = PostsType & ProfileInfoType;
-
 type PostsActionsType =
     ReturnType<typeof setNewPost>
     | ReturnType<typeof addNewPost>;
-type ProfileInfoActionsType = ReturnType<typeof setUserProfile>;
+type ProfileInfoActionsType = ReturnType<typeof setUserProfileSuccess>;
 export type ProfileActionsType = PostsActionsType | ProfileInfoActionsType;
 
 export type ProfileInfoWithPathParamsType = RouteComponentProps<PathParamsType> & ProfileInfoType;
 
+type SetUserProfileType = (userId: string | undefined) =>
+    (dispatch: (action: ProfileInfoActionsType) => void) => void
 
 export const setNewPost = (text: string) => ({
     type: "SET-NEW-POST",
     postText: text
 } as const);
 export const addNewPost = () => ({type: "ADD-NEW-POST"} as const);
-export const setUserProfile = (profile: UserProfileType) => ({
+export const setUserProfileSuccess = (profile: UserProfileType) => ({
     type: 'SET-USER-PROFILE',
     profile
 } as const);
+
+export const setUserProfile: SetUserProfileType = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUsersProfile(userId).then(data => {
+            dispatch(setUserProfileSuccess(data));
+        });
+    }
+};
 
 const initialState: ProfileStateType = {
     posts: [

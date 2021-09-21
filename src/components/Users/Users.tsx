@@ -2,7 +2,6 @@ import React from "react";
 import c from './Users.module.css';
 import catUser from '../../images/catUser.png';
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 
 type UserType = {
@@ -26,7 +25,7 @@ type UsersPropsType = {
     pageSize: number
     follow: (id: number) => void
     unfollow: (id: number) => void
-    changeCurrentPage: (currentPage: number) => void
+    changeCurrentPage: (page: number, pageSize: number) => void
     followingProgress: Array<number>
     setFollowingProgress: (isFetching: boolean, buttonId: number) => void
 }
@@ -40,8 +39,7 @@ export const Users: React.FC<UsersPropsType> = (
         follow,
         unfollow,
         changeCurrentPage,
-        followingProgress,
-        setFollowingProgress
+        followingProgress
     }
 ) => {
     const usersList = users.map(u => {
@@ -55,26 +53,14 @@ export const Users: React.FC<UsersPropsType> = (
                         u.followed
                             ? <button
                                 disabled={followingProgress.some(id => id === u.id)}
-                                onClick={() => {
-                                    setFollowingProgress(true, u.id);
-                                    usersAPI.unfollowUser(u.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            unfollow(u.id);
-                                        }
-                                        setFollowingProgress(false, u.id);
-                                    })
-                                }}>Unfollow</button>
+                                onClick={() => unfollow(u.id)}>
+                                Unfollow
+                            </button>
                             : <button
                                 disabled={followingProgress.some(id => id === u.id)}
-                                onClick={() => {
-                                    setFollowingProgress(true, u.id);
-                                    usersAPI.followUser(u.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            follow(u.id);
-                                        }
-                                        setFollowingProgress(false, u.id);
-                                    })
-                                }}>Follow</button>
+                                onClick={() => follow(u.id)}>
+                                Follow
+                            </button>
                     }
 
                     <div className={c.body}>
@@ -95,9 +81,10 @@ export const Users: React.FC<UsersPropsType> = (
         pages.push(i);
     }
 
-    const pagesList = pages.map(page => {
+    const pagesList = pages.map((page) => {
+
         const onChangeCurrentPageHandler = () => {
-            changeCurrentPage(page);
+            changeCurrentPage(page, pageSize);
         }
 
         return (
