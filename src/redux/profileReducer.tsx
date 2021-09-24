@@ -43,7 +43,6 @@ export type PostsStateType = {
 }
 export type ProfileInfoStateType = {
     profile: UserProfileType | null
-    isAuth: boolean
 }
 export type ProfileStateType = PostsStateType & ProfileInfoStateType;
 
@@ -104,8 +103,7 @@ const initialState: ProfileStateType = {
         },
     ],
     newPostText: '',
-    profile: null,
-    isAuth: false
+    profile: null
 }
 
 const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType):

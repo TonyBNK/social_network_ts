@@ -21,7 +21,6 @@ export type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string
-    isAuth: boolean
 };
 
 export type DialogsDispatchPropsType = {
@@ -47,7 +46,6 @@ const initialState: DialogsPageStateType = {
         {id: v1(), message: "What's up?"},
     ],
     newMessageText: '',
-    isAuth: false
 };
 
 const dialogsReducer = (state: DialogsPageStateType = initialState, action: DialogsActionsType): DialogsPageStateType => {
