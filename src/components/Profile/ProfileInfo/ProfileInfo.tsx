@@ -26,13 +26,15 @@ type ProfileType = {
     }
 }
 export type ProfileInfoType = {
-    titleImage: string
     profile: ProfileType | null
+    status: string,
+    updateStatus: (newStatus: string) => void
 };
 export const ProfileInfo: React.FC<ProfileInfoType> = (
     {
         profile,
-        titleImage
+        status,
+        updateStatus
     }
 ) => {
     if (!profile) {
@@ -41,13 +43,13 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
 
     return (
         <div className={c.info}>
-            {/*<div className={c.titleImage}>*/}
-            {/*    <img src={titleImage} alt="azgard"/>*/}
-            {/*</div>*/}
             <div className={c.avatar}>
                 <img src={profile.photos.large} alt="ava"/>
             </div>
-            <ProfileStatus/>
+            <ProfileStatus
+                status={status}
+                updateStatus={updateStatus}
+            />
             <div className={c.description}>
                 <span className={c.fullName}>{profile.fullName}</span>
             </div>

@@ -27,9 +27,19 @@ export const usersAPI = {
 };
 
 export const profileAPI = {
-    getUsersProfile: (userId: string = '2') => {
+    getUsersProfile: (userId: string) => {
         return axiosInst
             .get(`profile/${userId}`)
+            .then(response => response.data);
+    },
+    getUsersStatus: (userId: string = '19542') => {
+        return axiosInst
+            .get(`profile/status/${userId}`)
+            .then(response => response.data);
+    },
+    updateProfileStatus: (newStatus: string) => {
+        return axiosInst
+            .put(`profile/status`, {status: newStatus})
             .then(response => response.data);
     }
 };
