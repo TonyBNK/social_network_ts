@@ -1,4 +1,5 @@
 import axios from "axios";
+import {FormDataType} from "../components/LoginPage";
 
 const axiosInst = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -48,6 +49,25 @@ export const authAPI = {
     getUsersAuth: () => {
         return axiosInst
             .get(`auth/me`)
+            .then(response => response.data);
+    },
+    logUserIn: (formData: FormDataType) => {
+        const loginIsOk = formData.login === 'borisenk-anton@yandex.ru'
+            && formData.password === 'Qwerty123';
+
+        if (loginIsOk) {
+            return axiosInst
+                .post(`/auth/login`, {
+                    email: formData.login,
+                    password: formData.password,
+                    rememberMe: formData.rememberMe
+                })
+                .then(response => response.data);
+        }
+    },
+    logUserOut: () => {
+        return axiosInst
+            .delete(`/auth/login`)
             .then(response => response.data);
     }
 }

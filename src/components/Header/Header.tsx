@@ -4,22 +4,31 @@ import c from "./Header.module.css";
 import logo from '../../images/logo.png';
 import {AuthUserMTSPType} from "../../redux/authReducer";
 
-
-type HeaderPropsType = AuthUserMTSPType;
+type LogOutType = {
+    logOut: () => void
+}
+type HeaderPropsType = AuthUserMTSPType & LogOutType;
 
 export const Header: React.FC<HeaderPropsType> = (
     {
         login,
-        isAuth
+        isAuth,
+        logOut
     }
 ) => {
+    const logOutHandler = () => {
+        logOut();
+    }
+
     return (
         <header className={c.head}>
             <img src={logo} alt="логотип"/>
             <div className={c.loginBlock}>
                 {
                     isAuth
-                        ? login
+                        ? <div>
+                            {login} <button onClick={logOutHandler}>Logout</button>
+                        </div>
                         : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>

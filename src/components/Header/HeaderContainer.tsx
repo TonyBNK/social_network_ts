@@ -3,7 +3,7 @@ import {Header} from "./Header";
 import {connect} from "react-redux";
 import {
     AuthUserMTSPType,
-    AuthUserPropsType,
+    AuthUserPropsType, logOut,
     setAuthUserData
 } from "../../redux/authReducer";
 import {RootStateType} from "../../redux/store";
@@ -17,7 +17,8 @@ class HeaderContainer extends React.Component<AuthUserPropsType> {
     render() {
         return <Header
             login={this.props.login}
-            isAuth={this.props.isAuth}/>
+            isAuth={this.props.isAuth}
+            logOut={this.props.logOut}/>
     }
 }
 
@@ -27,5 +28,6 @@ const mapStateToProps = (state: RootStateType): AuthUserMTSPType => ({
 });
 
 export default connect(mapStateToProps, {
-    setAuthUserData
+    setAuthUserData,
+    logOut
 })(HeaderContainer);
