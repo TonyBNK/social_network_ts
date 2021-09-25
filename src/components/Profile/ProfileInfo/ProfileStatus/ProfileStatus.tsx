@@ -9,7 +9,7 @@ type ProfileStatusPropsType = {
 class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     state = {
         isEdit: false,
-        status: ''
+        status: this.props.status
     }
 
     activateEditMode = () => {
@@ -29,6 +29,14 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         this.setState({
             status: e.currentTarget.value
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
