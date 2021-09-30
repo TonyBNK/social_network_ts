@@ -39,7 +39,6 @@ type PathParamsType = {
 
 export type PostsStateType = {
     posts: Array<PostType>
-    newPostText: string
 }
 export type ProfileInfoStateType = {
     profile: UserProfileType | null
@@ -61,9 +60,7 @@ export type ProfileDispatchType = PostsDispatchType & ProfileInfoDispatchType;
 export type PostsType = PostsStateType & PostsDispatchType;
 export type ProfileInfoType = ProfileInfoStateType & ProfileInfoDispatchType;
 
-type PostsActionsType =
-    ReturnType<typeof setNewPost>
-    | ReturnType<typeof addNewPost>;
+type PostsActionsType = ReturnType<typeof addNewPost>;
 type ProfileInfoActionsType =
     ReturnType<typeof setUserProfileSuccess>
     | ReturnType<typeof setUserStatusSuccess>;
@@ -76,11 +73,10 @@ export type ProfileInfoWithPathParamsType =
 type SetUserProfileType = (userId: string) =>
     (dispatch: (action: ProfileInfoActionsType) => void) => void
 
-export const setNewPost = (text: string) => ({
-    type: "SET-NEW-POST",
-    postText: text
+export const addNewPost = (newPostText: string) => ({
+    type: "ADD-NEW-POST",
+    newPostText
 } as const);
-export const addNewPost = () => ({type: "ADD-NEW-POST"} as const);
 export const setUserProfileSuccess = (profile: UserProfileType) => ({
     type: 'SET-USER-PROFILE',
     profile
@@ -104,11 +100,11 @@ export const setUserStatus: SetUserProfileType = (userId = '19542') => {
         });
     }
 };
-export const updateStatus: SetUserProfileType = (newStatus ) => {
+export const updateStatus: SetUserProfileType = (newStatus) => {
     return (dispatch) => {
         profileAPI.updateProfileStatus(newStatus).then(data => {
             if (data.resultCode === 0)
-            dispatch(setUserStatusSuccess(newStatus));
+                dispatch(setUserStatusSuccess(newStatus));
         });
     }
 };
@@ -128,7 +124,6 @@ const initialState: ProfileStateType = {
             likesCount: 23
         },
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -136,11 +131,6 @@ const initialState: ProfileStateType = {
 const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType):
     ProfileStateType => {
     switch (action.type) {
-        case "SET-NEW-POST":
-            return {
-                ...state,
-                newPostText: action.postText,
-            };
         case "ADD-NEW-POST":
             return {
                 ...state,
@@ -148,12 +138,11 @@ const profileReducer = (state: ProfileStateType = initialState, action: ProfileA
                     {
                         id: v1(),
                         ava: cat_with_glasses,
-                        post: state.newPostText,
+                        post: action.newPostText,
                         likesCount: 0
                     },
                     ...state.posts
-                ],
-                newPostText: ''
+                ]
             };
         case "SET-USER-PROFILE":
             return {

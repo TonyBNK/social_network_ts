@@ -20,17 +20,13 @@ type MessageType = {
 export type DialogsPageStateType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
 };
 
 export type DialogsDispatchPropsType = {
-    setNewMessage: (text: string) => void,
-    addNewMessage: () => void
+    addNewMessage: (newMessageText: string) => void
 }
 
-export type DialogsActionsType =
-    ReturnType<typeof setNewMessage>
-    | ReturnType<typeof addNewMessage>;
+export type DialogsActionsType = ReturnType<typeof addNewMessage>;
 
 const initialState: DialogsPageStateType = {
     dialogs: [
@@ -44,33 +40,28 @@ const initialState: DialogsPageStateType = {
         {id: v1(), message: 'So much wow!'},
         {id: v1(), message: 'Bark'},
         {id: v1(), message: "What's up?"},
-    ],
-    newMessageText: '',
+    ]
 };
 
 const dialogsReducer = (state: DialogsPageStateType = initialState, action: DialogsActionsType): DialogsPageStateType => {
 
     switch (action.type) {
-        case "SET-NEW-MESSAGE":
-            return {
-                ...state,
-                newMessageText: action.messageText
-            };
         case "ADD-NEW-MESSAGE":
             return {
                 ...state,
-                messages: [...state.messages, {id: v1(), message: state.newMessageText}],
-                newMessageText: ''
+                messages: [...state.messages, {
+                    id: v1(),
+                    message: action.newMessageText
+                }]
             }
         default:
             return state;
     }
 }
 
-export const setNewMessage = (text: string) => ({
-    type: "SET-NEW-MESSAGE",
-    messageText: text
+export const addNewMessage = (newMessageText: string) => ({
+    type: "ADD-NEW-MESSAGE",
+    newMessageText
 } as const);
-export const addNewMessage = () => ({type: "ADD-NEW-MESSAGE"} as const);
 
 export default dialogsReducer;

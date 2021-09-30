@@ -1,21 +1,24 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import c from './Dialogs.module.css';
 import {Dialog, DialogType} from "./Dialog/Dialog";
 import {Message, MessageType} from "./Message/Message";
+import {
+    Field,
+    InjectedFormProps,
+    reduxForm
+} from "redux-form";
+import {FormDataType} from "../LoginPage";
+
 
 type DialogsPropsType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
-    setNewMessage: (text: string) => void
-    addNewMessage: () => void
+    addNewMessage: (newMessageText: string) => void
 }
 export const Dialogs: React.FC<DialogsPropsType> = (
     {
         dialogs,
         messages,
-        newMessageText,
-        setNewMessage,
         addNewMessage,
     }
 ) => {
@@ -32,12 +35,9 @@ export const Dialogs: React.FC<DialogsPropsType> = (
             message={m.message}
         />
     );
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setNewMessage(e.currentTarget.value);
+    const submitAddNewMessage = (values: any) => {
+        addNewMessage(values.newMessageText);
     }
-
-    const onClickHandler = () => addNewMessage();
 
     return (
         <div className={c.dialogs}>
@@ -46,16 +46,34 @@ export const Dialogs: React.FC<DialogsPropsType> = (
             </div>
             <div className={c.messages}>
                 {messagesList}
-                <div className={c.newMessage}>
-                    <textarea
-                        value={newMessageText}
-                        onChange={onChangeHandler}
-                    />
-                    <button onClick={onClickHandler}>
-                        Send
-                    </button>
-                </div>
+                <NewPostReduxForm onSubmit={submitAddNewMessage}/>
             </div>
         </div>
     );
 };
+
+const NewMessageForm: React.FC<InjectedFormProps<FormDataType>> = (
+    {
+        handleSubmit
+    }
+) => {
+    return (
+        <form
+            className={c.newMessage}
+            onSubmit={handleSubmit}
+        >
+            <Field
+                component={'textarea'}
+                type={'text'}
+                name={'newMessageText'}
+            />
+            <button>
+                Send
+            </button>
+        </form>
+    )
+}
+
+const NewPostReduxForm = reduxForm<FormDataType>({
+    form: 'newMessage'
+})(NewMessageForm);
