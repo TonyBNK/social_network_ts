@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import c from "./Header.module.css";
 import logo from '../../images/logo.png';
-import {AuthUserMTSPType} from "../../redux/authReducer";
+import {AuthUserMTSPType} from "../../bll/reducers/authReducer";
 
 type LogOutType = {
     logOut: () => void

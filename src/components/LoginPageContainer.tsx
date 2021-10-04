@@ -3,7 +3,8 @@ import {LoginPage} from "./LoginPage";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {withProfileRedirect} from "../hoc/withProfileRedirect";
-import {logIn, LogInType} from "../redux/authReducer";
+import {LogInType} from "../bll/reducers/authReducer";
+import {logIn} from "../bll/thunks/thunks";
 
 
 type LogInUserMDTPType = {

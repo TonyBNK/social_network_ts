@@ -1,9 +1,9 @@
 import {v1} from "uuid";
-import vsratiy_cat from "../images/vsratiy_cat.jpg";
-import doge from "../images/doge.jpg";
-import parrot from "../images/parrot.jpg";
-import hamster from "../images/hamster.jpg";
-import turtle from "../images/turtle.jpg";
+import vsratiy_cat from "../../images/vsratiy_cat.jpg";
+import doge from "../../images/doge.jpg";
+import parrot from "../../images/parrot.jpg";
+import hamster from "../../images/hamster.jpg";
+import turtle from "../../images/turtle.jpg";
 
 
 type DialogType = {

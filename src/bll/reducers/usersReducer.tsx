@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import {usersAPI} from "../../api/api";
 
 export type UserType = {
     id: number,

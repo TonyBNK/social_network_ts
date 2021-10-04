@@ -5,8 +5,8 @@ import {
     AuthUserMTSPType,
     AuthUserPropsType, logOut,
     setAuthUserData
-} from "../../redux/authReducer";
-import {RootStateType} from "../../redux/store";
+} from "../../bll/reducers/authReducer";
+import {RootStateType} from "../../bll/store";
 
 
 class HeaderContainer extends React.Component<AuthUserPropsType> {

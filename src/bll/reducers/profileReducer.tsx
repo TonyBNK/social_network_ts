@@ -1,9 +1,9 @@
 import {v1} from "uuid";
-import cat_with_glasses from "../images/cat_with_glasses.jpg";
-import cat_with_tongue from "../images/cat_with_tongue.jpg";
-import angry_cat from "../images/angry_cat.webp";
+import cat_with_glasses from "../../images/cat_with_glasses.jpg";
+import cat_with_tongue from "../../images/cat_with_tongue.jpg";
+import angry_cat from "../../images/angry_cat.webp";
 import {RouteComponentProps} from "react-router-dom";
-import {profileAPI} from "../api/api";
+import {profileAPI} from "../../api/api";
 
 
 type PostType = {

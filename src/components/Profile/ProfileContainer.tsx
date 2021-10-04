@@ -5,8 +5,8 @@ import {
     ProfileInfoStateType,
     ProfileInfoWithPathParamsType,
     setUserProfile, setUserStatus, updateStatus
-} from "../../redux/profileReducer";
-import {RootStateType} from "../../redux/store";
+} from "../../bll/reducers/profileReducer";
+import {RootStateType} from "../../bll/store";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";

@@ -8,8 +8,8 @@ import {
     setUsersTotalCount,
     UsersDispatchPropsType,
     UsersStatePropsType, setFollowingProgress
-} from "../../redux/usersReducer";
-import {RootStateType} from "../../redux/store";
+} from "../../bll/reducers/usersReducer";
+import {RootStateType} from "../../bll/store";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
 
