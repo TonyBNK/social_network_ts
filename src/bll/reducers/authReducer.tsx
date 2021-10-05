@@ -2,6 +2,7 @@ import {Nullable} from "../../types/nullable";
 import {FormDataType} from "../../components/LoginPage";
 import {setAuthUserDataSuccess} from "../action-creators/actionCreators";
 import {setAuthUserData} from "../thunks/thunks";
+import {FormAction} from "redux-form";
 
 
 export type SetUserDataType =
@@ -29,7 +30,7 @@ export type AuthUserPropsType = AuthUserMTSPType & AuthUserMDTPType;
 export type SetAuthUserDataType = () =>
     (dispatch: (action: SetUserDataType) => void) => void
 
-export type LogInType = (formatData: FormDataType) => (dispatch: (action: ReturnType<typeof setAuthUserData>) => void) => void
+export type LogInType = (formatData: FormDataType) => (dispatch: (action: ReturnType<typeof setAuthUserData> | FormAction) => void) => void
 
 const initialState: UserAuthStateType = {
     userId: null,

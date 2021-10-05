@@ -14,8 +14,14 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
     componentDidMount() {
-        this.props.setUserProfile(this.props.match.params.userId);
-        this.props.setUserStatus(this.props.match.params.userId);
+        let userId = this.props.match.params.userId;
+
+        if (!userId){
+            userId = this.props.userId!.toString();
+        }
+
+        this.props.setUserProfile(userId);
+        this.props.setUserStatus(userId);
     }
 
     render = () => {
@@ -29,7 +35,8 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
 
 const mapStateToProps = (state: RootStateType): ProfileInfoStateType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    userId: state.auth.userId
 });
 
 export default compose<ComponentType>(

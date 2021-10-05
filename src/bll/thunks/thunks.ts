@@ -5,6 +5,7 @@ import {
     SetAuthUserDataType,
     SetUserDataType
 } from "../reducers/authReducer";
+import {stopSubmit} from "redux-form";
 
 
 export const setAuthUserData: SetAuthUserDataType = () => {
@@ -26,6 +27,10 @@ export const logIn: LogInType = (formData) => {
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthUserData());
+                } else {
+                    const errorMessage = data.messages.length !== 0 ? data.messages[0] : 'Some error!';
+
+                    dispatch(stopSubmit('login', {_error: errorMessage}));
                 }
             })
     }

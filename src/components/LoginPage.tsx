@@ -2,6 +2,7 @@ import React from "react";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Input} from "./common/FormsControls";
 import {maxLengthCreator, required} from "../utils/validators/validators";
+import c from './LoginPage.module.scss';
 
 
 export type FormDataType = {
@@ -35,7 +36,8 @@ export const LoginPage: React.FC<LoginPagePropsType> = (
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (
     {
-        handleSubmit
+        handleSubmit,
+        error
     }
 ) => {
     return (
@@ -58,6 +60,11 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (
                     validate={[required,maxLength30]}
                 />
             </div>
+            {
+                error && <div className={c.errorMessage}>
+                    {error}
+                </div>
+            }
             <div>
                 <Field
                     name={'rememberMe'}

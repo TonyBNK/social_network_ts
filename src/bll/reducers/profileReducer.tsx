@@ -4,6 +4,7 @@ import cat_with_tongue from "../../images/cat_with_tongue.jpg";
 import angry_cat from "../../images/angry_cat.webp";
 import {RouteComponentProps} from "react-router-dom";
 import {profileAPI} from "../../api/api";
+import {Nullable} from "../../types/nullable";
 
 
 type PostType = {
@@ -43,6 +44,7 @@ export type PostsStateType = {
 export type ProfileInfoStateType = {
     profile: UserProfileType | null
     status: string
+    userId: Nullable<number>
 }
 export type ProfileStateType = PostsStateType & ProfileInfoStateType;
 
@@ -125,7 +127,8 @@ const initialState: ProfileStateType = {
         },
     ],
     profile: null,
-    status: ''
+    status: '',
+    userId: null
 }
 
 const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType):
