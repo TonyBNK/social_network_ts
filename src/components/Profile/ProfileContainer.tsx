@@ -33,11 +33,11 @@ const mapStateToProps = (state: RootStateType): ProfileInfoStateType => ({
 });
 
 export default compose<ComponentType>(
-    withAuthRedirect,
     connect(mapStateToProps, {
         setUserProfile,
         setUserStatus,
         updateStatus
     }),
-    withRouter
+    withRouter,
+    withAuthRedirect
 )(ProfileContainer);

@@ -3,10 +3,10 @@ import {Header} from "./Header";
 import {connect} from "react-redux";
 import {
     AuthUserMTSPType,
-    AuthUserPropsType, logOut,
-    setAuthUserData
+    AuthUserPropsType
 } from "../../bll/reducers/authReducer";
 import {RootStateType} from "../../bll/store";
+import {logOut, setAuthUserData} from "../../bll/thunks/thunks";
 
 
 class HeaderContainer extends React.Component<AuthUserPropsType> {

@@ -36,7 +36,7 @@ export const logOut = () => {
             .logUserOut()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setAuthUserDataSuccess(null, null, null, true));
+                    dispatch(setAuthUserDataSuccess(null, null, null, false));
                 }
             })
     }
