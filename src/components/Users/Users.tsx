@@ -25,7 +25,7 @@ type UsersPropsType = {
     pageSize: number
     follow: (id: number) => void
     unfollow: (id: number) => void
-    changeCurrentPage: (page: number, pageSize: number) => void
+    requestUsers: (page: number, pageSize: number) => void
     followingProgress: Array<number>
     setFollowingProgress: (isFetching: boolean, buttonId: number) => void
 }
@@ -38,7 +38,7 @@ export const Users: React.FC<UsersPropsType> = (
         pageSize,
         follow,
         unfollow,
-        changeCurrentPage,
+        requestUsers,
         followingProgress
     }
 ) => {
@@ -84,7 +84,7 @@ export const Users: React.FC<UsersPropsType> = (
     const pagesList = pages.map((page) => {
 
         const onChangeCurrentPageHandler = () => {
-            changeCurrentPage(page, pageSize);
+            requestUsers(page, pageSize);
         }
 
         return (

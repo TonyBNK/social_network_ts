@@ -26,8 +26,7 @@ export type UsersStatePropsType = {
 export type UsersDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (currentPage: number, pageSize: number) => void
-    changeCurrentPage: (currentPage: number, pageSize: number) => void
+    requestUsers: (page: number, pageSize: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
     setFollowingProgress: (isFetching: boolean, buttonId: number) => void
 }
@@ -102,13 +101,14 @@ export const unfollow = (userId: number): AppThunkType => {
         })
     }
 };
-export const setUsers = (
-    currentPage: number,
+export const requestUsers = (
+    page: number,
     pageSize: number
 ): AppThunkType => {
     return (dispatch) => {
         dispatch(setFetching(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(changeCurrentPageSuccess(page, pageSize));
+        usersAPI.getUsers(page, pageSize).then(data => {
                 dispatch(setFetching(false));
                 dispatch(setUsersSuccess(data.items));
                 dispatch(setUsersTotalCount(data.totalCount));
@@ -116,19 +116,6 @@ export const setUsers = (
         )
     }
 };
-export const changeCurrentPage = (
-    currentPage: number,
-    pageSize: number
-): AppThunkType => {
-    return (dispatch) => {
-        dispatch(setFetching(true));
-        dispatch(changeCurrentPageSuccess(currentPage, pageSize));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(setFetching(false));
-            dispatch(setUsersSuccess(data.items));
-        });
-    }
-}
 
 
 export const usersReducer = (state: UsersStatePropsType = initialState, action: UsersPageActionsType):
