@@ -22,10 +22,6 @@ export type DialogsPageStateType = {
     messages: Array<MessageType>
 };
 
-export type DialogsDispatchPropsType = {
-    addNewMessage: (newMessageText: string) => void
-}
-
 export type DialogsActionsType = ReturnType<typeof addNewMessage>;
 
 const initialState: DialogsPageStateType = {

@@ -1,4 +1,5 @@
 import {usersAPI} from "../../api/api";
+import {AppThunkType} from "../store";
 
 export type UserType = {
     id: number,
@@ -38,10 +39,6 @@ export type UsersPageActionsType =
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof setFetching>
     | ReturnType<typeof setFollowingProgress>;
-type FollowUnfollowUserType = (userId: number) =>
-    (dispatch: (action: UsersPageActionsType) => void) => void
-type SetUsersType = (currentPage: number, pageSize: number) =>
-    (dispatch: (action: UsersPageActionsType) => void) => void
 
 const initialState: UsersStatePropsType = {
     users: [],
@@ -83,7 +80,7 @@ export const setFollowingProgress = (isFetching: boolean, buttonId: number) => (
     buttonId
 } as const);
 
-export const follow: FollowUnfollowUserType = (userId) => {
+export const follow = (userId: number): AppThunkType => {
     return (dispatch) => {
         dispatch(setFollowingProgress(true, userId));
         usersAPI.followUser(userId).then(data => {
@@ -94,7 +91,7 @@ export const follow: FollowUnfollowUserType = (userId) => {
         })
     }
 };
-export const unfollow: FollowUnfollowUserType = (userId) => {
+export const unfollow = (userId: number): AppThunkType => {
     return (dispatch) => {
         dispatch(setFollowingProgress(true, userId));
         usersAPI.unfollowUser(userId).then(data => {
@@ -105,10 +102,10 @@ export const unfollow: FollowUnfollowUserType = (userId) => {
         })
     }
 };
-export const setUsers: SetUsersType = (
-    currentPage,
-    pageSize
-) => {
+export const setUsers = (
+    currentPage: number,
+    pageSize: number
+): AppThunkType => {
     return (dispatch) => {
         dispatch(setFetching(true));
         usersAPI.getUsers(currentPage, pageSize).then(data => {
@@ -119,10 +116,10 @@ export const setUsers: SetUsersType = (
         )
     }
 };
-export const changeCurrentPage: SetUsersType = (
-    currentPage,
-    pageSize
-) => {
+export const changeCurrentPage = (
+    currentPage: number,
+    pageSize: number
+): AppThunkType => {
     return (dispatch) => {
         dispatch(setFetching(true));
         dispatch(changeCurrentPageSuccess(currentPage, pageSize));

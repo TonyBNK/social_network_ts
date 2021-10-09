@@ -19,7 +19,7 @@ export const Sidebar:React.FC = (
                 <NavLink
                     to='/dialogs'
                     activeClassName={c.active}>
-                    Messages
+                    Dialogs
                 </NavLink>
             </div>
             <div className={c.item}>

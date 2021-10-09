@@ -5,6 +5,7 @@ import angry_cat from "../../images/angry_cat.webp";
 import {RouteComponentProps} from "react-router-dom";
 import {profileAPI} from "../../api/api";
 import {Nullable} from "../../types/nullable";
+import {AppThunkType} from "../store";
 
 
 type PostType = {
@@ -72,9 +73,6 @@ export type ProfileInfoWithPathParamsType =
     RouteComponentProps<PathParamsType>
     & ProfileInfoType;
 
-type SetUserProfileType = (userId: string) =>
-    (dispatch: (action: ProfileInfoActionsType) => void) => void
-
 export const addNewPost = (newPostText: string) => ({
     type: "ADD-NEW-POST",
     newPostText
@@ -88,21 +86,21 @@ export const setUserStatusSuccess = (status: string) => ({
     status
 } as const);
 
-export const setUserProfile: SetUserProfileType = (userId = '19542') => {
+export const setUserProfile = (userId = '19542'): AppThunkType => {
     return (dispatch) => {
         profileAPI.getUsersProfile(userId).then(profile => {
             dispatch(setUserProfileSuccess(profile));
         });
     }
 };
-export const setUserStatus: SetUserProfileType = (userId = '19542') => {
+export const setUserStatus = (userId = '19542'): AppThunkType => {
     return (dispatch) => {
         profileAPI.getUsersStatus(userId).then(status => {
             dispatch(setUserStatusSuccess(status));
         });
     }
 };
-export const updateStatus: SetUserProfileType = (newStatus) => {
+export const updateStatus = (newStatus: string): AppThunkType => {
     return (dispatch) => {
         profileAPI.updateProfileStatus(newStatus).then(data => {
             if (data.resultCode === 0)

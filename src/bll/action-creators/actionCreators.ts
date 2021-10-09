@@ -15,3 +15,7 @@ export const setAuthUserDataSuccess = (
         }
     } as const
 };
+
+export const initialiazedSuccess = () => ({
+    type: 'SET_INITIALIZED'
+} as const);

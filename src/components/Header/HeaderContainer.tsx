@@ -6,14 +6,10 @@ import {
     AuthUserPropsType
 } from "../../bll/reducers/authReducer";
 import {RootStateType} from "../../bll/store";
-import {logOut, setAuthUserData} from "../../bll/thunks/thunks";
+import {logOut} from "../../bll/thunks/thunks";
 
 
 class HeaderContainer extends React.Component<AuthUserPropsType> {
-    componentDidMount() {
-        this.props.setAuthUserData();
-    }
-
     render() {
         return <Header
             login={this.props.login}
@@ -28,6 +24,5 @@ const mapStateToProps = (state: RootStateType): AuthUserMTSPType => ({
 });
 
 export default connect(mapStateToProps, {
-    setAuthUserData,
     logOut
 })(HeaderContainer);

@@ -1,16 +1,16 @@
 import {authAPI} from "../../api/api";
-import {setAuthUserDataSuccess} from "../action-creators/actionCreators";
 import {
-    LogInType,
-    SetAuthUserDataType,
-    SetUserDataType
-} from "../reducers/authReducer";
+    initialiazedSuccess,
+    setAuthUserDataSuccess
+} from "../action-creators/actionCreators";
 import {stopSubmit} from "redux-form";
+import {AppThunkType} from "../store";
+import {FormDataType} from "../../components/LoginPage";
 
 
-export const setAuthUserData: SetAuthUserDataType = () => {
+export const setAuthUserData = (): AppThunkType<Promise<string | void>> => {
     return (dispatch) => {
-        authAPI
+        return authAPI
             .getUsersAuth()
             .then(data => {
                 if (data.resultCode === 0) {
@@ -20,7 +20,7 @@ export const setAuthUserData: SetAuthUserDataType = () => {
             })
     }
 };
-export const logIn: LogInType = (formData) => {
+export const logIn = (formData: FormDataType): AppThunkType => {
     return (dispatch) => {
         authAPI
             .logUserIn(formData)!
@@ -35,14 +35,22 @@ export const logIn: LogInType = (formData) => {
             })
     }
 };
-export const logOut = () => {
-    return (dispatch: (action: SetUserDataType) => void) => {
+export const logOut = (): AppThunkType => {
+    return (dispatch) => {
         authAPI
             .logUserOut()
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthUserDataSuccess(null, null, null, false));
                 }
+            })
+    }
+};
+export const initializeApp = (): AppThunkType => {
+    return (dispatch) => {
+        dispatch(setAuthUserData())
+            .then(() => {
+                dispatch(initialiazedSuccess());
             })
     }
 };
