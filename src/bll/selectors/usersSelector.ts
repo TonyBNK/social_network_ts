@@ -1,9 +1,15 @@
 import {RootStateType} from "../store";
 import {UserType} from "../reducers/usersReducer";
+import {createSelector} from "reselect";
 
-export const getUsers = (state: RootStateType): Array<UserType> => {
+
+const getUsersSelector = (state: RootStateType): Array<UserType> => {
     return state.usersPage.users;
 }
+
+export const getUsers = createSelector(getUsersSelector, (users) => {
+   return users.filter(user => user);
+});
 
 export const getCurrentPage = (state: RootStateType): number => {
     return state.usersPage.currentPage;
