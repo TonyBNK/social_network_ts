@@ -2,14 +2,10 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import c from "./Header.module.css";
 import logo from '../../images/logo.png';
-import {AuthUserMTSPType} from "../../bll/reducers/authReducer";
+import {AuthUserPropsType} from "../../bll/reducers/authReducer";
 
-type LogOutType = {
-    logOut: () => void
-}
-type HeaderPropsType = AuthUserMTSPType & LogOutType;
 
-export const Header: React.FC<HeaderPropsType> = (
+export const Header: React.FC<AuthUserPropsType> = (
     {
         login,
         isAuth,

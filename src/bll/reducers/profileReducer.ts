@@ -50,8 +50,7 @@ export type ProfileInfoStateType = {
 export type ProfileStateType = PostsStateType & ProfileInfoStateType;
 
 export type PostsDispatchType = {
-    setNewPost: (text: string) => void
-    addNewPost: () => void
+    addNewPost: (text: string) => void
 }
 export type ProfileInfoDispatchType = {
     setUserProfile: (userId: string | undefined) => void

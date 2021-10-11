@@ -1,22 +1,13 @@
 import React from "react";
 import c from './Dialogs.module.css';
-import {Dialog, DialogType} from "./Dialog/Dialog";
-import {Message, MessageType} from "./Message/Message";
-import {
-    Field,
-    InjectedFormProps,
-    reduxForm
-} from "redux-form";
+import {Dialog} from "./Dialog/Dialog";
+import {Message} from "./Message/Message";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormDataType} from "../LoginPage";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Textarea} from "../common/FormsControls";
+import {DialogsPropsType} from "../../bll/reducers/dialogsReducer";
 
-
-type DialogsPropsType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-    addNewMessage: (newMessageText: string) => void
-}
 
 const maxLength50 = maxLengthCreator(50);
 

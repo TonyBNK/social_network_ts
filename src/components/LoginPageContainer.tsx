@@ -3,15 +3,12 @@ import {LoginPage} from "./LoginPage";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {withProfileRedirect} from "../hoc/withProfileRedirect";
-import {LogInType} from "../bll/reducers/authReducer";
+import {LoginPageDispatchType} from "../bll/reducers/authReducer";
 import {logIn} from "../bll/thunks/thunks";
+import {RootStateType} from "../bll/store";
 
 
-type LogInUserMDTPType = {
-    logIn: LogInType
-}
-
-class LoginPageContainer extends React.Component<LogInUserMDTPType>{
+class LoginPageContainer extends React.Component<LoginPageDispatchType>{
 
     render = () => {
         return <LoginPage
@@ -21,5 +18,5 @@ class LoginPageContainer extends React.Component<LogInUserMDTPType>{
 
 export default compose<ComponentType>(
     withProfileRedirect,
-    connect(null, {logIn})
+    connect<{}, LoginPageDispatchType, {}, RootStateType>(null, {logIn})
 )(LoginPageContainer);

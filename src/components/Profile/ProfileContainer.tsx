@@ -2,6 +2,7 @@ import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {
+    ProfileInfoDispatchType,
     ProfileInfoStateType,
     ProfileInfoWithPathParamsType,
     setUserProfile, setUserStatus, updateStatus
@@ -43,7 +44,7 @@ const mapStateToProps = (state: RootStateType): ProfileInfoStateType => ({
 });
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {
+    connect<ProfileInfoStateType, ProfileInfoDispatchType, {}, RootStateType>(mapStateToProps, {
         setUserProfile,
         setUserStatus,
         updateStatus

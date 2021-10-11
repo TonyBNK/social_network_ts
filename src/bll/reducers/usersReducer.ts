@@ -15,7 +15,7 @@ export type UserType = {
     },
     status: string
 }
-export type UsersStatePropsType = {
+export type UsersStateType = {
     users: Array<UserType>
     currentPage: number
     usersTotalCount: number
@@ -23,13 +23,16 @@ export type UsersStatePropsType = {
     isFetching: boolean
     followingProgress: Array<number>
 }
-export type UsersDispatchPropsType = {
+export type UsersDispatchType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     requestUsers: (page: number, pageSize: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
     setFollowingProgress: (isFetching: boolean, buttonId: number) => void
 }
+
+export type UsersPropsType = UsersStateType & UsersDispatchType;
+
 export type UsersPageActionsType =
     ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>
@@ -39,7 +42,7 @@ export type UsersPageActionsType =
     | ReturnType<typeof setFetching>
     | ReturnType<typeof setFollowingProgress>;
 
-const initialState: UsersStatePropsType = {
+const initialState: UsersStateType = {
     users: [],
     currentPage: 1,
     usersTotalCount: 0,
@@ -118,8 +121,8 @@ export const requestUsers = (
 };
 
 
-export const usersReducer = (state: UsersStatePropsType = initialState, action: UsersPageActionsType):
-    UsersStatePropsType => {
+export const usersReducer = (state: UsersStateType = initialState, action: UsersPageActionsType):
+    UsersStateType => {
     switch (action.type) {
         case 'FOLLOW':
             return {

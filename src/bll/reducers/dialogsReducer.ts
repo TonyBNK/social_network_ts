@@ -22,6 +22,14 @@ export type DialogsPageStateType = {
     messages: Array<MessageType>
 };
 
+export type DialogsPageDispatchType = {
+    addNewMessage: (newMessageText: string) => DialogsActionsType
+};
+
+export type DialogsOwnType = {};
+
+export type DialogsPropsType = DialogsPageStateType & DialogsPageDispatchType & DialogsOwnType;
+
 export type DialogsActionsType = ReturnType<typeof addNewMessage>;
 
 const initialState: DialogsPageStateType = {

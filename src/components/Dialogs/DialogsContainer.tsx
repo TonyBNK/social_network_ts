@@ -1,4 +1,8 @@
-import {addNewMessage, DialogsPageStateType} from "../../bll/reducers/dialogsReducer";
+import {
+    addNewMessage, DialogsOwnType,
+    DialogsPageDispatchType,
+    DialogsPageStateType
+} from "../../bll/reducers/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {RootStateType} from "../../bll/store";
@@ -14,5 +18,5 @@ const mapStateToProps = (state: RootStateType): DialogsPageStateType => ({
 
 export const DialogsContainer = compose<ComponentType>(
     withAuthRedirect,
-    connect(mapStateToProps, {addNewMessage})
+    connect<DialogsPageStateType, DialogsPageDispatchType, DialogsOwnType, RootStateType>(mapStateToProps, {addNewMessage})
 )(Dialogs);

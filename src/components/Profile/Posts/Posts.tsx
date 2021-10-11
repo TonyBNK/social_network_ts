@@ -1,19 +1,16 @@
 import React from "react";
-import {Post, PostType} from "./Post/Post";
+import {Post} from "./Post/Post";
 import c from "./Posts.module.css";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormDataType} from "../../LoginPage";
 import {Textarea} from "../../common/FormsControls";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {PostsType} from "../../../bll/reducers/profileReducer";
 
-type PostsPropsType = {
-    posts: Array<PostType>
-    addNewPost: (newPostText: string) => void
-}
 
 const maxLength20 = maxLengthCreator(20);
 
-export const Posts: React.FC<PostsPropsType> = (
+export const Posts: React.FC<PostsType> = (
     {
         posts,
         addNewPost

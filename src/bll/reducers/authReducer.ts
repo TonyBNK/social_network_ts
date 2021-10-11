@@ -25,6 +25,10 @@ export type AuthUserMDTPType = {
     logOut: () => void
 }
 
+export type LoginPageDispatchType = {
+    logIn: (formData: FormDataType) => void
+}
+
 export type AuthUserPropsType = AuthUserMTSPType & AuthUserMDTPType;
 
 export type LogInType = (formatData: FormDataType) => (dispatch: Dispatch<ReturnType<typeof setAuthUserData> | FormAction>) => void

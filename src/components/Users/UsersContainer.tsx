@@ -6,8 +6,8 @@ import {
     setFollowingProgress,
     setUsersTotalCount,
     unfollow,
-    UsersDispatchPropsType,
-    UsersStatePropsType
+    UsersDispatchType, UsersPropsType,
+    UsersStateType
 } from "../../bll/reducers/usersReducer";
 import {RootStateType} from "../../bll/store";
 import {Users} from "./Users";
@@ -18,8 +18,6 @@ import {
     getUsers, getUsersTotalCount
 } from "../../bll/selectors/usersSelector";
 
-
-type UsersPropsType = UsersStatePropsType & UsersDispatchPropsType;
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
@@ -44,7 +42,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-const mapStateToProps = (state: RootStateType): UsersStatePropsType => ({
+const mapStateToProps = (state: RootStateType): UsersStateType => ({
     users: getUsers(state),
     currentPage: getCurrentPage(state),
     pageSize: getPageSize(state),
@@ -53,7 +51,7 @@ const mapStateToProps = (state: RootStateType): UsersStatePropsType => ({
     followingProgress: getFollowingProgress(state)
 });
 
-export default connect(mapStateToProps, {
+export default connect<UsersStateType, UsersDispatchType, {}, RootStateType>(mapStateToProps, {
     follow,
     unfollow,
     requestUsers,

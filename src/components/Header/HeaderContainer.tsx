@@ -2,6 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {
+    AuthUserMDTPType,
     AuthUserMTSPType,
     AuthUserPropsType
 } from "../../bll/reducers/authReducer";
@@ -23,6 +24,6 @@ const mapStateToProps = (state: RootStateType): AuthUserMTSPType => ({
     isAuth: state.auth.isAuth
 });
 
-export default connect(mapStateToProps, {
+export default connect<AuthUserMTSPType, AuthUserMDTPType, {}, RootStateType>(mapStateToProps, {
     logOut
 })(HeaderContainer);
