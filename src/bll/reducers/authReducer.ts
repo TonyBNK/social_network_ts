@@ -13,24 +13,14 @@ export type UserAuthStateType = {
     isAuth: boolean
 }
 
-export type AuthMeResponseType = {
-    data: {
-        id: number
-        login: string
-        email: string
-    },
-    messages: Array<string>
-    fieldsErrors: Array<string>
-    resultCode: number
+export type AuthMeType = {
+    id: number
+    login: string
+    email: string
 }
 
-export type LoginResponseType = {
-    data: {
-        userId: number
-    },
-    messages: Array<string>
-    fieldsErrors: Array<string>
-    resultCode: number
+export type LoginType = {
+    userId: number
 }
 
 export type AuthUserMTSPType = {

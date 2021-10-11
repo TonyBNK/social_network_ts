@@ -33,8 +33,8 @@ export type GetUsersResponseType = {
     totalCount: number
     error: Nullable<string>
 }
-export type DefaultResponseType = {
-    data: {},
+export type DefaultResponseType<T = {}> = {
+    data: T,
     messages: Array<string>
     fieldsErrors: Array<string>
     resultCode: number

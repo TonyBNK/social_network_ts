@@ -5,10 +5,7 @@ import {
     DefaultResponseType,
     GetUsersResponseType
 } from "../bll/reducers/usersReducer";
-import {
-    AuthMeResponseType,
-    LoginResponseType
-} from "../bll/reducers/authReducer";
+import {AuthMeType, LoginType} from "../bll/reducers/authReducer";
 
 
 const axiosInst = axios.create({
@@ -61,12 +58,12 @@ export const profileAPI = {
 export const authAPI = {
     me: () => {
         return axiosInst
-            .get<AuthMeResponseType>(`auth/me`)
+            .get<DefaultResponseType<AuthMeType>>(`auth/me`)
             .then(response => response.data);
     },
     logIn: (formData: FormDataType) => {
         return axiosInst
-            .post<LoginResponseType>(`/auth/login`, {
+            .post<DefaultResponseType<LoginType>>(`/auth/login`, {
                 email: formData.login,
                 password: formData.password,
                 rememberMe: formData.rememberMe
