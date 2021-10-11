@@ -1,4 +1,4 @@
-import {followAPI, usersAPI} from "../../api/api";
+import {followAPI, ResultCodes, usersAPI} from "../../api/api";
 import {AppThunkType} from "../store";
 import {Nullable} from "../../types/nullable";
 
@@ -37,7 +37,7 @@ export type DefaultResponseType<T = {}> = {
     data: T,
     messages: Array<string>
     fieldsErrors: Array<string>
-    resultCode: number
+    resultCode: ResultCodes
 }
 
 export type UsersPropsType = UsersStateType & UsersDispatchType;
@@ -97,7 +97,7 @@ export const follow = (userId: number): AppThunkType => {
         followAPI
             .followUser(userId)
             .then(data => {
-                if (data.resultCode === 0) {
+                if (data.resultCode === ResultCodes.Success) {
                     dispatch(followSuccess(userId));
                 }
                 dispatch(setFollowingProgress(false, userId));
@@ -110,7 +110,7 @@ export const unfollow = (userId: number): AppThunkType => {
         followAPI
             .unfollowUser(userId)
             .then(data => {
-                if (data.resultCode === 0) {
+                if (data.resultCode === ResultCodes.Success) {
                     dispatch(unfollowSuccess(userId));
                 }
                 dispatch(setFollowingProgress(false, userId));

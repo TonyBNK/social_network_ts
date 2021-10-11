@@ -16,6 +16,11 @@ const axiosInst = axios.create({
     }
 });
 
+export enum ResultCodes {
+    Success,
+    Error
+}
+
 export const usersAPI = {
     getUsers: (currentPage: number = 1, pageSize: number = 10) => {
         return axiosInst

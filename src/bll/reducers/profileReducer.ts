@@ -3,7 +3,7 @@ import cat_with_glasses from "../../images/cat_with_glasses.jpg";
 import cat_with_tongue from "../../images/cat_with_tongue.jpg";
 import angry_cat from "../../images/angry_cat.webp";
 import {RouteComponentProps} from "react-router-dom";
-import {profileAPI} from "../../api/api";
+import {profileAPI, ResultCodes} from "../../api/api";
 import {Nullable} from "../../types/nullable";
 import {AppThunkType} from "../store";
 
@@ -102,7 +102,7 @@ export const setUserStatus = (userId = '19542'): AppThunkType => {
 export const updateStatus = (newStatus: string): AppThunkType => {
     return (dispatch) => {
         profileAPI.updateMyStatus(newStatus).then(data => {
-            if (data.resultCode === 0)
+            if (data.resultCode === ResultCodes.Success)
                 dispatch(setUserStatusSuccess(newStatus));
         });
     }
