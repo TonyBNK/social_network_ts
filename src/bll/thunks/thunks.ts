@@ -11,7 +11,7 @@ import {FormDataType} from "../../components/LoginPage";
 export const setAuthUserData = (): AppThunkType<Promise<string | void>> => {
     return (dispatch) => {
         return authAPI
-            .getUsersAuth()
+            .me()
             .then(data => {
                 if (data.resultCode === 0) {
                     const {id, login, email} = data.data;
@@ -23,7 +23,7 @@ export const setAuthUserData = (): AppThunkType<Promise<string | void>> => {
 export const logIn = (formData: FormDataType): AppThunkType => {
     return (dispatch) => {
         authAPI
-            .logUserIn(formData)!
+            .logIn(formData)!
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthUserData());
@@ -38,7 +38,7 @@ export const logIn = (formData: FormDataType): AppThunkType => {
 export const logOut = (): AppThunkType => {
     return (dispatch) => {
         authAPI
-            .logUserOut()
+            .logOut()
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthUserDataSuccess(null, null, null, false));

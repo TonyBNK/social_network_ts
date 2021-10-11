@@ -2,31 +2,12 @@ import React from "react";
 import c from './ProfileInfo.module.css';
 import {Preloader} from "../../Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import {UserProfileType} from "../../../bll/reducers/profileReducer";
 
 
-type ProfileType = {
-    aboutMe: string
-    contacts: {
-        facebook: string,
-        website: string,
-        vk: string,
-        twitter: string,
-        instagram: string,
-        youtube: string,
-        github: string,
-        mainLink: string
-    },
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    userId: number,
-    photos: {
-        small: string,
-        large: string
-    }
-}
+
 export type ProfileInfoType = {
-    profile: ProfileType | null
+    profile: UserProfileType | null
     status: string,
     updateStatus: (newStatus: string) => void
 };
@@ -41,10 +22,12 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
         return <Preloader/>
     }
 
+    const avatar = profile.photos.large || undefined;
+
     return (
         <div className={c.info}>
             <div className={c.avatar}>
-                <img src={profile.photos.large} alt="ava"/>
+                <img src={avatar} alt="ava"/>
             </div>
             <ProfileStatus
                 status={status}

@@ -2,22 +2,9 @@ import React from "react";
 import c from './Users.module.css';
 import catUser from '../../images/catUser.png';
 import {NavLink} from "react-router-dom";
+import {UserType} from "../../bll/reducers/usersReducer";
 
 
-type UserType = {
-    id: number,
-    name: string,
-    photos: {
-        small: string,
-        large: string
-    },
-    followed: boolean,
-    address: {
-        country: string,
-        city: string
-    },
-    status: string
-}
 type UsersPropsType = {
     users: Array<UserType>
     currentPage: number

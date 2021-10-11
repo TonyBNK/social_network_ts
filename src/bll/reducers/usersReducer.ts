@@ -1,19 +1,17 @@
-import {usersAPI} from "../../api/api";
+import {followAPI, usersAPI} from "../../api/api";
 import {AppThunkType} from "../store";
+import {Nullable} from "../../types/nullable";
 
 export type UserType = {
-    id: number,
-    name: string,
+    id: number
+    name: string
+    uniqueUrlName: Nullable<string>
     photos: {
-        small: string,
-        large: string
-    },
-    followed: boolean,
-    address: {
-        country: string,
-        city: string
-    },
-    status: string
+        small: Nullable<string>
+        large: Nullable<string>
+    }
+    status: Nullable<string>
+    followed: boolean
 }
 export type UsersStateType = {
     users: Array<UserType>
@@ -29,6 +27,17 @@ export type UsersDispatchType = {
     requestUsers: (page: number, pageSize: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
     setFollowingProgress: (isFetching: boolean, buttonId: number) => void
+}
+export type GetUsersResponseType = {
+    items: Array<UserType>
+    totalCount: number
+    error: Nullable<string>
+}
+export type DefaultResponseType = {
+    data: {},
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    resultCode: number
 }
 
 export type UsersPropsType = UsersStateType & UsersDispatchType;
@@ -85,23 +94,27 @@ export const setFollowingProgress = (isFetching: boolean, buttonId: number) => (
 export const follow = (userId: number): AppThunkType => {
     return (dispatch) => {
         dispatch(setFollowingProgress(true, userId));
-        usersAPI.followUser(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followSuccess(userId));
-            }
-            dispatch(setFollowingProgress(false, userId));
-        })
+        followAPI
+            .followUser(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followSuccess(userId));
+                }
+                dispatch(setFollowingProgress(false, userId));
+            })
     }
 };
 export const unfollow = (userId: number): AppThunkType => {
     return (dispatch) => {
         dispatch(setFollowingProgress(true, userId));
-        usersAPI.unfollowUser(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unfollowSuccess(userId));
-            }
-            dispatch(setFollowingProgress(false, userId));
-        })
+        followAPI
+            .unfollowUser(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowSuccess(userId));
+                }
+                dispatch(setFollowingProgress(false, userId));
+            })
     }
 };
 export const requestUsers = (
@@ -111,12 +124,14 @@ export const requestUsers = (
     return (dispatch) => {
         dispatch(setFetching(true));
         dispatch(changeCurrentPageSuccess(page, pageSize));
-        usersAPI.getUsers(page, pageSize).then(data => {
-                dispatch(setFetching(false));
-                dispatch(setUsersSuccess(data.items));
-                dispatch(setUsersTotalCount(data.totalCount));
-            }
-        )
+        usersAPI
+            .getUsers(page, pageSize)
+            .then(data => {
+                    dispatch(setFetching(false));
+                    dispatch(setUsersSuccess(data.items));
+                    dispatch(setUsersTotalCount(data.totalCount));
+                }
+            )
     }
 };
 

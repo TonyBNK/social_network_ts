@@ -1,5 +1,15 @@
 import axios from "axios";
 import {FormDataType} from "../components/LoginPage";
+import {UserProfileType} from "../bll/reducers/profileReducer";
+import {
+    DefaultResponseType,
+    GetUsersResponseType
+} from "../bll/reducers/usersReducer";
+import {
+    AuthMeResponseType,
+    LoginResponseType
+} from "../bll/reducers/authReducer";
+
 
 const axiosInst = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -12,57 +22,60 @@ const axiosInst = axios.create({
 export const usersAPI = {
     getUsers: (currentPage: number = 1, pageSize: number = 10) => {
         return axiosInst
-            .get(`users?page=${currentPage}&count=${pageSize}`,)
+            .get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`,)
             .then(response => response.data);
     },
+};
+
+export const followAPI = {
     followUser: (userId: number) => {
         return axiosInst
-            .post(`follow/${userId}`)
+            .post<DefaultResponseType>(`follow/${userId}`)
             .then(response => response.data);
     },
     unfollowUser: (userId: number) => {
         return axiosInst
-            .delete(`follow/${userId}`)
+            .delete<DefaultResponseType>(`follow/${userId}`)
             .then(response => response.data);
     },
 };
 
 export const profileAPI = {
-    getUsersProfile: (userId: string) => {
+    getUserProfile: (userId: string) => {
         return axiosInst
-            .get(`profile/${userId}`)
+            .get<UserProfileType>(`profile/${userId}`)
             .then(response => response.data);
     },
-    getUsersStatus: (userId: string = '19542') => {
+    getUserStatus: (userId: string = '19542') => {
         return axiosInst
-            .get(`profile/status/${userId}`)
+            .get<string>(`profile/status/${userId}`)
             .then(response => response.data);
     },
-    updateProfileStatus: (newStatus: string) => {
+    updateMyStatus: (newStatus: string) => {
         return axiosInst
-            .put(`profile/status`, {status: newStatus})
+            .put<DefaultResponseType>(`profile/status`, {status: newStatus})
             .then(response => response.data);
     }
 };
 
 export const authAPI = {
-    getUsersAuth: () => {
+    me: () => {
         return axiosInst
-            .get(`auth/me`)
+            .get<AuthMeResponseType>(`auth/me`)
             .then(response => response.data);
     },
-    logUserIn: (formData: FormDataType) => {
+    logIn: (formData: FormDataType) => {
         return axiosInst
-            .post(`/auth/login`, {
+            .post<LoginResponseType>(`/auth/login`, {
                 email: formData.login,
                 password: formData.password,
                 rememberMe: formData.rememberMe
             })
             .then(response => response.data);
     },
-    logUserOut: () => {
+    logOut: () => {
         return axiosInst
-            .delete(`/auth/login`)
+            .delete<DefaultResponseType>(`/auth/login`)
             .then(response => response.data);
     }
 }

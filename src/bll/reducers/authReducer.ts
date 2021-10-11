@@ -1,9 +1,6 @@
 import {Nullable} from "../../types/nullable";
 import {FormDataType} from "../../components/LoginPage";
 import {setAuthUserDataSuccess} from "../action-creators/actionCreators";
-import {setAuthUserData} from "../thunks/thunks";
-import {FormAction} from "redux-form";
-import {Dispatch} from "react";
 
 
 export type AuthActionsType =
@@ -14,6 +11,26 @@ export type UserAuthStateType = {
     login: Nullable<string>
     email: Nullable<string>
     isAuth: boolean
+}
+
+export type AuthMeResponseType = {
+    data: {
+        id: number
+        login: string
+        email: string
+    },
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    resultCode: number
+}
+
+export type LoginResponseType = {
+    data: {
+        userId: number
+    },
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    resultCode: number
 }
 
 export type AuthUserMTSPType = {
@@ -31,7 +48,6 @@ export type LoginPageDispatchType = {
 
 export type AuthUserPropsType = AuthUserMTSPType & AuthUserMDTPType;
 
-export type LogInType = (formatData: FormDataType) => (dispatch: Dispatch<ReturnType<typeof setAuthUserData> | FormAction>) => void
 
 const initialState: UserAuthStateType = {
     userId: null,

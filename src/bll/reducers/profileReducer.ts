@@ -14,25 +14,25 @@ type PostType = {
     post: string
     likesCount: number
 }
-type UserProfileType = {
-    aboutMe: string
+export type UserProfileType = {
+    aboutMe: Nullable<string>
     contacts: {
-        facebook: string,
-        website: string,
-        vk: string,
-        twitter: string,
-        instagram: string,
-        youtube: string,
-        github: string,
-        mainLink: string
+        facebook: Nullable<string>
+        website: Nullable<string>
+        vk: Nullable<string>
+        twitter: Nullable<string>
+        instagram: Nullable<string>
+        youtube: Nullable<string>
+        github: Nullable<string>
+        mainLink: Nullable<string>
     },
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    userId: number,
+    lookingForAJob: boolean
+    lookingForAJobDescription: Nullable<string>
+    fullName: string
+    userId: number
     photos: {
-        small: string,
-        large: string
+        small: Nullable<string>
+        large: Nullable<string>
     }
 }
 type PathParamsType = {
@@ -87,21 +87,21 @@ export const setUserStatusSuccess = (status: string) => ({
 
 export const setUserProfile = (userId = '19542'): AppThunkType => {
     return (dispatch) => {
-        profileAPI.getUsersProfile(userId).then(profile => {
+        profileAPI.getUserProfile(userId).then(profile => {
             dispatch(setUserProfileSuccess(profile));
         });
     }
 };
 export const setUserStatus = (userId = '19542'): AppThunkType => {
     return (dispatch) => {
-        profileAPI.getUsersStatus(userId).then(status => {
+        profileAPI.getUserStatus(userId).then(status => {
             dispatch(setUserStatusSuccess(status));
         });
     }
 };
 export const updateStatus = (newStatus: string): AppThunkType => {
     return (dispatch) => {
-        profileAPI.updateProfileStatus(newStatus).then(data => {
+        profileAPI.updateMyStatus(newStatus).then(data => {
             if (data.resultCode === 0)
                 dispatch(setUserStatusSuccess(newStatus));
         });
