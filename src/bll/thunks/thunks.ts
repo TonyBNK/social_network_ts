@@ -2,7 +2,7 @@ import {authAPI} from "../../api/api";
 import {
     initialiazedSuccess,
     setAuthUserDataSuccess
-} from "../action-creators/actionCreators";
+} from "../actions/actions";
 import {stopSubmit} from "redux-form";
 import {AppThunkType} from "../store";
 import {FormDataType} from "../../components/LoginPage";

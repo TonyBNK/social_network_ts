@@ -1,6 +1,6 @@
 import {Nullable} from "../../types/nullable";
 import {FormDataType} from "../../components/LoginPage";
-import {setAuthUserDataSuccess} from "../action-creators/actionCreators";
+import {setAuthUserDataSuccess} from "../actions/actions";
 
 
 export type AuthActionsType =

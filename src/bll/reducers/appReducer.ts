@@ -1,4 +1,4 @@
-import {initialiazedSuccess} from "../action-creators/actionCreators";
+import {initialiazedSuccess} from "../actions/actions";
 import {Dispatch} from "react";
 import {AppThunkType} from "../store";
 
