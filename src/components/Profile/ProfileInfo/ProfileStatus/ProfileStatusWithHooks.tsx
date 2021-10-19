@@ -6,7 +6,7 @@ type ProfileStatusPropsType = {
     updateStatus: (newStatus: string) => void
 }
 
-const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = (
+const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
     {
         status,
         updateStatus
@@ -50,6 +50,6 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = (
             }
         </div>
     )
-}
+});
 
 export default ProfileStatusWithHooks;

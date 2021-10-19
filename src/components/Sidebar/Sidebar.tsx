@@ -3,7 +3,7 @@ import c from "./Sidebar.module.css";
 import {NavLink} from "react-router-dom";
 import {FriendsContainer} from "../Friends/FriendsContainer";
 
-export const Sidebar:React.FC = (
+export const Sidebar:React.FC = React.memo((
 
 ) => {
     return (
@@ -55,4 +55,4 @@ export const Sidebar:React.FC = (
             </div>
         </div>
     );
-};
+});

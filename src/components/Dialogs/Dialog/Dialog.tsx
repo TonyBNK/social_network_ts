@@ -7,7 +7,7 @@ export type DialogType = {
     name: string
     ava: string
 };
-export const Dialog: React.FC<DialogType> = (
+export const Dialog: React.FC<DialogType> = React.memo((
     {
         id,
         ava,
@@ -27,4 +27,4 @@ export const Dialog: React.FC<DialogType> = (
             </NavLink>
         </div>
     );
-};
+});

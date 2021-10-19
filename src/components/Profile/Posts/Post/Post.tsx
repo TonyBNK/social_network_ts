@@ -7,7 +7,7 @@ export type PostType = {
     post: string
     likesCount: number
 }
-export const Post: React.FC<PostType> = (
+export const Post: React.FC<PostType> = React.memo((
     {
         id,
         ava,
@@ -29,4 +29,4 @@ export const Post: React.FC<PostType> = (
             </div>
         </div>
     );
-}
+});

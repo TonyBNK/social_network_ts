@@ -1,8 +1,9 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {Friends} from "./Friends";
 import {connect} from "react-redux";
 import {RootStateType} from "../../bll/store";
 import {FriendsPageType} from "../../bll/reducers/friendsReducer";
+import {compose} from "redux";
 
 
 const mapStateToProps = (state: RootStateType): FriendsPageType => ({
@@ -13,4 +14,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 
 });
 
-export const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends);
+export const FriendsContainer = compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    React.memo
+)(Friends);

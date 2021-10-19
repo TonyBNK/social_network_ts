@@ -34,7 +34,7 @@ export const LoginPage: React.FC<LoginPagePropsType> = (
 }
 
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
     {
         handleSubmit,
         error
@@ -77,6 +77,6 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (
             </div>
         </form>
     )
-}
+});
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);

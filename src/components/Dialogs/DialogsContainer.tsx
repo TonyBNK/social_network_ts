@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {RootStateType} from "../../bll/store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {ComponentType} from "react";
+import React, {ComponentType} from "react";
 
 
 const mapStateToProps = (state: RootStateType): DialogsPageStateType => ({
@@ -18,5 +18,6 @@ const mapStateToProps = (state: RootStateType): DialogsPageStateType => ({
 
 export const DialogsContainer = compose<ComponentType>(
     withAuthRedirect,
-    connect<DialogsPageStateType, DialogsPageDispatchType, DialogsOwnType, RootStateType>(mapStateToProps, {addNewMessage})
+    connect<DialogsPageStateType, DialogsPageDispatchType, DialogsOwnType, RootStateType>(mapStateToProps, {addNewMessage}),
+    React.memo
 )(Dialogs);

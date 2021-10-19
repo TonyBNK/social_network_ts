@@ -8,7 +8,7 @@ import {logIn} from "../bll/thunks/thunks";
 import {RootStateType} from "../bll/store";
 
 
-class LoginPageContainer extends React.Component<LoginPageDispatchType>{
+class LoginPageContainer extends React.PureComponent<LoginPageDispatchType>{
 
     render = () => {
         return <LoginPage

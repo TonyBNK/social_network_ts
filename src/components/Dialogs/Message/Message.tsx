@@ -5,7 +5,7 @@ export type MessageType = {
     id: string
     message: string
 };
-export const Message: React.FC<MessageType> = (
+export const Message: React.FC<MessageType> = React.memo((
     {
         id,
         message
@@ -16,4 +16,4 @@ export const Message: React.FC<MessageType> = (
             {message}
         </div>
     );
-};
+});

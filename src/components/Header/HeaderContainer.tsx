@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../../bll/reducers/authReducer";
 import {RootStateType} from "../../bll/store";
 import {logOut} from "../../bll/thunks/thunks";
+import {compose} from "redux";
 
 
 class HeaderContainer extends React.Component<AuthUserPropsType> {
@@ -24,6 +25,9 @@ const mapStateToProps = (state: RootStateType): AuthUserMTSPType => ({
     isAuth: state.auth.isAuth
 });
 
-export default connect<AuthUserMTSPType, AuthUserMDTPType, {}, RootStateType>(mapStateToProps, {
-    logOut
-})(HeaderContainer);
+export default compose<ComponentType>(
+    connect<AuthUserMTSPType, AuthUserMDTPType, {}, RootStateType>(
+        mapStateToProps, {logOut}
+    ),
+    React.memo
+)(HeaderContainer);

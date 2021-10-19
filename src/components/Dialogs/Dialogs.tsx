@@ -48,7 +48,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (
     );
 };
 
-const NewMessageForm: React.FC<InjectedFormProps<FormDataType>> = (
+const NewMessageForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
     {
         handleSubmit
     }
@@ -69,7 +69,7 @@ const NewMessageForm: React.FC<InjectedFormProps<FormDataType>> = (
             </button>
         </form>
     )
-}
+});
 
 const NewPostReduxForm = reduxForm<FormDataType>({
     form: 'newMessage'

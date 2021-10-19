@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {connect} from "react-redux";
 import {
     follow,
@@ -17,11 +17,12 @@ import {
     getPageSize,
     getUsers, getUsersTotalCount
 } from "../../bll/selectors/usersSelector";
+import {compose} from "redux";
 
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-            this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     render = () => {
@@ -51,10 +52,15 @@ const mapStateToProps = (state: RootStateType): UsersStateType => ({
     followingProgress: getFollowingProgress(state)
 });
 
-export default connect<UsersStateType, UsersDispatchType, {}, RootStateType>(mapStateToProps, {
-    follow,
-    unfollow,
-    requestUsers,
-    setUsersTotalCount,
-    setFollowingProgress
-})(UsersContainer);
+export default compose<ComponentType>(
+    connect<UsersStateType, UsersDispatchType, {}, RootStateType>(
+        mapStateToProps, {
+            follow,
+            unfollow,
+            requestUsers,
+            setUsersTotalCount,
+            setFollowingProgress
+        }
+    ),
+    React.memo
+)(UsersContainer);

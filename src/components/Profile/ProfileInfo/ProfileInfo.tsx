@@ -11,7 +11,7 @@ export type ProfileInfoType = {
     status: string,
     updateStatus: (newStatus: string) => void
 };
-export const ProfileInfo: React.FC<ProfileInfoType> = (
+export const ProfileInfo: React.FC<ProfileInfoType> = React.memo((
     {
         profile,
         status,
@@ -38,4 +38,4 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
             </div>
         </div>
     );
-};
+});

@@ -6,7 +6,7 @@ import {WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 type FormsControlsPropsType = {
     meta: WrappedFieldMetaProps
 }
-const FormControl: React.FC<FormsControlsPropsType> = (
+const FormControl: React.FC<FormsControlsPropsType> = React.memo((
     {
         meta: {
             touched,
@@ -27,14 +27,14 @@ const FormControl: React.FC<FormsControlsPropsType> = (
             {hasError && <span>{error}</span>}
         </div>
     )
-}
+});
 
-export const Textarea: React.FC<WrappedFieldProps> = (props) => {
+export const Textarea: React.FC<WrappedFieldProps> = React.memo((props) => {
     const {input, meta, ...restProps} = props;
     return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
-}
+});
 
-export const Input: React.FC<WrappedFieldProps> = (props) => {
+export const Input: React.FC<WrappedFieldProps> = React.memo((props) => {
     const {input, meta, ...restProps} = props;
     return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
-}
+});

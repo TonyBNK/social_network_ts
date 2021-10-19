@@ -41,7 +41,7 @@ export const Posts: React.FC<PostsType> = (
     );
 };
 
-const NewPostForm: React.FC<InjectedFormProps<FormDataType>> = (
+const NewPostForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
     {
         handleSubmit
     }
@@ -64,7 +64,7 @@ const NewPostForm: React.FC<InjectedFormProps<FormDataType>> = (
             </div>
         </form>
     )
-}
+});
 
 const NewPostReduxForm = reduxForm<FormDataType>({
     form: 'newPost'
