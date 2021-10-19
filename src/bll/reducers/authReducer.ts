@@ -1,42 +1,4 @@
-import {Nullable} from "../../types/nullable";
-import {FormDataType} from "../../components/LoginPage";
-import {setAuthUserDataSuccess} from "../actions/actions";
-
-
-export type AuthActionsType =
-    ReturnType<typeof setAuthUserDataSuccess>;
-
-export type UserAuthStateType = {
-    userId: Nullable<number>
-    login: Nullable<string>
-    email: Nullable<string>
-    isAuth: boolean
-}
-
-export type AuthMeType = {
-    id: number
-    login: string
-    email: string
-}
-
-export type LoginType = {
-    userId: number
-}
-
-export type AuthUserMTSPType = {
-    login: Nullable<string>
-    isAuth: boolean
-}
-
-export type AuthUserMDTPType = {
-    logOut: () => void
-}
-
-export type LoginPageDispatchType = {
-    logIn: (formData: FormDataType) => void
-}
-
-export type AuthUserPropsType = AuthUserMTSPType & AuthUserMDTPType;
+import {AuthActionType, UserAuthStateType} from "../../types/types";
 
 
 const initialState: UserAuthStateType = {
@@ -46,10 +8,10 @@ const initialState: UserAuthStateType = {
     isAuth: false
 }
 
-export const authReducer = (state = initialState, action: AuthActionsType):
+export const authReducer = (state = initialState, action: AuthActionType):
     UserAuthStateType => {
     switch (action.type) {
-        case "SET_USER_DATA":
+        case "social_network/auth/SET_AUTHENTICATED":
             return {
                 ...state,
                 ...action.payload

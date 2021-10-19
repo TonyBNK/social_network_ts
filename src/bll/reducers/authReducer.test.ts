@@ -1,4 +1,4 @@
-import {setAuthUserDataSuccess} from "../actions/actions";
+import {setAuthenticated} from "../actions/actions";
 import {authReducer, UserAuthStateType} from "./authReducer";
 
 let initialState: UserAuthStateType;
@@ -13,7 +13,7 @@ beforeEach(() => {
 });
 
 test('state should be initialized with profile data', () => {
-    let newState = authReducer(initialState, setAuthUserDataSuccess(
+    let newState = authReducer(initialState, setAuthenticated(
         1, 'tony', 'tony@mail.ru', true)
     );
 

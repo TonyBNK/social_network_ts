@@ -13,9 +13,9 @@ import LoginPageContainer from "./components/LoginPageContainer";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {initializeApp} from "./bll/thunks/thunks";
-import {InitializeStateType, InitializeType} from "./bll/reducers/appReducer";
 import {RootStateType} from "./bll/store";
 import {Preloader} from "./components/Preloader/Preloader";
+import {InitializeStateType, InitializeType} from "./types/types";
 
 class App extends React.Component<InitializeType> {
     componentDidMount() {

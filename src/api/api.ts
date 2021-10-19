@@ -1,11 +1,11 @@
 import axios from "axios";
 import {FormDataType} from "../components/LoginPage";
-import {UserProfileType} from "../bll/reducers/profileReducer";
 import {
-    DefaultResponseType,
-    GetUsersResponseType
-} from "../bll/reducers/usersReducer";
-import {AuthMeType, LoginType} from "../bll/reducers/authReducer";
+    AuthMeType, DefaultResponseType,
+    GetUsersResponseType,
+    LoginType,
+    UserProfileType
+} from "../types/types";
 
 
 const axiosInst = axios.create({
@@ -22,62 +22,88 @@ export enum ResultCodes {
 }
 
 export const usersAPI = {
-    getUsers: (currentPage: number = 1, pageSize: number = 10) => {
-        return axiosInst
-            .get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`,)
-            .then(response => response.data);
+    getUsers: async (currentPage: number = 1, pageSize: number = 10) => {
+        try {
+            const response = await axiosInst.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     },
 };
 
 export const followAPI = {
-    followUser: (userId: number) => {
-        return axiosInst
-            .post<DefaultResponseType>(`follow/${userId}`)
-            .then(response => response.data);
+    followUser: async (userId: number) => {
+        try {
+            const response = await axiosInst.post<DefaultResponseType>(`follow/${userId}`);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     },
-    unfollowUser: (userId: number) => {
-        return axiosInst
-            .delete<DefaultResponseType>(`follow/${userId}`)
-            .then(response => response.data);
+    unfollowUser: async (userId: number) => {
+        try {
+            const response = await axiosInst.delete<DefaultResponseType>(`follow/${userId}`);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     },
 };
 
 export const profileAPI = {
-    getUserProfile: (userId: string) => {
-        return axiosInst
-            .get<UserProfileType>(`profile/${userId}`)
-            .then(response => response.data);
+    getUserProfile: async (userId: string) => {
+        try {
+            const response = await axiosInst.get<UserProfileType>(`profile/${userId}`);
+                return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     },
-    getUserStatus: (userId: string = '19542') => {
-        return axiosInst
-            .get<string>(`profile/status/${userId}`)
-            .then(response => response.data);
+    getUserStatus: async (userId: string = '19542') => {
+        try {
+            const response = await axiosInst.get<string>(`profile/status/${userId}`)
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     },
-    updateMyStatus: (newStatus: string) => {
-        return axiosInst
-            .put<DefaultResponseType>(`profile/status`, {status: newStatus})
-            .then(response => response.data);
+    updateMyStatus: async (newStatus: string) => {
+        try {
+            return await axiosInst.put<DefaultResponseType>(`profile/status`, {status: newStatus});
+        } catch (e) {
+            console.log(e);
+        }
     }
 };
 
 export const authAPI = {
-    me: () => {
-        return axiosInst
-            .get<DefaultResponseType<AuthMeType>>(`auth/me`)
-            .then(response => response.data);
+    me: async () => {
+        try {
+            const response = await axiosInst.get<DefaultResponseType<AuthMeType>>(`auth/me`);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     },
-    logIn: (formData: FormDataType) => {
-        return axiosInst
-            .post<DefaultResponseType<LoginType>>(`/auth/login`, {
+    logIn: async (formData: FormDataType) => {
+        try {
+            const response = await axiosInst.post<DefaultResponseType<LoginType>>(`/auth/login`, {
                 email: formData.login,
                 password: formData.password,
                 rememberMe: formData.rememberMe
-            })
-            .then(response => response.data);
+            });
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     },
-    logOut: () => {
-        return axiosInst
-            .delete<DefaultResponseType>(`/auth/login`)
-            .then(response => response.data);
+    logOut: async () => {
+        try {
+            const response = await axiosInst.delete<DefaultResponseType>(`/auth/login`);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

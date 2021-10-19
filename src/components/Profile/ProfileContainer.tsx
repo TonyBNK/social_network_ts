@@ -1,16 +1,20 @@
 import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {
-    ProfileInfoDispatchType,
-    ProfileInfoStateType,
-    ProfileInfoWithPathParamsType,
-    setUserProfile, setUserStatus, updateStatus
-} from "../../bll/reducers/profileReducer";
 import {RootStateType} from "../../bll/store";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    ProfileInfoDispatchType,
+    ProfileInfoStateType,
+    ProfileInfoWithPathParamsType
+} from "../../types/types";
+import {
+    getUserProfile,
+    getUserStatus,
+    updateMyStatus
+} from "../../bll/thunks/thunks";
 
 
 class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
@@ -24,8 +28,8 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
             }
         }
 
-        this.props.setUserProfile(userId);
-        this.props.setUserStatus(userId);
+        this.props.getUserProfile(userId);
+        this.props.getUserStatus(userId);
     }
 
     render = () => {
@@ -33,7 +37,7 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
             {...this.props}
             profile={this.props.profile}
             status={this.props.status}
-            updateStatus={this.props.updateStatus}/>
+            updateStatus={this.props.updateMyStatus}/>
     }
 }
 
@@ -45,9 +49,9 @@ const mapStateToProps = (state: RootStateType): ProfileInfoStateType => ({
 
 export default compose<ComponentType>(
     connect<ProfileInfoStateType, ProfileInfoDispatchType, {}, RootStateType>(mapStateToProps, {
-        setUserProfile,
-        setUserStatus,
-        updateStatus
+        getUserProfile,
+        getUserStatus,
+        updateMyStatus
     }),
     withRouter,
     withAuthRedirect,

@@ -1,14 +1,5 @@
 import React, {ComponentType} from "react";
 import {connect} from "react-redux";
-import {
-    follow,
-    requestUsers,
-    setFollowingProgress,
-    setUsersTotalCount,
-    unfollow,
-    UsersDispatchType, UsersPropsType,
-    UsersStateType
-} from "../../bll/reducers/usersReducer";
 import {RootStateType} from "../../bll/store";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
@@ -18,6 +9,18 @@ import {
     getUsers, getUsersTotalCount
 } from "../../bll/selectors/usersSelector";
 import {compose} from "redux";
+import {
+    UsersDispatchType,
+    UsersPropsType,
+    UsersStateType
+} from "../../types/types";
+import {
+    follow,
+    setFollowingProcess,
+    setUsersTotalCount,
+    unfollow
+} from "../../bll/actions/actions";
+import {requestUsers} from "../../bll/thunks/thunks";
 
 
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -37,7 +40,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 unfollow={this.props.unfollow}
                 requestUsers={this.props.requestUsers}
                 followingProgress={this.props.followingProgress}
-                setFollowingProgress={this.props.setFollowingProgress}
+                setFollowingProgress={this.props.setFollowingProcess}
             />
         </div>
     }
@@ -59,7 +62,7 @@ export default compose<ComponentType>(
             unfollow,
             requestUsers,
             setUsersTotalCount,
-            setFollowingProgress
+            setFollowingProcess
         }
     ),
     React.memo

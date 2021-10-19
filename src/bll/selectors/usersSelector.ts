@@ -1,6 +1,6 @@
 import {RootStateType} from "../store";
-import {UserType} from "../reducers/usersReducer";
 import {createSelector} from "reselect";
+import {UserType} from "../../types/types";
 
 
 const getUsersSelector = (state: RootStateType): Array<UserType> => {

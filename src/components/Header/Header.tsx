@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import c from "./Header.module.css";
 import logo from '../../images/logo.png';
-import {AuthUserPropsType} from "../../bll/reducers/authReducer";
+import {AuthUserPropsType} from "../../types/types";
 
 
 export const Header: React.FC<AuthUserPropsType> = (

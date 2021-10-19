@@ -2,7 +2,7 @@ import React from "react";
 import c from './ProfileInfo.module.css';
 import {Preloader} from "../../Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatusWithHooks";
-import {UserProfileType} from "../../../bll/reducers/profileReducer";
+import {UserProfileType} from "../../../types/types";
 
 
 

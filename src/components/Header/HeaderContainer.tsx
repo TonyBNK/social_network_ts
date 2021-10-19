@@ -1,14 +1,14 @@
 import React, {ComponentType} from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
+import {RootStateType} from "../../bll/store";
+import {logOut} from "../../bll/thunks/thunks";
+import {compose} from "redux";
 import {
     AuthUserMDTPType,
     AuthUserMTSPType,
     AuthUserPropsType
-} from "../../bll/reducers/authReducer";
-import {RootStateType} from "../../bll/store";
-import {logOut} from "../../bll/thunks/thunks";
-import {compose} from "redux";
+} from "../../types/types";
 
 
 class HeaderContainer extends React.Component<AuthUserPropsType> {

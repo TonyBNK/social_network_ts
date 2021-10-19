@@ -2,7 +2,7 @@ import React from "react";
 import c from './Users.module.css';
 import catUser from '../../images/catUser.png';
 import {NavLink} from "react-router-dom";
-import {UserType} from "../../bll/reducers/usersReducer";
+import {UserType} from "../../types/types";
 
 
 type UsersPropsType = {

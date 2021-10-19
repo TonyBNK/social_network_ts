@@ -25,8 +25,9 @@ const initialState:FriendsPageType  = {
         {id: v1(), name: "Turtle", ava: turtle},
     ]
 }
-const friendsReducer = (state = initialState, action: any) => {
-    return state;
+export const friendsReducer = (state = initialState, action: any) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
 }
-
-export default friendsReducer;

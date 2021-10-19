@@ -1,0 +1,18 @@
+.user {
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+
+  button {
+    background: midnightblue;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+  }
+}

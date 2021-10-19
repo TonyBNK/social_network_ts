@@ -1,13 +1,10 @@
-import {
-    addNewPost,
-    PostsDispatchType,
-    PostsStateType
-} from "../../../bll/reducers/profileReducer";
 import {Posts} from "./Posts";
 import {connect} from "react-redux";
 import {RootStateType} from "../../../bll/store";
 import {compose} from "redux";
 import React, {ComponentType} from "react";
+import {PostsDispatchType, PostsStateType} from "../../../types/types";
+import {addNewPost} from "../../../bll/actions/actions";
 
 
 const mapStateToProps = (state: RootStateType): PostsStateType => {

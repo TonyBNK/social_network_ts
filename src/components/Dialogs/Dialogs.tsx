@@ -6,7 +6,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormDataType} from "../LoginPage";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Textarea} from "../common/FormsControls";
-import {DialogsPropsType} from "../../bll/reducers/dialogsReducer";
+import {DialogsPropsType} from "../../types/types";
 
 
 const maxLength50 = maxLengthCreator(50);

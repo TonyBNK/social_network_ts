@@ -1,29 +1,14 @@
-import {initialiazedSuccess} from "../actions/actions";
-import {Dispatch} from "react";
-import {AppThunkType} from "../store";
+import {InitializeActionType, InitializeStateType} from "../../types/types";
 
-
-export type InitializeStateType = {
-    isInitialize: boolean;
-}
-export type InitializeDispatchType = {
-    initializeApp: () => AppThunkType
-}
-
-export type InitializeActionsType = ReturnType<typeof initialiazedSuccess>;
-
-export type InitializeType = InitializeStateType & InitializeDispatchType;
-
-export type InitializeThunkType = () => (dispatch: Dispatch<InitializeActionsType>) => void
 
 const initialState: InitializeStateType = {
     isInitialize: false
 }
 
-export const appReducer = (state = initialState, action: InitializeActionsType):
+export const appReducer = (state = initialState, action: InitializeActionType):
     InitializeStateType => {
     switch (action.type) {
-        case "SET_INITIALIZED":
+        case "social_network/app/SET_INITIALIZED":
             return {
                 ...state,
                 isInitialize: true

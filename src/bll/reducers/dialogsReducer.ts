@@ -4,33 +4,8 @@ import doge from "../../images/doge.jpg";
 import parrot from "../../images/parrot.jpg";
 import hamster from "../../images/hamster.jpg";
 import turtle from "../../images/turtle.jpg";
+import {DialogsActionType, DialogsPageStateType} from "../../types/types";
 
-
-type DialogType = {
-    id: string
-    ava: string
-    name: string
-};
-
-type MessageType = {
-    id: string
-    message: string
-};
-
-export type DialogsPageStateType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-};
-
-export type DialogsPageDispatchType = {
-    addNewMessage: (newMessageText: string) => DialogsActionsType
-};
-
-export type DialogsOwnType = {};
-
-export type DialogsPropsType = DialogsPageStateType & DialogsPageDispatchType & DialogsOwnType;
-
-export type DialogsActionsType = ReturnType<typeof addNewMessage>;
 
 const initialState: DialogsPageStateType = {
     dialogs: [
@@ -47,10 +22,10 @@ const initialState: DialogsPageStateType = {
     ]
 };
 
-const dialogsReducer = (state: DialogsPageStateType = initialState, action: DialogsActionsType): DialogsPageStateType => {
+export const dialogsReducer = (state: DialogsPageStateType = initialState, action: DialogsActionType): DialogsPageStateType => {
 
     switch (action.type) {
-        case "ADD-NEW-MESSAGE":
+        case "social_network/dialogs/ADD_NEW_MESSAGE":
             return {
                 ...state,
                 messages: [...state.messages, {
@@ -61,11 +36,4 @@ const dialogsReducer = (state: DialogsPageStateType = initialState, action: Dial
         default:
             return state;
     }
-}
-
-export const addNewMessage = (newMessageText: string) => ({
-    type: "ADD-NEW-MESSAGE",
-    newMessageText
-} as const);
-
-export default dialogsReducer;
+};

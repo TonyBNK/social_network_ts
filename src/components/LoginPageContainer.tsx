@@ -3,9 +3,9 @@ import {LoginPage} from "./LoginPage";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {withProfileRedirect} from "../hoc/withProfileRedirect";
-import {LoginPageDispatchType} from "../bll/reducers/authReducer";
 import {logIn} from "../bll/thunks/thunks";
 import {RootStateType} from "../bll/store";
+import {LoginPageDispatchType} from "../types/types";
 
 
 class LoginPageContainer extends React.PureComponent<LoginPageDispatchType>{
