@@ -36,6 +36,7 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
 
     render = () => {
         const {profile, status, updateMyStatus, ...restProps} = this.props;
+
         return <Profile
             {...restProps}
             profile={profile}
