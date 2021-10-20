@@ -19,25 +19,28 @@ import {
 
 class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
     componentDidMount() {
+        const {history, getUserProfile, getUserStatus} = this.props;
+
         let userId = this.props.match.params.userId;
 
         if (!userId){
             userId = this.props.userId!.toString();
             if (!userId){
-                this.props.history.push('/login');
+                history.push('/login');
             }
         }
 
-        this.props.getUserProfile(userId);
-        this.props.getUserStatus(userId);
+        getUserProfile(userId);
+        getUserStatus(userId);
     }
 
     render = () => {
+        const {profile, status, updateMyStatus, ...restProps} = this.props;
         return <Profile
-            {...this.props}
-            profile={this.props.profile}
-            status={this.props.status}
-            updateStatus={this.props.updateMyStatus}/>
+            {...restProps}
+            profile={profile}
+            status={status}
+            updateStatus={updateMyStatus}/>
     }
 }
 

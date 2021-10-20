@@ -150,11 +150,11 @@ export type UsersStateType = {
     usersTotalCount: number
     pageSize: number
     isFetching: boolean
-    followingProgress: Array<number>
+    followingInProgress: Array<number>
 }
 export type UsersDispatchType = {
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
     requestUsers: (page: number, pageSize: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
     setFollowingProcess: (isFetching: boolean, buttonId: number) => void

@@ -2,16 +2,26 @@ import React from "react";
 import c from './User.module.scss';
 import {NavLink} from "react-router-dom";
 import catUser from "../../../images/catUser.png";
+import {Nullable} from "../../../types/types";
 
 
-export const User = React.memo((
+type UserPropsType = {
+    id: number,
+    name: string,
+    status: Nullable<string>,
+    photo: Nullable<string>,
+    isFollowed: boolean,
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void,
+    followingInProgress: Array<number>
+
+}
+export const User: React.FC<UserPropsType> = React.memo((
     {
         id,
         name,
         status,
         photo,
-        country,
-        city,
         isFollowed,
         follow,
         unfollow,
@@ -45,9 +55,6 @@ export const User = React.memo((
                 </div>
                 <div className={c.text}>
                     {status}
-                </div>
-                <div className={c.address}>
-                    {`${country ? country : ''}`}, {`${city ? city: ''}`}
                 </div>
             </div>
         </div>

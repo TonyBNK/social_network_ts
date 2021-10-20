@@ -8,7 +8,7 @@ const initialState: UsersStateType = {
     usersTotalCount: 0,
     pageSize: 10,
     isFetching: false,
-    followingProgress: []
+    followingInProgress: []
 }
 
 export const usersReducer = (state: UsersStateType = initialState, action: UsersPageActionType):
@@ -58,9 +58,9 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
         case "social_network/users/SET_FOLLOWING_PROCESS":
             return {
                 ...state,
-                followingProgress: action.isFetching
-                    ? [...state.followingProgress, action.buttonId]
-                    : state.followingProgress.filter(id => id !== action.buttonId)
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.buttonId]
+                    : state.followingInProgress.filter(id => id !== action.buttonId)
             }
         default:
             return state

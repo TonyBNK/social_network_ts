@@ -28,5 +28,5 @@ export const getFetching = (state: RootStateType): boolean => {
 }
 
 export const getFollowingProgress = (state: RootStateType): Array<number> => {
-    return state.usersPage.followingProgress;
+    return state.usersPage.followingInProgress;
 }

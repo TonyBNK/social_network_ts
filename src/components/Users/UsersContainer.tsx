@@ -4,9 +4,12 @@ import {RootStateType} from "../../bll/store";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
 import {
-    getCurrentPage, getFetching, getFollowingProgress,
+    getCurrentPage,
+    getFetching,
+    getFollowingProgress,
     getPageSize,
-    getUsers, getUsersTotalCount
+    getUsers,
+    getUsersTotalCount
 } from "../../bll/selectors/usersSelector";
 import {compose} from "redux";
 import {
@@ -15,32 +18,42 @@ import {
     UsersStateType
 } from "../../types/types";
 import {
-    follow,
     setFollowingProcess,
-    setUsersTotalCount,
-    unfollow
+    setUsersTotalCount
 } from "../../bll/actions/actions";
-import {requestUsers} from "../../bll/thunks/thunks";
+import {followUser, requestUsers, unfollowUser} from "../../bll/thunks/thunks";
 
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {requestUsers, currentPage, pageSize} = this.props;
+        requestUsers(currentPage, pageSize);
     }
 
     render = () => {
+        const {
+            isFetching,
+            users,
+            currentPage,
+            pageSize,
+            usersTotalCount,
+            followUser,
+            unfollowUser,
+            followingInProgress,
+            requestUsers
+        } = this.props;
+
         return <div>
-            {this.props.isFetching ? <Preloader/> : null}
+            {isFetching ? <Preloader/> : null}
             <Users
-                users={this.props.users}
-                currentPage={this.props.currentPage}
-                usersTotalCount={this.props.usersTotalCount}
-                pageSize={this.props.pageSize}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
-                requestUsers={this.props.requestUsers}
-                followingProgress={this.props.followingProgress}
-                setFollowingProgress={this.props.setFollowingProcess}
+                users={users}
+                currentPage={currentPage}
+                usersTotalCount={usersTotalCount}
+                pageSize={pageSize}
+                follow={followUser}
+                unfollow={unfollowUser}
+                requestUsers={requestUsers}
+                followingInProgress={followingInProgress}
             />
         </div>
     }
@@ -52,17 +65,17 @@ const mapStateToProps = (state: RootStateType): UsersStateType => ({
     pageSize: getPageSize(state),
     usersTotalCount: getUsersTotalCount(state),
     isFetching: getFetching(state),
-    followingProgress: getFollowingProgress(state)
+    followingInProgress: getFollowingProgress(state)
 });
 
 export default compose<ComponentType>(
     connect<UsersStateType, UsersDispatchType, {}, RootStateType>(
         mapStateToProps, {
-            follow,
-            unfollow,
+            followUser,
+            unfollowUser,
+            setFollowingProcess,
             requestUsers,
-            setUsersTotalCount,
-            setFollowingProcess
+            setUsersTotalCount
         }
     ),
     React.memo

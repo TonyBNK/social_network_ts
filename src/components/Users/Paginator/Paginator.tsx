@@ -2,7 +2,13 @@ import React from "react";
 import c from "./Paginator.module.scss";
 
 
-export const Paginator = React.memo((
+type PaginatorPropsType = {
+    currentPage: number
+    pageSize: number
+    usersTotalCount: number
+    requestUsers: (page: number, pageSize: number) => void
+}
+export const Paginator: React.FC<PaginatorPropsType> = React.memo((
     {
         currentPage,
         pageSize,
@@ -24,7 +30,7 @@ export const Paginator = React.memo((
 
         return (
             <span
-                className={currentPage === p && c.pageSelected}
+                className={currentPage === p ? c.pageSelected : ''}
                 onClick={onChangeCurrentPageHandler}
             >
                 {p}

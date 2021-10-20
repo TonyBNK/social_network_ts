@@ -13,10 +13,11 @@ import {
 
 class HeaderContainer extends React.Component<AuthUserPropsType> {
     render() {
+        const {login, isAuth, logOut} = this.props;
         return <Header
-            login={this.props.login}
-            isAuth={this.props.isAuth}
-            logOut={this.props.logOut}/>
+            login={login}
+            isAuth={isAuth}
+            logOut={logOut}/>
     }
 }
 
