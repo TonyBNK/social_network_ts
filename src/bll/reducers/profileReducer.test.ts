@@ -1,11 +1,9 @@
 import {v1} from "uuid";
 import cat_with_tongue from "../../images/cat_with_tongue.jpg";
 import angry_cat from "../../images/angry_cat.webp";
-import profileReducer, {
-    addNewPost,
-    ProfileStateType,
-    setUserProfileSuccess, setUserStatusSuccess,
-} from "./profileReducer";
+import {ProfileStateType} from "../../types/types";
+import {addNewPost, getUser, setMyStatus} from "../actions/actions";
+import {profileReducer} from "./profileReducer";
 
 
 let initialState: ProfileStateType;
@@ -59,12 +57,12 @@ test('should got users profile', () => {
         userId: 20115
     }
 
-    let newState = profileReducer(initialState, setUserProfileSuccess(profile));
+    let newState = profileReducer(initialState, getUser(profile));
     expect(newState.profile!.userId).toBe(20115);
 });
 
 test('new status should be set', () => {
-    let newState = profileReducer(initialState, setUserStatusSuccess('General Kenobi!'));
+    let newState = profileReducer(initialState, setMyStatus('General Kenobi!'));
 
     expect(newState.status).toBe('General Kenobi!');
 });
