@@ -41,7 +41,7 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
             {...restProps}
             profile={profile}
             status={status}
-            updateStatus={updateMyStatus}/>
+            updateMyStatus={updateMyStatus}/>
     }
 }
 

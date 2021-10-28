@@ -3,13 +3,13 @@ import c from './ProfileStatus.module.css';
 
 type ProfileStatusPropsType = {
     status: string,
-    updateStatus: (newStatus: string) => void
+    updateMyStatus: (newStatus: string) => void
 }
 
 const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
     {
         status,
-        updateStatus
+        updateMyStatus
     }
 ) => {
     const [editMode, setEditMode] = useState<boolean>(false);
@@ -25,7 +25,7 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        updateStatus(profileStatus);
+        updateMyStatus(profileStatus);
     }
 
     const updateStatusLocally = (e: ChangeEvent<HTMLInputElement>) => {

@@ -9,13 +9,13 @@ import {UserProfileType} from "../../../types/types";
 export type ProfileInfoType = {
     profile: UserProfileType | null
     status: string,
-    updateStatus: (newStatus: string) => void
+    updateMyStatus: (newStatus: string) => void
 };
 export const ProfileInfo: React.FC<ProfileInfoType> = React.memo((
     {
         profile,
         status,
-        updateStatus
+        updateMyStatus
     }
 ) => {
     if (!profile) {
@@ -31,7 +31,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = React.memo((
             </div>
             <ProfileStatus
                 status={status}
-                updateStatus={updateStatus}
+                updateMyStatus={updateMyStatus}
             />
             <div className={c.description}>
                 <span className={c.fullName}>{profile.fullName}</span>

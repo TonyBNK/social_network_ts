@@ -3,7 +3,7 @@ import c from './ProfileStatus.module.css';
 
 type ProfileStatusPropsType = {
     status: string,
-    updateStatus: (newStatus: string) => void
+    updateMyStatus: (newStatus: string) => void
 }
 
 class ProfileStatus extends React.Component<ProfileStatusPropsType> {
@@ -22,7 +22,7 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         this.setState({
             isEdit: false
         });
-        this.props.updateStatus(this.state.status);
+        this.props.updateMyStatus(this.state.status);
     }
 
     updateStatusLocally = (e: ChangeEvent<HTMLInputElement>) => {
