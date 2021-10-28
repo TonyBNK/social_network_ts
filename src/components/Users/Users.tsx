@@ -2,7 +2,7 @@ import React from "react";
 import c from './Users.module.scss';
 import {UserType} from "../../types/types";
 import {User} from "./User/User";
-import {Paginator} from "./Paginator/Paginator";
+import {Paginator} from "../common/Paginator/Paginator";
 
 
 type UsersPropsType = {
