@@ -1,11 +1,20 @@
-import {authAPI, followAPI, profileAPI, usersAPI} from "../../api/api";
+import {
+    authAPI,
+    followAPI,
+    profileAPI,
+    ResultCodes,
+    securityAPI,
+    usersAPI
+} from "../../api/api";
 import {
     changeCurrentPage,
-    follow,
+    follow, getCaptcha,
     getUser,
-    setAuthenticated, setEdit,
+    setAuthenticated,
+    setEdit,
     setFetching,
-    setInitialized, setMyPhoto,
+    setInitialized,
+    setMyPhoto,
     setMyStatus,
     setUsersTotalCount,
     showUsers,
@@ -123,9 +132,13 @@ export const logIn = (formData: FormDataType): AppThunkType =>
     async (dispatch) => {
         try {
             const data = await authAPI.logIn(formData);
-            if (data && data.resultCode === 0) {
+            if (data && data.resultCode === ResultCodes.Success) {
                 dispatch(setAuthentication());
             } else {
+                if (data && data.resultCode === ResultCodes.WrongCaptcha){
+                    const response = await securityAPI.getCaptchaURL();
+                    response && dispatch(getCaptcha(response.url));
+                }
                 const errorMessage = data && data.messages.length !== 0 ? data.messages[0] : 'Some error!'
                 dispatch(stopSubmit('login', {_error: errorMessage}));
             }

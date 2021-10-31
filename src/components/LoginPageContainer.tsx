@@ -5,18 +5,23 @@ import {compose} from "redux";
 import {withProfileRedirect} from "../hoc/withProfileRedirect";
 import {logIn} from "../bll/thunks/thunks";
 import {RootStateType} from "../bll/store";
-import {LoginPageDispatchType} from "../types/types";
+import {LoginPageDispatchType, Nullable} from "../types/types";
 
 
-class LoginPageContainer extends React.PureComponent<LoginPageDispatchType>{
+class LoginPageContainer extends React.PureComponent<LoginPageDispatchType & { captchaURL: Nullable<string> }> {
 
     render = () => {
         return <LoginPage
+            captchaURL={this.props.captchaURL}
             logIn={this.props.logIn}/>
     }
 }
 
+const mapStateToProps = (state: RootStateType): { captchaURL: Nullable<string> } => ({
+    captchaURL: state.auth.captchaURL
+});
+
 export default compose<ComponentType>(
     withProfileRedirect,
-    connect<{}, LoginPageDispatchType, {}, RootStateType>(null, {logIn})
+    connect<{ captchaURL: Nullable<string> }, LoginPageDispatchType, {}, RootStateType>(mapStateToProps, {logIn})
 )(LoginPageContainer);

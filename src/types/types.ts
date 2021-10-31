@@ -2,7 +2,7 @@ import {
     addNewMessage,
     addNewPost,
     changeCurrentPage,
-    follow,
+    follow, getCaptcha,
     getUser,
     setAuthenticated, setEdit,
     setFetching,
@@ -38,12 +38,15 @@ export type InitializeType = InitializeStateType & InitializeDispatchType;
 export type InitializeThunkType = () => (dispatch: Dispatch<InitializeActionType>) => void
 
 // Auth types
-export type AuthActionType = ReturnType<typeof setAuthenticated>;
+export type AuthActionType =
+    ReturnType<typeof setAuthenticated>
+    | ReturnType<typeof getCaptcha>;
 export type UserAuthStateType = {
     userId: Nullable<number>
     login: Nullable<string>
     email: Nullable<string>
     isAuth: boolean
+    captchaURL: Nullable<string>
 };
 export type AuthMeType = {
     id: number

@@ -3,21 +3,25 @@ import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Input} from "./common/FormsControls";
 import {maxLengthCreator, required} from "../utils/validators/validators";
 import c from './LoginPage.module.scss';
+import {Nullable} from "../types/types";
 
 
 export type FormDataType = {
     login: string
     password: string
     rememberMe: boolean
+    captcha: Nullable<string>
 }
 
 const maxLength30 = maxLengthCreator(30);
 
 type LoginPagePropsType = {
+    captchaURL: Nullable<string>
     logIn: (formData: FormDataType) => void
 }
 export const LoginPage: React.FC<LoginPagePropsType> = (
     {
+        captchaURL,
         logIn
     }
 ) => {
@@ -28,16 +32,16 @@ export const LoginPage: React.FC<LoginPagePropsType> = (
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={submit}/>
+            <LoginReduxForm onSubmit={submit} captchaURL={captchaURL}/>
         </div>
     )
 }
 
-
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
+const LoginForm: React.FC<{ captchaURL: Nullable<string> } & InjectedFormProps<FormDataType, { captchaURL: Nullable<string> }>> = React.memo((
     {
         handleSubmit,
-        error
+        error,
+        captchaURL
     }
 ) => {
     return (
@@ -48,7 +52,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
                     component={Input}
                     type={'text'}
                     placeholder={'Profile'}
-                    validate={[required,maxLength30]}
+                    validate={[required, maxLength30]}
                 />
             </div>
             <div>
@@ -57,7 +61,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
                     component={Input}
                     type={'password'}
                     placeholder={'Password'}
-                    validate={[required,maxLength30]}
+                    validate={[required, maxLength30]}
                 />
             </div>
             {
@@ -72,6 +76,18 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
                     type={'checkbox'}
                 /> remember me
             </div>
+            {
+                captchaURL && <div>
+                    <img src={captchaURL} alt="captcha"/>
+                    <Field
+                        component={Input}
+                        type={'captcha'}
+                        placeholder={'Captcha'}
+                        name={'captcha'}
+                        validate={[required]}
+                    />
+                </div>
+            }
             <div>
                 <button>Login</button>
             </div>
@@ -79,4 +95,4 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
     )
 });
 
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);
+const LoginReduxForm = reduxForm<FormDataType, { captchaURL: Nullable<string> }>({form: 'login'})(LoginForm);

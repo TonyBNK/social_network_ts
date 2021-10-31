@@ -5,7 +5,8 @@ const initialState: UserAuthStateType = {
     userId: null,
     login: null,
     email: null,
-    isAuth: false
+    isAuth: false,
+    captchaURL: null
 }
 
 export const authReducer = (state = initialState, action: AuthActionType):
@@ -16,6 +17,11 @@ export const authReducer = (state = initialState, action: AuthActionType):
                 ...state,
                 ...action.payload
             };
+        case "social_network/auth/GET_CAPTCHA_URL":
+            return {
+                ...state,
+                captchaURL: action.captchaURL
+            }
         default:
             return state;
     }

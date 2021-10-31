@@ -18,7 +18,8 @@ const axiosInst = axios.create({
 
 export enum ResultCodes {
     Success,
-    Error
+    Error,
+    WrongCaptcha = 10
 }
 
 export const usersAPI = {
@@ -63,7 +64,6 @@ export const profileAPI = {
     getUserStatus: async (userId: Nullable<number>) => {
         try {
             const response = await axiosInst.get(`profile/status/${userId}`);
-            debugger
             return response.data;
         } catch (e) {
             console.log(e);
@@ -112,7 +112,8 @@ export const authAPI = {
             const response = await axiosInst.post<DefaultResponseType<LoginType>>(`/auth/login`, {
                 email: formData.login,
                 password: formData.password,
-                rememberMe: formData.rememberMe
+                rememberMe: formData.rememberMe,
+                captcha: formData.captcha
             });
             return response.data;
         } catch (e) {
@@ -122,6 +123,17 @@ export const authAPI = {
     logOut: async () => {
         try {
             const response = await axiosInst.delete<DefaultResponseType>(`/auth/login`);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+export const securityAPI = {
+    getCaptchaURL: async () => {
+        try {
+            const response = await axiosInst.get(`/security/get-captcha-url`);
             return response.data;
         } catch (e) {
             console.log(e);

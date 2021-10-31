@@ -13,6 +13,10 @@ export const setAuthenticated = (
         isAuth
     }
 } as const);
+export const getCaptcha = (captchaURL: string) => ({
+    type: 'social_network/auth/GET_CAPTCHA_URL',
+    captchaURL
+} as const);
 export const setInitialized = () => ({
     type: 'social_network/app/SET_INITIALIZED'
 } as const);
