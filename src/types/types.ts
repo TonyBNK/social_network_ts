@@ -1,7 +1,18 @@
 import {
-    addNewMessage, addNewPost, changeCurrentPage, follow, getUser,
-    setAuthenticated, setFetching, setFollowingProcess,
-    setInitialized, setMyStatus, setUsersTotalCount, showUsers, unfollow
+    addNewMessage,
+    addNewPost,
+    changeCurrentPage,
+    follow,
+    getUser,
+    setAuthenticated,
+    setFetching,
+    setFollowingProcess,
+    setInitialized,
+    setMyPhoto,
+    setMyStatus,
+    setUsersTotalCount,
+    showUsers,
+    unfollow
 } from "../bll/actions/actions";
 import {AppThunkType} from "../bll/store";
 import {Dispatch} from "react";
@@ -69,7 +80,10 @@ export type DialogsPageDispatchType = {
     addNewMessage: (newMessageText: string) => DialogsActionType
 };
 export type DialogsOwnType = {};
-export type DialogsPropsType = DialogsPageStateType & DialogsPageDispatchType & DialogsOwnType;
+export type DialogsPropsType =
+    DialogsPageStateType
+    & DialogsPageDispatchType
+    & DialogsOwnType;
 export type DialogsActionType = ReturnType<typeof addNewMessage>;
 
 // Profile types
@@ -80,8 +94,8 @@ export type PostType = {
     likesCount: number
 }
 export type UserProfileType = {
-    aboutMe: Nullable<string>
-    contacts: {
+    aboutMe?: Nullable<string>
+    contacts?: {
         facebook: Nullable<string>
         website: Nullable<string>
         vk: Nullable<string>
@@ -91,11 +105,11 @@ export type UserProfileType = {
         github: Nullable<string>
         mainLink: Nullable<string>
     },
-    lookingForAJob: boolean
-    lookingForAJobDescription: Nullable<string>
-    fullName: string
-    userId: number
-    photos: {
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: Nullable<string>
+    fullName?: string
+    userId?: number
+    photos?: {
         small: Nullable<string>
         large: Nullable<string>
     }
@@ -119,6 +133,7 @@ export type ProfileInfoDispatchType = {
     getUserProfile: (userId: string | undefined) => void
     getUserStatus: (userId: string | undefined) => void
     updateMyStatus: (newStatus: Nullable<string>) => void
+    updateMyPhoto: (newPhoto: File) => void
 };
 export type ProfileDispatchType = PostsDispatchType & ProfileInfoDispatchType;
 export type PostsType = PostsStateType & PostsDispatchType;
@@ -126,7 +141,8 @@ export type ProfileInfoType = ProfileInfoStateType & ProfileInfoDispatchType;
 export type PostsActionType = ReturnType<typeof addNewPost>;
 export type ProfileInfoActionType =
     ReturnType<typeof getUser>
-    | ReturnType<typeof setMyStatus>;
+    | ReturnType<typeof setMyStatus>
+    | ReturnType<typeof setMyPhoto>;
 export type ProfileActionType = PostsActionType | ProfileInfoActionType;
 export type ProfileInfoWithPathParamsType =
     RouteComponentProps<PathParamsType>

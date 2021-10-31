@@ -4,17 +4,15 @@ import {Nullable, UserProfileType, UserType} from "../../types/types";
 export const setAuthenticated = (
     userId: Nullable<number>, login: Nullable<string>,
     email: Nullable<string>, isAuth: boolean
-) => {
-    return {
-        type: 'social_network/auth/SET_AUTHENTICATED',
-        payload: {
-            userId,
-            login,
-            email,
-            isAuth
-        }
-    } as const
-};
+) => ({
+    type: 'social_network/auth/SET_AUTHENTICATED',
+    payload: {
+        userId,
+        login,
+        email,
+        isAuth
+    }
+} as const);
 export const setInitialized = () => ({
     type: 'social_network/app/SET_INITIALIZED'
 } as const);
@@ -30,9 +28,16 @@ export const getUser = (profile: UserProfileType) => ({
     type: 'social_network/profile/GET_USER',
     profile
 } as const);
-export const setMyStatus = (status: string | null) => ({
+export const setMyStatus = (status: Nullable<string>) => ({
     type: 'social_network/profile/SET_MY_STATUS',
     status
+} as const);
+export const setMyPhoto = (photos: {
+    small: Nullable<string>
+    large: Nullable<string>
+}) => ({
+    type: 'social_network/profile/SET_MY_PHOTO',
+    photos
 } as const);
 export const follow = (userId: number) => ({
     type: 'social_network/users/FOLLOW',

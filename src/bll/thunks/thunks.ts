@@ -5,7 +5,7 @@ import {
     getUser,
     setAuthenticated,
     setFetching,
-    setInitialized,
+    setInitialized, setMyPhoto,
     setMyStatus,
     setUsersTotalCount,
     showUsers,
@@ -42,6 +42,17 @@ export const updateMyStatus = (newStatus: Nullable<string>): AppThunkType =>
             const response = await profileAPI.updateMyStatus(newStatus);
             if (response && response.data.resultCode === 0) {
                 dispatch(setMyStatus(newStatus));
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+export const updateMyPhoto = (newPhoto: File): AppThunkType =>
+    async (dispatch) => {
+        try {
+            const response = await profileAPI.updateMyPhoto(newPhoto);
+            if (response && response.data.resultCode === 0) {
+                dispatch(setMyPhoto(response.data.data.photos));
             }
         } catch (e) {
             console.log(e);

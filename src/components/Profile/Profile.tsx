@@ -7,14 +7,18 @@ export const Profile: React.FC<ProfileInfoType> = (
     {
         profile,
         status,
-        updateMyStatus
+        updateMyStatus,
+        updateMyPhoto,
+        isOwner
     }
 ) => {
     return (
         <div className={c.profile}>
             <ProfileInfo profile={profile}
                          status={status}
-                         updateMyStatus={updateMyStatus}/>
+                         updateMyStatus={updateMyStatus}
+                         updateMyPhoto={updateMyPhoto}
+                         isOwner={isOwner}/>
             <PostsContainer/>
         </div>
     );

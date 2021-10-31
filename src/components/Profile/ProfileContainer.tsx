@@ -12,20 +12,20 @@ import {
 } from "../../types/types";
 import {
     getUserProfile,
-    getUserStatus,
+    getUserStatus, updateMyPhoto,
     updateMyStatus
 } from "../../bll/thunks/thunks";
 
 
 class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
-    refreshProfile(){
+    refreshProfile() {
         const {history, getUserProfile, getUserStatus} = this.props;
 
         let userId = this.props.match.params.userId;
 
-        if (!userId){
+        if (!userId) {
             userId = this.props.userId!.toString();
-            if (!userId){
+            if (!userId) {
                 history.push('/login');
             }
         }
@@ -39,19 +39,21 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<ProfileInfoWithPathParamsType>, prevState: Readonly<{}>, snapshot?: any) {
-        if (this.props.match.params.userId !== prevProps.match.params.userId){
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile();
         }
     }
 
     render = () => {
-        const {profile, status, updateMyStatus, ...restProps} = this.props;
+        const {profile, status, updateMyStatus, updateMyPhoto, ...restProps} = this.props;
 
         return <Profile
             {...restProps}
             profile={profile}
             status={status}
-            updateMyStatus={updateMyStatus}/>
+            updateMyStatus={updateMyStatus}
+            updateMyPhoto={updateMyPhoto}
+            isOwner={!this.props.match.params.userId}/>
     }
 }
 
@@ -65,7 +67,8 @@ export default compose<ComponentType>(
     connect<ProfileInfoStateType, ProfileInfoDispatchType, {}, RootStateType>(mapStateToProps, {
         getUserProfile,
         getUserStatus,
-        updateMyStatus
+        updateMyStatus,
+        updateMyPhoto
     }),
     withRouter,
     withAuthRedirect,

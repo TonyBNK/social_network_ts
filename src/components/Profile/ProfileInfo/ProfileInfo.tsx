@@ -1,33 +1,42 @@
-import React from "react";
-import c from './ProfileInfo.module.css';
+import React, {ChangeEvent} from "react";
+import c from './ProfileInfo.module.scss';
 import {Preloader} from "../../Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatusWithHooks";
 import {Nullable, UserProfileType} from "../../../types/types";
-
+import catUser from "../../../images/catUser.png";
 
 
 export type ProfileInfoType = {
     profile: Nullable<UserProfileType>
     status: Nullable<string>,
     updateMyStatus: (newStatus: Nullable<string>) => void
+    updateMyPhoto: (file: File) => void
+    isOwner: boolean
 };
 export const ProfileInfo: React.FC<ProfileInfoType> = React.memo((
     {
         profile,
         status,
-        updateMyStatus
+        updateMyStatus,
+        updateMyPhoto,
+        isOwner
     }
 ) => {
     if (!profile) {
         return <Preloader/>
     }
 
-    const avatar = profile.photos.large || undefined;
+    const onMainPhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+        e.target.files && e.target.files.length && updateMyPhoto(e.target.files[0]);
+    }
 
     return (
         <div className={c.info}>
             <div className={c.avatar}>
-                <img src={avatar} alt="ava"/>
+                <img src={(profile.photos && profile.photos.large) || catUser} alt="ava"/>
+                {
+                    isOwner && <input type="file" onChange={onMainPhotoChange}/>
+                }
             </div>
             <ProfileStatus
                 status={status}

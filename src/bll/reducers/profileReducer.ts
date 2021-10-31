@@ -51,6 +51,14 @@ export const profileReducer = (state: ProfileStateType = initialState, action: P
                 ...state,
                 status: action.status
             }
+        case "social_network/profile/SET_MY_PHOTO":
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: action.photos
+                }
+            }
         default:
             return state;
     }
