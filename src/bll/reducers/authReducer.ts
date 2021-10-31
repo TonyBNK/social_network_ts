@@ -2,7 +2,7 @@ import {AuthActionType, UserAuthStateType} from "../../types/types";
 
 
 const initialState: UserAuthStateType = {
-    userId: null,
+    userId: '',
     login: null,
     email: null,
     isAuth: false

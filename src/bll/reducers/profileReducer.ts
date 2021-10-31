@@ -22,7 +22,7 @@ const initialState: ProfileStateType = {
     ],
     profile: null,
     status: '',
-    userId: null
+    userId: ''
 }
 
 export const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionType):

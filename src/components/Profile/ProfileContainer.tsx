@@ -18,13 +18,13 @@ import {
 
 
 class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
-    componentDidMount() {
+    refreshProfile(){
         const {history, getUserProfile, getUserStatus} = this.props;
 
         let userId = this.props.match.params.userId;
 
         if (!userId){
-            userId = this.props.userId!.toString();
+            userId = this.props.userId;
             if (!userId){
                 history.push('/login');
             }
@@ -32,6 +32,16 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
 
         getUserProfile(userId);
         getUserStatus(userId);
+    }
+
+    componentDidMount() {
+        this.refreshProfile();
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileInfoWithPathParamsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId){
+            this.refreshProfile();
+        }
     }
 
     render = () => {

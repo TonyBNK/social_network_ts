@@ -26,7 +26,7 @@ export type InitializeThunkType = () => (dispatch: Dispatch<InitializeActionType
 // Auth types
 export type AuthActionType = ReturnType<typeof setAuthenticated>;
 export type UserAuthStateType = {
-    userId: Nullable<number>
+    userId: string
     login: Nullable<string>
     email: Nullable<string>
     isAuth: boolean
@@ -109,7 +109,7 @@ export type PostsStateType = {
 export type ProfileInfoStateType = {
     profile: UserProfileType | null
     status: string
-    userId: Nullable<number>
+    userId: string
 };
 export type ProfileStateType = PostsStateType & ProfileInfoStateType;
 export type PostsDispatchType = {

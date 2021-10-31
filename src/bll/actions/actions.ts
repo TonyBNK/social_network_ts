@@ -2,7 +2,7 @@ import {Nullable, UserProfileType, UserType} from "../../types/types";
 
 
 export const setAuthenticated = (
-    userId: Nullable<number>, login: Nullable<string>,
+    userId: string, login: Nullable<string>,
     email: Nullable<string>, isAuth: boolean
 ) => {
     return {

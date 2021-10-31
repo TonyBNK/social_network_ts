@@ -77,7 +77,7 @@ export const setAuthentication = (): AppThunkType<Promise<string | void>> =>
             const data = await authAPI.me();
             if (data && data.resultCode === 0) {
                 const {id, login, email} = data.data;
-                dispatch(setAuthenticated(id, login, email, true));
+                dispatch(setAuthenticated(id.toString(), login, email, true));
             }
         } catch (e) {
             console.log(e);
@@ -102,7 +102,7 @@ export const logOut = (): AppThunkType =>
         try {
             const response = await authAPI.logOut();
             if (response && response.resultCode === 0) {
-                dispatch(setAuthenticated(null, null, null, false));
+                dispatch(setAuthenticated('', null, null, false));
             }
         } catch (e) {
             console.log(e);
