@@ -15,6 +15,7 @@ import {stopSubmit} from "redux-form";
 import {AppThunkType} from "../store";
 import {FormDataType} from "../../components/LoginPage";
 import {followUnfollowFlow} from "../../utils/utils";
+import {Nullable} from "../../types/types";
 
 
 export const getUserProfile = (userId = '19542'): AppThunkType =>
@@ -30,12 +31,12 @@ export const getUserStatus = (userId = '19542'): AppThunkType =>
     async (dispatch) => {
         try {
             const status = await profileAPI.getUserStatus(userId);
-            status && dispatch(setMyStatus(status));
+            dispatch(setMyStatus(status));
         } catch (e) {
             console.log(e);
         }
     };
-export const updateMyStatus = (newStatus: string): AppThunkType =>
+export const updateMyStatus = (newStatus: Nullable<string>): AppThunkType =>
     async (dispatch) => {
         try {
             const response = await profileAPI.updateMyStatus(newStatus);
@@ -77,7 +78,7 @@ export const setAuthentication = (): AppThunkType<Promise<string | void>> =>
             const data = await authAPI.me();
             if (data && data.resultCode === 0) {
                 const {id, login, email} = data.data;
-                dispatch(setAuthenticated(id.toString(), login, email, true));
+                dispatch(setAuthenticated(id, login, email, true));
             }
         } catch (e) {
             console.log(e);
@@ -102,7 +103,7 @@ export const logOut = (): AppThunkType =>
         try {
             const response = await authAPI.logOut();
             if (response && response.resultCode === 0) {
-                dispatch(setAuthenticated('', null, null, false));
+                dispatch(setAuthenticated(null, null, null, false));
             }
         } catch (e) {
             console.log(e);

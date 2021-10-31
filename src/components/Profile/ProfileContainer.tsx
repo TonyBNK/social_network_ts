@@ -24,7 +24,7 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
         let userId = this.props.match.params.userId;
 
         if (!userId){
-            userId = this.props.userId;
+            userId = this.props.userId!.toString();
             if (!userId){
                 history.push('/login');
             }

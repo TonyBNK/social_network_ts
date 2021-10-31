@@ -1,9 +1,10 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import c from './ProfileStatus.module.css';
+import {Nullable} from "../../../../types/types";
 
 type ProfileStatusPropsType = {
-    status: string,
-    updateMyStatus: (newStatus: string) => void
+    status: Nullable<string>,
+    updateMyStatus: (newStatus: Nullable<string>) => void
 }
 
 const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
@@ -13,7 +14,7 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
     }
 ) => {
     const [editMode, setEditMode] = useState<boolean>(false);
-    const [profileStatus, setProfileStatus] = useState<string>(status);
+    const [profileStatus, setProfileStatus] = useState<Nullable<string>>(status);
 
     useEffect(() => {
         setProfileStatus(status);
@@ -37,7 +38,7 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
             {
                 editMode
                     ? <div>
-                        <input value={profileStatus}
+                        <input value={profileStatus || ''}
                                onBlur={deactivateEditMode}
                                autoFocus
                                onChange={updateStatusLocally}/>

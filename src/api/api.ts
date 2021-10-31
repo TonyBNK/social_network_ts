@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import {FormDataType} from "../components/LoginPage";
 import {
     AuthMeType, DefaultResponseType,
     GetUsersResponseType,
-    LoginType,
+    LoginType, Nullable,
     UserProfileType
 } from "../types/types";
 
@@ -55,20 +55,21 @@ export const profileAPI = {
     getUserProfile: async (userId: string) => {
         try {
             const response = await axiosInst.get<UserProfileType>(`profile/${userId}`);
-                return response.data;
+            return response.data;
         } catch (e) {
             console.log(e);
         }
     },
     getUserStatus: async (userId: string = '19542') => {
         try {
-            const response = await axiosInst.get<string>(`profile/status/${userId}`)
+            const response = await axiosInst.get(`profile/status/${userId}`);
+            debugger
             return response.data;
         } catch (e) {
             console.log(e);
         }
     },
-    updateMyStatus: async (newStatus: string) => {
+    updateMyStatus: async (newStatus: Nullable<string>) => {
         try {
             return await axiosInst.put<DefaultResponseType>(`profile/status`, {status: newStatus});
         } catch (e) {

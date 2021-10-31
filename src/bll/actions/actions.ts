@@ -2,7 +2,7 @@ import {Nullable, UserProfileType, UserType} from "../../types/types";
 
 
 export const setAuthenticated = (
-    userId: string, login: Nullable<string>,
+    userId: Nullable<number>, login: Nullable<string>,
     email: Nullable<string>, isAuth: boolean
 ) => {
     return {
@@ -30,7 +30,7 @@ export const getUser = (profile: UserProfileType) => ({
     type: 'social_network/profile/GET_USER',
     profile
 } as const);
-export const setMyStatus = (status: string) => ({
+export const setMyStatus = (status: string | null) => ({
     type: 'social_network/profile/SET_MY_STATUS',
     status
 } as const);

@@ -26,7 +26,7 @@ export type InitializeThunkType = () => (dispatch: Dispatch<InitializeActionType
 // Auth types
 export type AuthActionType = ReturnType<typeof setAuthenticated>;
 export type UserAuthStateType = {
-    userId: string
+    userId: Nullable<number>
     login: Nullable<string>
     email: Nullable<string>
     isAuth: boolean
@@ -107,9 +107,9 @@ export type PostsStateType = {
     posts: Array<PostType>
 };
 export type ProfileInfoStateType = {
-    profile: UserProfileType | null
-    status: string
-    userId: string
+    profile: Nullable<UserProfileType>
+    status: Nullable<string>
+    userId: Nullable<number>
 };
 export type ProfileStateType = PostsStateType & ProfileInfoStateType;
 export type PostsDispatchType = {
@@ -118,7 +118,7 @@ export type PostsDispatchType = {
 export type ProfileInfoDispatchType = {
     getUserProfile: (userId: string | undefined) => void
     getUserStatus: (userId: string | undefined) => void
-    updateMyStatus: (newStatus: string) => void
+    updateMyStatus: (newStatus: Nullable<string>) => void
 };
 export type ProfileDispatchType = PostsDispatchType & ProfileInfoDispatchType;
 export type PostsType = PostsStateType & PostsDispatchType;
