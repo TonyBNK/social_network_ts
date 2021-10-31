@@ -12,7 +12,8 @@ import {
 } from "../../types/types";
 import {
     getUserProfile,
-    getUserStatus, updateMyPhoto,
+    getUserStatus, saveProfile, setEditMode,
+    updateMyPhoto,
     updateMyStatus
 } from "../../bll/thunks/thunks";
 
@@ -21,10 +22,10 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
     refreshProfile() {
         const {history, getUserProfile, getUserStatus} = this.props;
 
-        let userId = this.props.match.params.userId;
+        let userId = +this.props.match.params.userId;
 
         if (!userId) {
-            userId = this.props.userId!.toString();
+            userId = +this.props.userId!;
             if (!userId) {
                 history.push('/login');
             }
@@ -53,14 +54,16 @@ class ProfileContainer extends React.Component<ProfileInfoWithPathParamsType> {
             status={status}
             updateMyStatus={updateMyStatus}
             updateMyPhoto={updateMyPhoto}
-            isOwner={!this.props.match.params.userId}/>
+            isOwner={!this.props.match.params.userId}
+        />
     }
 }
 
 const mapStateToProps = (state: RootStateType): ProfileInfoStateType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    editMode: state.app.editMode
 });
 
 export default compose<ComponentType>(
@@ -68,7 +71,9 @@ export default compose<ComponentType>(
         getUserProfile,
         getUserStatus,
         updateMyStatus,
-        updateMyPhoto
+        updateMyPhoto,
+        saveProfile,
+        setEditMode
     }),
     withRouter,
     withAuthRedirect,

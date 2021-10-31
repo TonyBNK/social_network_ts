@@ -9,7 +9,10 @@ export const Profile: React.FC<ProfileInfoType> = (
         status,
         updateMyStatus,
         updateMyPhoto,
-        isOwner
+        isOwner,
+        saveProfile,
+        editMode,
+        setEditMode
     }
 ) => {
     return (
@@ -18,7 +21,11 @@ export const Profile: React.FC<ProfileInfoType> = (
                          status={status}
                          updateMyStatus={updateMyStatus}
                          updateMyPhoto={updateMyPhoto}
-                         isOwner={isOwner}/>
+                         isOwner={isOwner}
+                         saveProfile={saveProfile}
+                         editMode={editMode}
+                         setEditMode={setEditMode}
+            />
             <PostsContainer/>
         </div>
     );

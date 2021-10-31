@@ -52,7 +52,7 @@ export const followAPI = {
 };
 
 export const profileAPI = {
-    getUserProfile: async (userId: string) => {
+    getUserProfile: async (userId: Nullable<number>) => {
         try {
             const response = await axiosInst.get<UserProfileType>(`profile/${userId}`);
             return response.data;
@@ -60,7 +60,7 @@ export const profileAPI = {
             console.log(e);
         }
     },
-    getUserStatus: async (userId: string = '19542') => {
+    getUserStatus: async (userId: Nullable<number>) => {
         try {
             const response = await axiosInst.get(`profile/status/${userId}`);
             debugger
@@ -85,6 +85,13 @@ export const profileAPI = {
                     'Content-type': 'multipart/form-data'
                 }
             });
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    saveProfile: async (profile: UserProfileType) => {
+        try {
+            return await axiosInst.put(`profile`, profile);
         } catch (e) {
             console.log(e);
         }

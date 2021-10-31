@@ -2,7 +2,8 @@ import {InitializeActionType, InitializeStateType} from "../../types/types";
 
 
 const initialState: InitializeStateType = {
-    isInitialize: false
+    isInitialize: false,
+    editMode: false
 }
 
 export const appReducer = (state = initialState, action: InitializeActionType):
@@ -12,6 +13,11 @@ export const appReducer = (state = initialState, action: InitializeActionType):
             return {
                 ...state,
                 isInitialize: true
+            }
+        case "social_network/app/SET_EDIT_MODE":
+            return {
+                ...state,
+                editMode: action.isEdit
             }
         default:
             return state;

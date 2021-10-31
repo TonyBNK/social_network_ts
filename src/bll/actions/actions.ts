@@ -16,6 +16,10 @@ export const setAuthenticated = (
 export const setInitialized = () => ({
     type: 'social_network/app/SET_INITIALIZED'
 } as const);
+export const setEdit = (isEdit: boolean) => ({
+    type: 'social_network/app/SET_EDIT_MODE',
+    isEdit
+} as const);
 export const addNewMessage = (newMessageText: string) => ({
     type: "social_network/dialogs/ADD_NEW_MESSAGE",
     newMessageText

@@ -4,7 +4,7 @@ import {
     changeCurrentPage,
     follow,
     getUser,
-    setAuthenticated,
+    setAuthenticated, setEdit,
     setFetching,
     setFollowingProcess,
     setInitialized,
@@ -25,12 +25,15 @@ export type Nullable<T> = T | null;
 
 // App types
 export type InitializeStateType = {
-    isInitialize: boolean;
+    isInitialize: boolean
+    editMode: boolean
 }
 export type InitializeDispatchType = {
     initializeApp: () => AppThunkType
 }
-export type InitializeActionType = ReturnType<typeof setInitialized>;
+export type InitializeActionType =
+    ReturnType<typeof setInitialized>
+    | ReturnType<typeof setEdit>;
 export type InitializeType = InitializeStateType & InitializeDispatchType;
 export type InitializeThunkType = () => (dispatch: Dispatch<InitializeActionType>) => void
 
@@ -124,16 +127,19 @@ export type ProfileInfoStateType = {
     profile: Nullable<UserProfileType>
     status: Nullable<string>
     userId: Nullable<number>
+    editMode: boolean
 };
 export type ProfileStateType = PostsStateType & ProfileInfoStateType;
 export type PostsDispatchType = {
     addNewPost: (text: string) => void
 };
 export type ProfileInfoDispatchType = {
-    getUserProfile: (userId: string | undefined) => void
-    getUserStatus: (userId: string | undefined) => void
+    getUserProfile: (userId: Nullable<number>) => void
+    getUserStatus: (userId: Nullable<number>) => void
     updateMyStatus: (newStatus: Nullable<string>) => void
     updateMyPhoto: (newPhoto: File) => void
+    saveProfile: (profile: UserProfileType) => void
+    setEditMode: (isEdit: boolean) => void
 };
 export type ProfileDispatchType = PostsDispatchType & ProfileInfoDispatchType;
 export type PostsType = PostsStateType & PostsDispatchType;

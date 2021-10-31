@@ -3,7 +3,7 @@ import {
     changeCurrentPage,
     follow,
     getUser,
-    setAuthenticated,
+    setAuthenticated, setEdit,
     setFetching,
     setInitialized, setMyPhoto,
     setMyStatus,
@@ -15,10 +15,10 @@ import {stopSubmit} from "redux-form";
 import {AppThunkType} from "../store";
 import {FormDataType} from "../../components/LoginPage";
 import {followUnfollowFlow} from "../../utils/utils";
-import {Nullable} from "../../types/types";
+import {Nullable, UserProfileType} from "../../types/types";
 
 
-export const getUserProfile = (userId = '19542'): AppThunkType =>
+export const getUserProfile = (userId: Nullable<number>): AppThunkType =>
     async (dispatch) => {
         try {
             const profile = await profileAPI.getUserProfile(userId);
@@ -27,7 +27,7 @@ export const getUserProfile = (userId = '19542'): AppThunkType =>
             console.log(e);
         }
     };
-export const getUserStatus = (userId = '19542'): AppThunkType =>
+export const getUserStatus = (userId: Nullable<number>): AppThunkType =>
     async (dispatch) => {
         try {
             const status = await profileAPI.getUserStatus(userId);
@@ -58,6 +58,30 @@ export const updateMyPhoto = (newPhoto: File): AppThunkType =>
             console.log(e);
         }
     };
+export const saveProfile = (profile: UserProfileType): AppThunkType =>
+    async (dispatch, getState) => {
+        try {
+            const response = await profileAPI.saveProfile(profile);
+            if (response && response.data.resultCode === 0) {
+                dispatch(getUserProfile(getState().auth.userId));
+                dispatch(setEditMode(false));
+            } else {
+                const errorMessage = response?.data.messages.length !== 0 ? response?.data.messages[0] : 'Some error!'
+                dispatch(stopSubmit('profileDescription', {_error: errorMessage}));
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+export const setEditMode = (isEdit: boolean): AppThunkType =>
+    async (dispatch) => {
+        try {
+            dispatch(setEdit(isEdit));
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
 export const requestUsers = (page: number, pageSize: number): AppThunkType =>
     async (dispatch) => {
         try {

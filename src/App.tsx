@@ -70,7 +70,8 @@ class App extends React.Component<InitializeType> {
 }
 
 const mapStateToProps = (state: RootStateType): InitializeStateType => ({
-    isInitialize: state.app.isInitialize
+    isInitialize: state.app.isInitialize,
+    editMode: state.app.editMode
 });
 
 const AppContainer = compose<ComponentType>(
