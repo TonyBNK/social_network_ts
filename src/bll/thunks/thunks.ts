@@ -152,6 +152,7 @@ export const logOut = (): AppThunkType =>
             const response = await authAPI.logOut();
             if (response && response.resultCode === 0) {
                 dispatch(setAuthenticated(null, null, null, false));
+                dispatch(getCaptcha(null));
             }
         } catch (e) {
             console.log(e);

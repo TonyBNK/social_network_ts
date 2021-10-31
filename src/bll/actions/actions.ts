@@ -13,7 +13,7 @@ export const setAuthenticated = (
         isAuth
     }
 } as const);
-export const getCaptcha = (captchaURL: string) => ({
+export const getCaptcha = (captchaURL: Nullable<string>) => ({
     type: 'social_network/auth/GET_CAPTCHA_URL',
     captchaURL
 } as const);
