@@ -1,5 +1,5 @@
 import React from "react";
-import c from './Friends.module.css';
+import c from './Friends.module.scss';
 import {Friend, FriendType} from "./Friend/Friend";
 
 export type FriendsPageType = {
@@ -19,11 +19,11 @@ export const Friends: React.FC<FriendsPageType> = (
     );
 
     return (
-        <div className={c.friends}>
-            <div className={c.title}>
+        <div className={c.friendsContainer}>
+            <div className={c.titleContainer}>
                 Friends
             </div>
-            <div className={c.friendsElements}>
+            <div className={c.bodyContainer}>
                 {friendsList}
             </div>
         </div>
