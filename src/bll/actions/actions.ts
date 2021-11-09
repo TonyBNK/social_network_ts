@@ -59,9 +59,12 @@ export const showUsers = (users: Array<UserType>) => ({
     type: 'social_network/users/SHOW_USERS',
     users
 } as const);
-export const changeCurrentPage = (currentPage: number, pageSize: number) => ({ // TODO: delete page size
+export const changeCurrentPage = (currentPage: number) => ({
     type: 'social_network/users/CHANGE_CURRENT_PAGE',
-    currentPage,
+    currentPage
+} as const);
+export const changePageSize = (pageSize?: number) => ({
+    type: 'social_network/users/CHANGE_PAGE_SIZE',
     pageSize
 } as const);
 export const setUsersTotalCount = (usersTotalCount: number) => ({

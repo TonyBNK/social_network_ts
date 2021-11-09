@@ -7,7 +7,7 @@ import {
     usersAPI
 } from "../../api/api";
 import {
-    changeCurrentPage,
+    changeCurrentPage, changePageSize,
     follow, getCaptcha,
     getUser,
     setAuthenticated,
@@ -91,11 +91,12 @@ export const setEditMode = (isEdit: boolean): AppThunkType =>
         }
     };
 
-export const requestUsers = (page: number, pageSize: number): AppThunkType =>
+export const requestUsers = (page: number, pageSize?: number): AppThunkType =>
     async (dispatch) => {
         try {
             dispatch(setFetching(true));
-            dispatch(changeCurrentPage(page, pageSize)); // TODO: delete page size
+            dispatch(changeCurrentPage(page));
+            dispatch(changePageSize(pageSize));
             const data = await usersAPI.getUsers(page, pageSize);
             dispatch(setFetching(false));
             if (data) {

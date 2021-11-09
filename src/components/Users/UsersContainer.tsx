@@ -7,7 +7,6 @@ import {
     getCurrentPage,
     getFetching,
     getFollowingProgress,
-    getPageSize,
     getUsers,
     getUsersTotalCount
 } from "../../bll/selectors/usersSelector";
@@ -35,7 +34,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
             isFetching,
             users,
             currentPage,
-            pageSize,
             usersTotalCount,
             followUser,
             unfollowUser,
@@ -49,7 +47,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 users={users}
                 currentPage={currentPage}
                 usersTotalCount={usersTotalCount}
-                pageSize={pageSize}
                 follow={followUser}
                 unfollow={unfollowUser}
                 requestUsers={requestUsers}
@@ -62,7 +59,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
 const mapStateToProps = (state: RootStateType): UsersStateType => ({
     users: getUsers(state),
     currentPage: getCurrentPage(state),
-    pageSize: getPageSize(state),
     usersTotalCount: getUsersTotalCount(state),
     isFetching: getFetching(state),
     followingInProgress: getFollowingProgress(state)

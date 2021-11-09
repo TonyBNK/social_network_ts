@@ -1,18 +1,26 @@
-.user {
-  img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+.userCard {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  width: 150px;
+  padding: 10px 0;
+
+  .statusContainer{
+    color: gray;
+    font-style: italic;
+    text-align: center;
   }
 
-  button {
-    background: midnightblue;
-    color: white;
-    font-weight: bold;
+  .nameContainer{
     font-size: 16px;
+    font-weight: bold;
+    text-align: center;
   }
 
-  button:disabled {
-    opacity: 0.5;
+  .noStatus{
+    display: none;
   }
 }

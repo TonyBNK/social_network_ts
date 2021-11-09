@@ -2,17 +2,16 @@ import React from "react";
 import c from './Users.module.scss';
 import {UserType} from "../../types/types";
 import {User} from "./User/User";
-import {Paginator} from "../common/Paginator/Paginator";
+import {Button, Pagination} from "antd";
 
 
 type UsersPropsType = {
     users: Array<UserType>
     currentPage: number
     usersTotalCount: number
-    pageSize: number
     follow: (id: number) => void
     unfollow: (id: number) => void
-    requestUsers: (page: number, pageSize: number) => void
+    requestUsers: (page: number, pageSize?: number) => void
     followingInProgress: Array<number>
 }
 
@@ -21,7 +20,6 @@ export const Users: React.FC<UsersPropsType> = (
         users,
         currentPage,
         usersTotalCount,
-        pageSize,
         follow,
         unfollow,
         requestUsers,
@@ -42,21 +40,25 @@ export const Users: React.FC<UsersPropsType> = (
         }
     );
 
+    const onChange = (currentPage: number, pageSize?: number) => {
+        requestUsers(currentPage, pageSize);
+    };
+
     return (
-        <div className={c.users}>
-            <div>
-                <h3>Users</h3>
-                <Paginator
-                    currentPage={currentPage}
-                    pageSize={pageSize}
-                    usersTotalCount={usersTotalCount}
-                    requestUsers={requestUsers}
-                />
+        <div className={c.usersContainer}>
+            <div className={c.titleContainer}>
+                Users
             </div>
-            <span>
-                    {usersList}
-                </span>
-            <button className={c.show}>Show more</button>
+            <div className={c.bodyContainer}>
+                {usersList}
+            </div>
+            <div className={c.moreUsersContainer}>
+                <Button type='primary' shape='round' size='large'>
+                    Show more
+                </Button>
+                <Pagination current={currentPage} onChange={onChange}
+                            total={usersTotalCount} onShowSizeChange={onChange}/>
+            </div>
         </div>
     )
 }

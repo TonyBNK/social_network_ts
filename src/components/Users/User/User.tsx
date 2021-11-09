@@ -3,6 +3,7 @@ import c from './User.module.scss';
 import {NavLink} from "react-router-dom";
 import catUser from "../../../images/catUser.png";
 import {Nullable} from "../../../types/types";
+import {Avatar, Button} from 'antd';
 
 
 type UserPropsType = {
@@ -29,34 +30,29 @@ export const User: React.FC<UserPropsType> = React.memo((
     }
 ) => {
     return (
-        <div className={c.user} key={id}>
+        <div className={c.userCard} key={id}>
             <NavLink to={'/profile/' + id}>
-                <img
-                    src={photo ? photo : catUser}
-                    alt="ava"
-                />
+                <Avatar size={70} src={photo ? photo : catUser}/>
             </NavLink>
+            <div className={status ? c.statusContainer : c.noStatus}>
+                {status}
+            </div>
+            <div className={c.nameContainer}>
+                {name}
+            </div>
             {
                 isFollowed
-                    ? <button
-                        disabled={followingInProgress.some(userId => userId === id)}
-                        onClick={() => unfollow(id)}>
+                    ? <Button type='primary' shape='round'
+                              disabled={followingInProgress.some(userId => userId === id)}
+                              onClick={() => unfollow(id)}>
                         Unfollow
-                    </button>
-                    : <button
-                        disabled={followingInProgress.some(userId => userId === id)}
-                        onClick={() => follow(id)}>
+                    </Button>
+                    : <Button type='primary' shape='round'
+                              disabled={followingInProgress.some(userId => userId === id)}
+                              onClick={() => follow(id)}>
                         Follow
-                    </button>
+                    </Button>
             }
-            <div className={c.body}>
-                <div className={c.name}>
-                    {name}
-                </div>
-                <div className={c.text}>
-                    {status}
-                </div>
-            </div>
         </div>
     )
 });

@@ -42,9 +42,13 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
         case "social_network/users/CHANGE_CURRENT_PAGE":
             return {
                 ...state,
-                currentPage: action.currentPage,
-                pageSize: action.pageSize
+                currentPage: action.currentPage
             };
+        case "social_network/users/CHANGE_PAGE_SIZE":
+            return {
+                ...state,
+                pageSize: action.pageSize
+            }
         case "social_network/users/SET_USERS_TOTAL_COUNT":
             return {
                 ...state,

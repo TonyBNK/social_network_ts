@@ -1,7 +1,7 @@
 import {
     addNewMessage,
     addNewPost,
-    changeCurrentPage,
+    changeCurrentPage, changePageSize,
     follow, getCaptcha,
     getUser,
     setAuthenticated, setEdit,
@@ -175,14 +175,14 @@ export type UsersStateType = {
     users: Array<UserType>
     currentPage: number
     usersTotalCount: number
-    pageSize: number
+    pageSize?: number
     isFetching: boolean
     followingInProgress: Array<number>
 }
 export type UsersDispatchType = {
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
-    requestUsers: (page: number, pageSize: number) => void
+    requestUsers: (page: number, pageSize?: number) => void
     setUsersTotalCount: (usersTotalCount: number) => void
     setFollowingProcess: (isFetching: boolean, buttonId: number) => void
 }
@@ -203,6 +203,7 @@ export type UsersPageActionType =
     | ReturnType<typeof unfollow>
     | ReturnType<typeof showUsers>
     | ReturnType<typeof changeCurrentPage>
+    | ReturnType<typeof changePageSize>
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof setFetching>
     | ReturnType<typeof setFollowingProcess>;
