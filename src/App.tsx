@@ -1,6 +1,6 @@
 import React, {ComponentType} from 'react';
 import './App.module.scss';
-import {Sidebar} from "./components/Sidebar/Sidebar";
+import {Navbar} from "./components/Navbar/Navbar";
 import {
     BrowserRouter,
     Redirect,
@@ -55,7 +55,7 @@ class App extends React.Component<InitializeType> {
                 <HeaderContainer/>
                 <Layout className={c.bodyContainer}>
                     <Sider className={c.sider}>
-                        <Sidebar/>
+                        <Navbar/>
                         {
                             this.props.isAuth && <FriendsContainer/>
                         }
@@ -105,7 +105,7 @@ class App extends React.Component<InitializeType> {
             </Layout>
             // <div className="app-wrapper">
             //     <HeaderContainer/>
-            //     <Sidebar/>
+            //     <Navbar/>
             //     <React.Suspense fallback={<Preloader/>}>
             //         <Switch>
             //             <Route
