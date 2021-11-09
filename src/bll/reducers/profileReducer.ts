@@ -20,7 +20,7 @@ const initialState: ProfileStateType = {
             likesCount: 23
         },
     ],
-    profile: null,
+    profile: {},
     status: '',
     userId: null,
     editMode: false

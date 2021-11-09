@@ -45,7 +45,7 @@ export const getUserStatus = (userId: Nullable<number>): AppThunkType =>
             console.log(e);
         }
     };
-export const updateMyStatus = (newStatus: Nullable<string>): AppThunkType =>
+export const updateMyStatus = (newStatus?: string): AppThunkType =>
     async (dispatch) => {
         try {
             const response = await profileAPI.updateMyStatus(newStatus);

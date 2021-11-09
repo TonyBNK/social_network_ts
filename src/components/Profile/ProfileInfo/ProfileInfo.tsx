@@ -3,16 +3,17 @@ import c from './ProfileInfo.module.scss';
 import {Preloader} from "../../Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatusWithHooks";
 import {Nullable, UserProfileType} from "../../../types/types";
-import catUser from "../../../images/catUser.png";
-import ProfileDescriptionForm
-    from "./ProfileDescriptionForm/ProfileDescriptionForm";
+import avatar from "../../../images/catUser.png";
 import {ProfileDescription} from "./ProfileDescription/ProfileDescription";
+import {Avatar, Button} from 'antd';
+import {EditOutlined} from "@ant-design/icons";
+import {ProfileDescriptionForm} from "./ProfileDescriptionForm/ProfileDescriptionForm";
 
 
 export type ProfileInfoType = {
     profile: Nullable<UserProfileType>
-    status: Nullable<string>,
-    updateMyStatus: (newStatus: Nullable<string>) => void
+    status?: string
+    updateMyStatus: (newStatus?: string) => void
     updateMyPhoto: (file: File) => void
     isOwner: boolean
     saveProfile: (formData: UserProfileType) => void
@@ -44,31 +45,41 @@ export const ProfileInfo: React.FC<ProfileInfoType> = React.memo((
     }
 
     return (
-        <div className={c.info}>
-            <div className={c.avatar}>
-                <img src={(profile.photos && profile.photos.large) || catUser} alt="ava"/>
+        <div className={c.infoContainer}>
+            <div className={c.avatarContainer}>
+                <Avatar size={150} src={profile.photos?.large || avatar}/>
                 {
-                    isOwner && <input type="file" onChange={onMainPhotoChange}/>
+                    isOwner &&
+                    <>
+                        <div className={c.overlay}></div>
+                        <input type="file" onChange={onMainPhotoChange}/>
+                    </>
                 }
             </div>
             <ProfileStatus
                 status={status}
                 updateMyStatus={updateMyStatus}
             />
-            {
-                isOwner && <button onClick={() => setEditMode(true)}>
-                    Edit
-                </button>
-            }
-            {
-                editMode
-                    ? <ProfileDescriptionForm initialValues={profile} onSubmit={onSubmitForm}/>
-                    : <ProfileDescription profile={profile}/>
-            }
+            <div className={c.descriptionContainer}>
+                {
+                    (isOwner && !editMode) &&
+                    <div className={c.ownerContainer}>
+                        <Button onClick={() => setEditMode(true)}
+                                shape='circle'
+                                icon={<EditOutlined/>}/>
+                    </div>
+                }
+                {
+                    editMode
+                        ? <ProfileDescriptionForm initialValues={profile}
+                                                  onSubmit={onSubmitForm}
+                                                  cancelEditMode={() => setEditMode(false)}/>
+                        : <ProfileDescription profile={profile}/>
+                }
+            </div>
         </div>
     );
 });
-
 
 type ContactPropsType = {
     contactTitle: Nullable<string>
@@ -81,8 +92,8 @@ export const Contact: React.FC<ContactPropsType> = (
     }
 ) => {
     return (
-        <div className={c.contact}>
+        <p className={c.contact}>
             <b>{contactTitle}</b>: {contactValue}
-        </div>
+        </p>
     )
 }

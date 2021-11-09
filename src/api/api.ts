@@ -69,7 +69,7 @@ export const profileAPI = {
             console.log(e);
         }
     },
-    updateMyStatus: async (newStatus: Nullable<string>) => {
+    updateMyStatus: async (newStatus?: string) => {
         try {
             return await axiosInst.put<DefaultResponseType>(`profile/status`, {status: newStatus});
         } catch (e) {

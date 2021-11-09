@@ -36,7 +36,7 @@ export const getUser = (profile: UserProfileType) => ({
     type: 'social_network/profile/GET_USER',
     profile
 } as const);
-export const setMyStatus = (status: Nullable<string>) => ({
+export const setMyStatus = (status?: string) => ({
     type: 'social_network/profile/SET_MY_STATUS',
     status
 } as const);

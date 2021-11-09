@@ -1,11 +1,9 @@
-form {
-  .fullName {
-    font-size: 24px;
-    font-weight: bold;
-  }
+.form {
+  width: 250px;
+  margin-bottom: 20px;
 
-  .errorMessage {
-    color: red;
+  .buttonsContainer {
+    display: flex;
+    justify-content: space-evenly;
   }
 }
-

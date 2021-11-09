@@ -1,8 +1,11 @@
 import React from "react";
 import c from "./ProfileDescription.module.scss";
 import {Contact} from "../ProfileInfo";
-import {UserProfileType} from "../../../../types/types";
+import {Nullable, UserProfileType} from "../../../../types/types";
+import {Tabs} from 'antd';
 
+
+const {TabPane} = Tabs;
 
 type ProfileDescriptionPropsType = {
     profile: UserProfileType
@@ -17,27 +20,36 @@ export const ProfileDescription: React.FC<ProfileDescriptionPropsType> = (
             <div className={c.fullName}>
                 {profile.fullName}
             </div>
-            <div>
-                <b>About me</b>: {profile.aboutMe}
-            </div>
-            <div className={c.jobSearch}>
-                <b>Looking for a
-                    job</b>: {profile.lookingForAJob ? 'yes' : 'no'}
-            </div>
-            <div>
-                <b>Looking for a job
-                    description</b>: {profile.lookingForAJobDescription}
-            </div>
-            <div className={c.contacts}>
-                <b>Contacts</b>: {
-                Object.entries({...profile.contacts}).map(entry => entry[1] && <Contact
-                        key={entry[0]}
-                        contactTitle={entry[0]}
-                        contactValue={entry[1]}
-                    />
-                )
-            }
-            </div>
+            <Tabs defaultActiveKey="aboutMe">
+                <TabPane tab="About me" key="aboutMe">
+                    <p>
+                        {profile.aboutMe}
+                    </p>
+                </TabPane>
+                <TabPane tab="Job description" key="lookingForAJob">
+                    <p>
+                        {
+                            profile.lookingForAJob
+                                ? `Looking for a job!`
+                                : `Not looking for a job!`
+                        }
+                    </p>
+                    <p>
+                        {profile.lookingForAJobDescription}
+                    </p>
+                </TabPane>
+                <TabPane tab="Contacts" key="contacts">
+                    {
+                        profile.contacts && Object.keys(profile.contacts).map(key => profile.contacts && profile.contacts[key as keyof typeof profile.contacts] &&
+                            <Contact
+                                key={key}
+                                contactTitle={key}
+                                contactValue={profile.contacts[key as keyof typeof profile.contacts]}
+                            />
+                        )
+                    }
+                </TabPane>
+            </Tabs>
         </div>
     )
 }

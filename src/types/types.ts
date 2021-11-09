@@ -128,8 +128,8 @@ export type PostsStateType = {
     posts: Array<PostType>
 };
 export type ProfileInfoStateType = {
-    profile: Nullable<UserProfileType>
-    status: Nullable<string>
+    profile: UserProfileType
+    status?: string
     userId: Nullable<number>
     editMode: boolean
 };
@@ -140,7 +140,7 @@ export type PostsDispatchType = {
 export type ProfileInfoDispatchType = {
     getUserProfile: (userId: Nullable<number>) => void
     getUserStatus: (userId: Nullable<number>) => void
-    updateMyStatus: (newStatus: Nullable<string>) => void
+    updateMyStatus: (newStatus?: string) => void
     updateMyPhoto: (newPhoto: File) => void
     saveProfile: (profile: UserProfileType) => void
     setEditMode: (isEdit: boolean) => void

@@ -1,71 +1,58 @@
 import React from "react";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import c from "./ProfileDescriptionForm.module.scss";
-import {Input, Textarea} from "../../../common/FormsControls";
 import {UserProfileType} from "../../../../types/types";
+import {Button, Checkbox, Form, Input} from 'antd';
+import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
 
-const ProfileDescriptionForm: React.FC<InjectedFormProps<UserProfileType>> = (
+export const ProfileDescriptionForm: React.FC<{ initialValues: UserProfileType, onSubmit: (formData: UserProfileType) => void, cancelEditMode: () => void }> = (
     {
-        handleSubmit,
+        onSubmit,
         initialValues,
-        error
+        cancelEditMode
     }
 ) => {
-  return(
-      <form onSubmit={handleSubmit}>
-          <div className={c.fullName}>
-              <b>Full name</b>: <Field
-                  component={Input}
-                  type={'text'}
-                  name={'fullName'}
-                  placeholder={'Full name'}
-              />
-          </div>
-          <div>
-              <b>About me</b>: <Field
-              component={Textarea}
-              name={'aboutMe'}
-              placeholder={'About me...'}
-          />
-          </div>
-          <div>
-              <b>Looking for a job</b>: <Field
-              component={Input}
-              type={'checkbox'}
-              name={'lookingForAJob'}
-          />
-          </div>
-          <div>
-              <b>Looking for a job description</b>: <Field
-              component={Textarea}
-              name={'lookingForAJobDescription'}
-              placeholder={'Description...'}
-          />
-          </div>
-          <div>
-              <b>Contacts</b>: {
-              Object.keys({...initialValues.contacts}).map(key =>
-                  <Field
-                      key={key}
-                      component={Input}
-                      type={'text'}
-                      name={`contacts.${key}`}
-                      placeholder={key}
-                  />
-              )
-          }
-          </div>
-          {
-              error && <div className={c.errorMessage}>
-                  {error}
-              </div>
-          }
-          <div>
-              <button>Save</button>
-          </div>
-      </form>
-  )
-}
+    const onCancelClick = () => {
+        cancelEditMode();
+    }
 
-export default reduxForm({form: 'profileDescription'})(ProfileDescriptionForm);
+    return (
+        <Form onFinish={onSubmit} size='small' className={c.form}
+              initialValues={initialValues}>
+            <Form.Item label="Full name" name="fullName"
+                       rules={[{
+                           required: true,
+                           message: 'Please input your full name!'
+                       }]}>
+                <Input/>
+            </Form.Item>
+            <Form.Item label="About me" name="aboutMe">
+                <Input.TextArea/>
+            </Form.Item>
+            <Form.Item label="Looking for a job" name="lookingForAJob">
+                <Checkbox checked={initialValues.lookingForAJob}/>
+            </Form.Item>
+            <Form.Item label="Description" name="lookingForAJobDescription">
+                <Input.TextArea/>
+            </Form.Item>
+            {
+                initialValues.contacts && Object.keys(initialValues.contacts).map(key => {
+                        return <Form.Item
+                            label={key}
+                            key={key}
+                            name={`contacts.${key}`}
+                        >
+                            <Input/>
+                        </Form.Item>
+                    }
+                )
+            }
+            <div className={c.buttonsContainer}>
+                <Button onClick={onCancelClick} icon={<CloseOutlined/>}
+                        shape='round' style={{backgroundColor: 'red'}}/>
+                <Button htmlType='submit' icon={<CheckOutlined/>}
+                        shape='round' style={{backgroundColor: 'green'}}/>
+            </div>
+        </Form>
+    )
+}

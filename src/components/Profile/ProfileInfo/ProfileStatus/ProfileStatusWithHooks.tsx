@@ -1,10 +1,10 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
-import c from './ProfileStatus.module.css';
-import {Nullable} from "../../../../types/types";
+import c from './ProfileStatus.module.scss';
+
 
 type ProfileStatusPropsType = {
-    status: Nullable<string>,
-    updateMyStatus: (newStatus: Nullable<string>) => void
+    status?: string
+    updateMyStatus: (newStatus?: string) => void
 }
 
 const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
@@ -14,7 +14,7 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
     }
 ) => {
     const [editMode, setEditMode] = useState<boolean>(false);
-    const [profileStatus, setProfileStatus] = useState<Nullable<string>>(status);
+    const [profileStatus, setProfileStatus] = useState<string | undefined>(status);
 
     useEffect(() => {
         setProfileStatus(status);
@@ -34,20 +34,17 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = React.memo((
     }
 
     return (
-        <div className={c.profileStatus}>
+        <div className={c.statusContainer}>
             {
                 editMode
-                    ? <div>
-                        <input value={profileStatus || ''}
-                               onBlur={deactivateEditMode}
-                               autoFocus
-                               onChange={updateStatusLocally}/>
-                    </div>
-                    : <div>
-                        <span onDoubleClick={activateEditMode}>
+                    ? <input
+                        value={profileStatus}
+                        onBlur={deactivateEditMode}
+                        autoFocus
+                        onChange={updateStatusLocally}/>
+                    : <span onClick={activateEditMode}>
                             {status}
-                        </span>
-                    </div>
+                    </span>
             }
         </div>
     )
