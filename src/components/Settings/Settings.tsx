@@ -1,10 +1,7 @@
 import React from "react";
-import c from './Settings.module.css';
+import { Empty } from 'antd';
+
 
 export const Settings = () => {
-    return (
-        <div>
-            Settings
-        </div>
-    );
+    return <Empty/>;
 };

@@ -1,10 +1,7 @@
 import React from "react";
-import c from './News.module.css';
+import { Empty } from 'antd';
+
 
 export const News = () => {
-    return (
-        <div>
-            News
-        </div>
-    );
+    return <Empty/>
 };
