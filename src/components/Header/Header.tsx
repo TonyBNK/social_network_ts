@@ -1,9 +1,13 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import c from "./Header.module.css";
+import c from "./Header.module.scss";
 import logo from '../../images/logo.png';
 import {AuthUserPropsType} from "../../types/types";
+import {Layout, Menu} from 'antd';
+import 'antd/dist/antd.css';
 
+
+const {Header: HeaderAntD} = Layout;
 
 export const Header: React.FC<AuthUserPropsType> = (
     {
@@ -17,17 +21,19 @@ export const Header: React.FC<AuthUserPropsType> = (
     }
 
     return (
-        <header className={c.head}>
+        <HeaderAntD className={c.headerContainer}>
             <img src={logo} alt="логотип"/>
-            <div className={c.loginBlock}>
-                {
-                    isAuth
-                        ? <div>
-                            {login} <button onClick={logOutHandler}>Logout</button>
-                        </div>
-                        : <NavLink to={'/login'}>Login</NavLink>
-                }
-            </div>
-        </header>
+            <header>Catbook</header>
+            <Menu theme='dark' mode='horizontal' style={{position: 'relative'}}>
+                <Menu.Item key='1' style={{position: 'absolute', right: 0}}>
+                    {
+                        isAuth
+                            ? <NavLink to={'/login'} onClick={logOutHandler}>Sign
+                                Out</NavLink>
+                            : <NavLink to={'/login'}>Sign In</NavLink>
+                    }
+                </Menu.Item>
+            </Menu>
+        </HeaderAntD>
     );
 };
