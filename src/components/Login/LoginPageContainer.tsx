@@ -3,8 +3,8 @@ import {LoginPage} from "./LoginPage";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {withProfileRedirect} from "../../hoc/withProfileRedirect";
-import {logIn} from "../../bll/thunks/thunks";
-import {RootStateType} from "../../bll/store";
+import {logIn} from "../../redux/thunks/thunks";
+import {RootStateType} from "../../redux/store";
 import {LoginPageDispatchType, Nullable} from "../../types/types";
 
 

@@ -1,8 +1,8 @@
 import React, {ComponentType} from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {RootStateType} from "../../bll/store";
-import {logOut} from "../../bll/thunks/thunks";
+import {RootStateType} from "../../redux/store";
+import {logOut} from "../../redux/thunks/thunks";
 import {compose} from "redux";
 import {
     AuthUserMDTPType,

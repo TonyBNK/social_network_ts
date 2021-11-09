@@ -1,6 +1,6 @@
 import React, {ComponentType} from "react";
 import {connect} from "react-redux";
-import {RootStateType} from "../../bll/store";
+import {RootStateType} from "../../redux/store";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
 import {
@@ -9,7 +9,7 @@ import {
     getFollowingProgress,
     getUsers,
     getUsersTotalCount
-} from "../../bll/selectors/usersSelector";
+} from "../../redux/selectors/usersSelector";
 import {compose} from "redux";
 import {
     UsersDispatchType,
@@ -19,8 +19,8 @@ import {
 import {
     setFollowingProcess,
     setUsersTotalCount
-} from "../../bll/actions/actions";
-import {followUser, requestUsers, unfollowUser} from "../../bll/thunks/thunks";
+} from "../../redux/actions/actions";
+import {followUser, requestUsers, unfollowUser} from "../../redux/thunks/thunks";
 
 
 class UsersContainer extends React.Component<UsersPropsType> {

@@ -13,8 +13,8 @@ import {
     setUsersTotalCount,
     showUsers,
     unfollow
-} from "../bll/actions/actions";
-import {AppThunkType} from "../bll/store";
+} from "../redux/actions/actions";
+import {AppThunkType} from "../redux/store";
 import {Dispatch} from "react";
 import {FormDataType} from "../components/Login/LoginPage";
 import {RouteComponentProps} from "react-router-dom";

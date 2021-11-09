@@ -4,7 +4,7 @@ import {
     UsersACType,
     UserType
 } from "../types/types";
-import {setFollowingProcess} from "../bll/actions/actions";
+import {setFollowingProcess} from "../redux/actions/actions";
 
 
 export const followUnfollowFlow = async (

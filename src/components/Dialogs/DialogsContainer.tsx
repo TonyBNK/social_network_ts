@@ -1,6 +1,6 @@
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {RootStateType} from "../../bll/store";
+import {RootStateType} from "../../redux/store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import React, {ComponentType} from "react";
@@ -9,7 +9,7 @@ import {
     DialogsPageDispatchType,
     DialogsPageStateType
 } from "../../types/types";
-import {addNewMessage} from "../../bll/actions/actions";
+import {addNewMessage} from "../../redux/actions/actions";
 
 
 const mapStateToProps = (state: RootStateType): DialogsPageStateType => ({

@@ -70,7 +70,25 @@ export const updateMyPhoto = (newPhoto: File): AppThunkType =>
 export const saveProfile = (profile: UserProfileType): AppThunkType =>
     async (dispatch, getState) => {
         try {
-            const response = await profileAPI.saveProfile(profile);
+            const formData: UserProfileType = {
+                contacts: {
+                    facebook: null,
+                    github: null,
+                    instagram: null,
+                    vk: null,
+                    mainLink: null,
+                    twitter: null,
+                    website: null,
+                    youtube: null
+                }
+            };
+            const properties = Object.getOwnPropertyNames(profile);
+            properties.forEach(propName => {
+                formData.contacts && propName.includes('contacts.')
+                    ? formData.contacts[propName.slice(9) as keyof typeof profile.contacts] = profile[propName as keyof typeof profile.contacts]
+                    : formData[propName as keyof typeof profile.contacts] = profile[propName as keyof typeof profile.contacts];
+            });
+            const response = await profileAPI.saveProfile(formData);
             if (response && response.data.resultCode === 0) {
                 dispatch(getUserProfile(getState().auth.userId));
                 dispatch(setEditMode(false));

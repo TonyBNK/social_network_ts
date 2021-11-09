@@ -1,10 +1,10 @@
 import {Posts} from "./Posts";
 import {connect} from "react-redux";
-import {RootStateType} from "../../../bll/store";
+import {RootStateType} from "../../../redux/store";
 import {compose} from "redux";
 import React, {ComponentType} from "react";
 import {PostsDispatchType, PostsStateType} from "../../../types/types";
-import {addNewPost} from "../../../bll/actions/actions";
+import {addNewPost} from "../../../redux/actions/actions";
 
 
 const mapStateToProps = (state: RootStateType): PostsStateType => {

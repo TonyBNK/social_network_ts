@@ -1,8 +1,8 @@
 import React, {ComponentType} from "react";
 import {Friends} from "./Friends";
 import {connect} from "react-redux";
-import {RootStateType} from "../../bll/store";
-import {FriendsPageType} from "../../bll/reducers/friendsReducer";
+import {RootStateType} from "../../redux/store";
+import {FriendsPageType} from "../../redux/reducers/friendsReducer";
 import {compose} from "redux";
 
 
