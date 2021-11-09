@@ -26,7 +26,7 @@ import {FriendsContainer} from "./components/Friends/FriendsContainer";
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-const LoginPageContainer = React.lazy(() => import('./components/LoginPageContainer'));
+const LoginPageContainer = React.lazy(() => import('./components/Login/LoginPageContainer'));
 
 
 const {Content, Sider} = Layout;

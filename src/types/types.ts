@@ -16,7 +16,7 @@ import {
 } from "../bll/actions/actions";
 import {AppThunkType} from "../bll/store";
 import {Dispatch} from "react";
-import {FormDataType} from "../components/LoginPage";
+import {FormDataType} from "../components/Login/LoginPage";
 import {RouteComponentProps} from "react-router-dom";
 import {ResultCodes} from "../api/api";
 

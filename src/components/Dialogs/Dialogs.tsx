@@ -2,15 +2,9 @@ import React from "react";
 import c from './Dialogs.module.scss';
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {FormDataType} from "../LoginPage";
-import {maxLengthCreator, required} from "../../utils/validators/validators";
-import {Textarea} from "../common/FormsControls";
 import {DialogsPropsType} from "../../types/types";
 import {Button, Form, Input} from 'antd';
 
-
-const maxLength50 = maxLengthCreator(50);
 
 export const Dialogs: React.FC<DialogsPropsType> = (
     {
@@ -47,19 +41,19 @@ export const Dialogs: React.FC<DialogsPropsType> = (
                 </div>
             </div>
             <div className={c.newMessageContainer}>
-                <NewMessageReduxForm onSubmit={submitAddNewMessage}/>
+                <NewMessageForm onSubmit={submitAddNewMessage}/>
             </div>
         </>
     );
 };
 
-const NewMessageForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
+const NewMessageForm: React.FC<{onSubmit: (values: string) => void}> = React.memo((
     {
-        handleSubmit
+        onSubmit
     }
 ) => {
     return (
-        <Form onFinish={handleSubmit}>
+        <Form onFinish={onSubmit}>
             <Form.Item name={'newMessageText'} rules={[
                 {required: true, message: "Field is required!"},
                 {max: 50, message: 'Max length of message is 50 symbols!'}
@@ -74,8 +68,3 @@ const NewMessageForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
         </Form>
     )
 });
-
-
-const NewMessageReduxForm = reduxForm<FormDataType>({
-    form: 'newMessage'
-})(NewMessageForm);

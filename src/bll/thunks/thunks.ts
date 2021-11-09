@@ -22,7 +22,7 @@ import {
 } from "../actions/actions";
 import {stopSubmit} from "redux-form";
 import {AppThunkType} from "../store";
-import {FormDataType} from "../../components/LoginPage";
+import {FormDataType} from "../../components/Login/LoginPage";
 import {followUnfollowFlow} from "../../utils/utils";
 import {Nullable, UserProfileType} from "../../types/types";
 

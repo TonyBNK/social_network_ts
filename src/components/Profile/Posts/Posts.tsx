@@ -2,7 +2,7 @@ import React from "react";
 import {Post} from "./Post/Post";
 import c from "./Posts.module.css";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {FormDataType} from "../../LoginPage";
+import {FormDataType} from "../../Login/LoginPage";
 import {Textarea} from "../../common/FormsControls";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {PostsType} from "../../../types/types";

@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {FormDataType} from "../components/LoginPage";
+import {FormDataType} from "../components/Login/LoginPage";
 import {
     AuthMeType, DefaultResponseType,
     GetUsersResponseType,
