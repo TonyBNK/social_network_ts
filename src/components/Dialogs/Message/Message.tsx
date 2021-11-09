@@ -1,5 +1,5 @@
 import React from "react";
-import c from './Message.module.css';
+
 
 export type MessageType = {
     id: string
@@ -12,7 +12,7 @@ export const Message: React.FC<MessageType> = React.memo((
     }
 ) =>{
     return(
-        <div className={c.message}>
+        <div>
             {message}
         </div>
     );

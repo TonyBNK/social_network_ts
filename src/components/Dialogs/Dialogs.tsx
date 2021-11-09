@@ -1,5 +1,5 @@
 import React from "react";
-import c from './Dialogs.module.css';
+import c from './Dialogs.module.scss';
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
@@ -7,6 +7,7 @@ import {FormDataType} from "../LoginPage";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Textarea} from "../common/FormsControls";
 import {DialogsPropsType} from "../../types/types";
+import {Button, Form, Input} from 'antd';
 
 
 const maxLength50 = maxLengthCreator(50);
@@ -36,15 +37,19 @@ export const Dialogs: React.FC<DialogsPropsType> = (
     }
 
     return (
-        <div className={c.dialogs}>
-            <div className={c.dialogsItems}>
-                {dialogsList}
+        <>
+            <div className={c.dialogsContainer}>
+                <div className={c.dialogs}>
+                    {dialogsList}
+                </div>
+                <div className={c.messages}>
+                    {messagesList}
+                </div>
             </div>
-            <div className={c.messages}>
-                {messagesList}
-                <NewPostReduxForm onSubmit={submitAddNewMessage}/>
+            <div className={c.newMessageContainer}>
+                <NewMessageReduxForm onSubmit={submitAddNewMessage}/>
             </div>
-        </div>
+        </>
     );
 };
 
@@ -54,23 +59,23 @@ const NewMessageForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
     }
 ) => {
     return (
-        <form
-            className={c.newMessage}
-            onSubmit={handleSubmit}
-        >
-            <Field
-                component={Textarea}
-                name={'newMessageText'}
-                placeholder={'Type new message...'}
-                validate={[required, maxLength50]}
-            />
-            <button>
-                Send
-            </button>
-        </form>
+        <Form onFinish={handleSubmit}>
+            <Form.Item name={'newMessageText'} rules={[
+                {required: true, message: "Field is required!"},
+                {max: 50, message: 'Max length of message is 50 symbols!'}
+            ]}>
+                <Input.TextArea placeholder={'Type new message...'}/>
+            </Form.Item>
+            <div className={c.buttonContainer}>
+                <Button type='primary' htmlType='submit'>
+                    Send
+                </Button>
+            </div>
+        </Form>
     )
 });
 
-const NewPostReduxForm = reduxForm<FormDataType>({
+
+const NewMessageReduxForm = reduxForm<FormDataType>({
     form: 'newMessage'
 })(NewMessageForm);

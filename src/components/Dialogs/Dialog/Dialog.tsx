@@ -1,6 +1,8 @@
 import React from "react";
-import c from './Dialog.module.css';
-import {NavLink} from "react-router-dom";
+import c from './Dialog.module.scss';
+import {Avatar} from 'antd';
+import {UserOutlined} from "@ant-design/icons";
+
 
 export type DialogType = {
     id: string
@@ -14,17 +16,12 @@ export const Dialog: React.FC<DialogType> = React.memo((
         name
     }
 ) => {
-    const path = `/dialogs/${id}`;
     return (
-        <div className={c.dialog}>
-            <img
-                src={ava}
-                alt="ava"/>
-            <NavLink
-                to={path}
-                activeClassName={c.active}>
+        <div className={c.dialogContainer}>
+            <Avatar size={60} src={ava} icon={<UserOutlined/>}/>
+            <div className={c.nameContainer}>
                 {name}
-            </NavLink>
+            </div>
         </div>
     );
 });

@@ -1,0 +1,33 @@
+.dialogsContainer {
+    display: flex;
+    justify-content: space-around;
+
+    .dialogs {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 20px;
+    }
+
+    .messages {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        row-gap: 20px;
+        width: 300px;
+        background-color: white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+}
+
+.newMessageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    form {
+        width: 250px;
+        margin-top: 20px;
+    }
+}

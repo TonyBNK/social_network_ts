@@ -3,7 +3,8 @@ import {InitializeActionType, InitializeStateType} from "../../types/types";
 
 const initialState: InitializeStateType = {
     isInitialize: false,
-    editMode: false
+    editMode: false,
+    isAuth: false
 }
 
 export const appReducer = (state = initialState, action: InitializeActionType):

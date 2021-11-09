@@ -27,6 +27,7 @@ export type Nullable<T> = T | null;
 export type InitializeStateType = {
     isInitialize: boolean
     editMode: boolean
+    isAuth: boolean
 }
 export type InitializeDispatchType = {
     initializeApp: () => AppThunkType
