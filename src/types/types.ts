@@ -97,6 +97,7 @@ export type DialogsActionType = ReturnType<typeof addNewMessage>;
 export type PostType = {
     id: string
     ava: string
+    name: string
     post: string
     likesCount: number
 }

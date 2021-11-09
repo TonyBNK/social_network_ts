@@ -1,14 +1,9 @@
 import React from "react";
 import {Post} from "./Post/Post";
-import c from "./Posts.module.css";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {FormDataType} from "../../Login/LoginPage";
-import {Textarea} from "../../common/FormsControls";
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import c from "./Posts.module.scss";
 import {PostsType} from "../../../types/types";
+import {Button, Form, Input} from 'antd';
 
-
-const maxLength20 = maxLengthCreator(20);
 
 export const Posts: React.FC<PostsType> = (
     {
@@ -20,6 +15,7 @@ export const Posts: React.FC<PostsType> = (
         <Post
             id={p.id}
             ava={p.ava}
+            name={p.name}
             post={p.post}
             likesCount={p.likesCount}
         />
@@ -29,11 +25,13 @@ export const Posts: React.FC<PostsType> = (
     }
 
     return (
-        <div className={c.allPosts}>
-            <h3 className={c.title}>
-                My Posts
-            </h3>
-            <NewPostReduxForm onSubmit={submitAddNewPost}/>
+        <div className={c.postsContainer}>
+            <div className={c.createNewPostContainer}>
+                <div className={c.titleContainer}>
+                    My Posts
+                </div>
+                <NewPostForm onSubmit={submitAddNewPost}/>
+            </div>
             <div>
                 {postsList}
             </div>
@@ -41,31 +39,24 @@ export const Posts: React.FC<PostsType> = (
     );
 };
 
-const NewPostForm: React.FC<InjectedFormProps<FormDataType>> = React.memo((
+const NewPostForm: React.FC<{onSubmit: (values: string) => void}> = React.memo((
     {
-        handleSubmit
+        onSubmit
     }
 ) => {
     return (
-        <form
-            className={c.newPost}
-            onSubmit={handleSubmit}
-        >
-            <Field
-                component={Textarea}
-                placeholder={'Add new post...'}
-                name={'newPostText'}
-                validate={[required, maxLength20]}
-            />
-            <div>
-                <button>
-                    Send
-                </button>
+        <Form onFinish={onSubmit}>
+            <Form.Item name={'newPostText'} rules={[
+                {required: true, message: "Field is required!"},
+                {max: 20, message: 'Max length of post is 20 symbols!'}
+            ]}>
+                <Input.TextArea placeholder={'Add new post...'}/>
+            </Form.Item>
+            <div className={c.buttonContainer}>
+                <Button type='primary' htmlType='submit'>
+                    Post
+                </Button>
             </div>
-        </form>
+        </Form>
     )
 });
-
-const NewPostReduxForm = reduxForm<FormDataType>({
-    form: 'newPost'
-})(NewPostForm)

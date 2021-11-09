@@ -10,12 +10,14 @@ const initialState: ProfileStateType = {
         {
             id: v1(),
             ava: cat_with_tongue,
+            name: 'Cat_with_tongue',
             post: "Кто насрал в мой лоток?",
             likesCount: 14
         },
         {
             id: v1(),
             ava: angry_cat,
+            name: 'Angry_cat',
             post: "Кожанный мешок опять забыл покормить :(",
             likesCount: 23
         },
@@ -36,6 +38,7 @@ export const profileReducer = (state: ProfileStateType = initialState, action: P
                     {
                         id: v1(),
                         ava: cat_with_glasses,
+                        name: 'TonyBNK',
                         post: action.newPostText,
                         likesCount: 0
                     },
