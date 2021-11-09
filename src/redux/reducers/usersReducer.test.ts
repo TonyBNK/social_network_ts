@@ -1,7 +1,7 @@
 import {UsersStateType, UserType} from "../../types/types";
 import {usersReducer} from "./usersReducer";
 import {
-    changeCurrentPage,
+    changeCurrentPage, changePageSize,
     follow, setFetching, setFollowingProcess, setUsersTotalCount,
     showUsers,
     unfollow
@@ -83,10 +83,15 @@ test('users should be set', () => {
 });
 
 test('current page should be changed', () => {
-    let newState = usersReducer(initialState, changeCurrentPage(2, 15));
+    let newState = usersReducer(initialState, changeCurrentPage(2));
 
     expect(newState.currentPage).toBe(2);
-    expect(newState.pageSize).toBe(15);
+});
+
+test('page size should be changed', () => {
+    let newState = usersReducer(initialState, changePageSize(20));
+
+    expect(newState.pageSize).toBe(20);
 });
 
 test('users total count should be changed', () => {

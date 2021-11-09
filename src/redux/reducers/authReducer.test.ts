@@ -1,5 +1,6 @@
 import {setAuthenticated} from "../actions/actions";
-import {authReducer, UserAuthStateType} from "./authReducer";
+import {authReducer} from "./authReducer";
+import {UserAuthStateType} from "../../types/types";
 
 let initialState: UserAuthStateType;
 
@@ -8,7 +9,8 @@ beforeEach(() => {
         userId: null,
         login: null,
         email: null,
-        isAuth: false
+        isAuth: false,
+        captchaURL: null
     }
 });
 

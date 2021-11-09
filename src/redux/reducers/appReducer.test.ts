@@ -1,12 +1,15 @@
-import {appReducer, InitializeStateType} from "./appReducer";
+import {appReducer} from "./appReducer";
 import {setInitialized} from "../actions/actions";
+import {InitializeStateType} from "../../types/types";
 
 
 let initialState: InitializeStateType;
 
 beforeEach(() => {
     initialState = {
-        isInitialize: false
+        isInitialize: false,
+        isAuth: false,
+        editMode: false
     }
 });
 

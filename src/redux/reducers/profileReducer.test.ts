@@ -14,19 +14,22 @@ beforeEach(() => {
             {
                 id: v1(),
                 ava: cat_with_tongue,
+                name: 'Cat_with_tongue',
                 post: "Кто насрал в мой лоток?",
                 likesCount: 14
             },
             {
                 id: v1(),
                 ava: angry_cat,
+                name: 'Angry_cat',
                 post: "Кожанный мешок опять забыл покормить }:(",
                 likesCount: 23
             },
         ],
-        profile: null,
+        profile: {},
         status: '',
-        userId: null
+        userId: null,
+        editMode: false
     };
 });
 
