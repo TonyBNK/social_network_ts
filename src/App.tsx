@@ -103,51 +103,6 @@ class App extends React.Component<InitializeType> {
                     </Content>
                 </Layout>
             </Layout>
-            // <div className="app-wrapper">
-            //     <HeaderContainer/>
-            //     <Navbar/>
-            //     <React.Suspense fallback={<Preloader/>}>
-            //         <Switch>
-            //             <Route
-            //                 exact path={'/'}
-            //                 render={() => <Redirect to={'/profile'}/>}
-            //             />
-            //             <Route
-            //                 path='/profile/:userId?'
-            //                 render={() => <ProfileContainer/>}
-            //             />
-            //             <Route
-            //                 path='/dialogs'
-            //                 render={() => <DialogsContainer/>}
-            //             />
-            //             <Route
-            //                 path={'/users'}
-            //                 render={() => <UsersContainer/>}
-            //             />
-            //             <Route
-            //                 path='/login'
-            //                 render={() => <LoginPageContainer/>}
-            //             />
-            //             <Route
-            //                 path='/news'
-            //                 render={() => <News/>}
-            //             />
-            //             <Route
-            //                 path='/music'
-            //                 render={() => <Music/>}
-            //             />
-            //
-            //             <Route
-            //                 path='/settings'
-            //                 render={() => <Settings/>}
-            //             />
-            //             <Route
-            //                 path='*'
-            //                 render={() => <h2>404 NOT FOUND</h2>}
-            //             />
-            //         </Switch>
-            //     </React.Suspense>
-            // </div>
         );
     }
 }
